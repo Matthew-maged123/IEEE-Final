@@ -1,0 +1,461 @@
+{
+  "info": {
+    "name": "UserSeif Backend API - IEEE Brand & Build (Enhanced)",
+    "description": "مجموعة طلبات Postman متكاملة ومحدثة للربط مع الفرونت إند لمشروع يوزرسيف (UserSeif) للطباعة والتخصيص في أسوان.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api/v1", "type": "string" },
+    { "key": "customerToken", "value": "", "type": "string" },
+    { "key": "adminToken", "value": "", "type": "string" },
+    { "key": "requestId", "value": "", "type": "string" },
+    { "key": "requestNumber", "value": "US-2026-0001", "type": "string" },
+    { "key": "enquiryId", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "01 - Auth & Profile (المصادقة والحساب)",
+      "item": [
+        {
+          "name": "تسجيل حساب عميل جديد (Register)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"محمود حسن\",\n  \"email\": \"mahmoud@example.com\",\n  \"phone\": \"01116891025\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "تسجيل دخول العميل (Login Customer)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.success && jsonData.data.token) {",
+                  "  pm.collectionVariables.set('customerToken', jsonData.data.token);",
+                  "  console.log('Customer token saved to collection variable!');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"customer@test.com\",\n  \"password\": \"Test123!\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "تسجيل دخول الأدمن (Login Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.success && jsonData.data.token) {",
+                  "  pm.collectionVariables.set('adminToken', jsonData.data.token);",
+                  "  console.log('Admin token saved to collection variable!');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@userseif.com\",\n  \"password\": \"Admin123!\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "جلب بيانات المستخدم الحالي (Get Me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+          }
+        },
+        {
+          "name": "تحديث الملف الشخصي (Update Profile)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{customerToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"أحمد محمود حسن\",\n  \"phone\": \"01012345678\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/profile", "host": ["{{baseUrl}}"], "path": ["auth", "profile"] }
+          }
+        },
+        {
+          "name": "تغيير كلمة المرور (Update Password)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{customerToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"Test123!\",\n  \"newPassword\": \"NewPassword123!\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/auth/password", "host": ["{{baseUrl}}"], "path": ["auth", "password"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Services & Mockups (الخدمات وقوالب المعاينة)",
+      "item": [
+        {
+          "name": "عرض كل الخدمات (Get All Services)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/services", "host": ["{{baseUrl}}"], "path": ["services"] }
+          }
+        },
+        {
+          "name": "🌟 جلب قوالب المعاينة الحية ومساحات الطباعة (Get Mockup Templates)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/services/mockup-templates", "host": ["{{baseUrl}}"], "path": ["services", "mockup-templates"] }
+          }
+        },
+        {
+          "name": "عرض خدمة بالـ Slug (Get Service By Slug)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/services/custom-tshirts-hoodies",
+              "host": ["{{baseUrl}}"],
+              "path": ["services", "custom-tshirts-hoodies"]
+            }
+          }
+        },
+        {
+          "name": "إضافة خدمة جديدة [الأدمن] (Create Service)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"دروع تذكارية خشبية وأكريليك\",\n  \"category\": \"gifts\",\n  \"description\": \"دروع تكريم للمسابقات والمؤتمرات مع حفر ليزر وطباعة ملونة\",\n  \"basePrice\": 180,\n  \"options\": {\n    \"materials\": [\"خشب زان طبيعي\", \"أكريليك شفاف كريستالي\"]\n  }\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/services", "host": ["{{baseUrl}}"], "path": ["services"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Portfolio (معرض الأعمال)",
+      "item": [
+        {
+          "name": "عرض معرض الأعمال (Get Portfolio)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/portfolio", "host": ["{{baseUrl}}"], "path": ["portfolio"] }
+          }
+        },
+        {
+          "name": "فلترة الأعمال بالفئة (Get by Category)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/portfolio?category=clothing",
+              "host": ["{{baseUrl}}"],
+              "path": ["portfolio"],
+              "query": [{ "key": "category", "value": "clothing" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - Requests & Tracking (الطلبات والتتبع)",
+      "item": [
+        {
+          "name": "🌟 فحص جاهزية الطلب تفاعلياً (Validate Readiness)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"clothing\",\n  \"quantity\": 10,\n  \"specifications\": {\n    \"sizeBreakdown\": { \"S\": 2, \"M\": 4, \"L\": 3, \"XL\": 1 },\n    \"color\": \"أسود\",\n    \"printPosition\": \"الصدر والظهر\"\n  },\n  \"artwork\": {\n    \"files\": [\"/uploads/demo-logo.png\"],\n    \"needsDesignHelp\": false\n  },\n  \"contactInfo\": {\n    \"name\": \"أحمد محمود\",\n    \"phone\": \"01116891025\"\n  },\n  \"desiredDate\": \"2026-11-10\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/requests/validate-readiness",
+              "host": ["{{baseUrl}}"],
+              "path": ["requests", "validate-readiness"]
+            }
+          }
+        },
+        {
+          "name": "إرسال طلب جديد مع الـ Mockup (Create Request)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.success && jsonData.data.request) {",
+                  "  pm.collectionVariables.set('requestId', jsonData.data.request._id);",
+                  "  pm.collectionVariables.set('requestNumber', jsonData.data.request.requestNumber);",
+                  "  console.log('Saved requestNumber:', jsonData.data.request.requestNumber);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{customerToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"clothing\",\n  \"quantity\": 10,\n  \"serviceTitle\": \"طباعة تيشيرتات وهوديز\",\n  \"description\": \"تيشيرتات لفعالية IEEE بأسوان\",\n  \"specifications\": {\n    \"sizeBreakdown\": { \"S\": 2, \"M\": 4, \"L\": 3, \"XL\": 1 },\n    \"color\": \"أسود\",\n    \"printPosition\": \"الصدر والظهر\"\n  },\n  \"artwork\": {\n    \"files\": [\"/uploads/demo-ieee-logo.png\"],\n    \"needsDesignHelp\": false\n  },\n  \"mockup\": {\n    \"productType\": \"tshirt\",\n    \"printPosition\": \"chest\",\n    \"placement\": { \"x\": 120, \"y\": 150, \"scale\": 0.85, \"rotation\": 0 }\n  },\n  \"contactInfo\": {\n    \"name\": \"أحمد محمود\",\n    \"phone\": \"01012345678\",\n    \"email\": \"customer@test.com\",\n    \"preferredContactMethod\": \"whatsapp\"\n  },\n  \"receiptMethod\": \"pickup\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/requests", "host": ["{{baseUrl}}"], "path": ["requests"] }
+          }
+        },
+        {
+          "name": "🌟 تتبع الطلب الآمن للزوار برقم الطلب والهاتف (Track Request)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestNumber\": \"{{requestNumber}}\",\n  \"phone\": \"01012345678\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/requests/track", "host": ["{{baseUrl}}"], "path": ["requests", "track"] }
+          }
+        },
+        {
+          "name": "عرض طلباتي الخاصة (Get My Requests)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/requests/my-requests", "host": ["{{baseUrl}}"], "path": ["requests", "my-requests"] }
+          }
+        },
+        {
+          "name": "تفاصيل طلب محدد (Get Request By ID)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customerToken}}" }],
+            "url": { "raw": "{{baseUrl}}/requests/{{requestId}}", "host": ["{{baseUrl}}"], "path": ["requests", "{{requestId}}"] }
+          }
+        },
+        {
+          "name": "توليد رابط واتساب للطلب (Get WhatsApp Link)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customerToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/requests/{{requestId}}/whatsapp",
+              "host": ["{{baseUrl}}"],
+              "path": ["requests", "{{requestId}}", "whatsapp"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 - Admin Workspace (لوحة تحكم صاحب العمل)",
+      "item": [
+        {
+          "name": "إحصائيات لوحة التحكم (Get Admin Stats)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/stats", "host": ["{{baseUrl}}"], "path": ["admin", "stats"] }
+          }
+        },
+        {
+          "name": "عرض كل طلبات العملاء وفلترتها (Get All Requests)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/admin/requests?status=pending",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "requests"],
+              "query": [{ "key": "status", "value": "pending" }]
+            }
+          }
+        },
+        {
+          "name": "فحص تفاصيل طلب كاملة مع الشات (Get Request Details)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/requests/{{requestId}}", "host": ["{{baseUrl}}"], "path": ["admin", "requests", "{{requestId}}"] }
+          }
+        },
+        {
+          "name": "اتخاذ قرار: قبول الطلب (Approve Request)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"approved\",\n  \"approvalNotes\": \"تم فحص دقة اللوجو وهي ممتازة للطباعة، الخامات متوفرة وجاهزة للبدء\",\n  \"estimatedCost\": 2200,\n  \"estimatedDeliveryDate\": \"2026-11-05\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/requests/{{requestId}}/decision",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "requests", "{{requestId}}", "decision"]
+            }
+          }
+        },
+        {
+          "name": "تحديث مرحلة الطلب إلى قيد التنفيذ (Update Status)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in_production\",\n  \"note\": \"تم تجهيز الشبلونة وبدء مرحلة الطباعة الحرارية على التيشيرتات\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/requests/{{requestId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "requests", "{{requestId}}", "status"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 - Contact & Enquiries (الاستفسارات والتواصل)",
+      "item": [
+        {
+          "name": "إرسال استفسار عام لغير الجاهزين للطلب (Submit Enquiry)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.success && jsonData.data.enquiry) {",
+                  "  pm.collectionVariables.set('enquiryId', jsonData.data.enquiry._id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"طارق علي\",\n  \"phone\": \"01234567890\",\n  \"email\": \"tarek@example.com\",\n  \"subject\": \"استفسار عن الخامات المتوفرة للطباعة\",\n  \"serviceCategory\": \"clothing\",\n  \"message\": \"هل متوفر خامات قطن صيفي خفيف للمؤتمرات في شهر مايو بأسوان؟\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/enquiries", "host": ["{{baseUrl}}"], "path": ["enquiries"] }
+          }
+        },
+        {
+          "name": "عرض كل الاستفسارات [الأدمن] (Get All Enquiries)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/enquiries", "host": ["{{baseUrl}}"], "path": ["enquiries"] }
+          }
+        },
+        {
+          "name": "تحديث حالة استفسار [الأدمن] (Update Enquiry Status)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"contacted\",\n  \"adminNotes\": \"تم التواصل وتقديم عينات الخامات\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/enquiries/{{enquiryId}}/status", "host": ["{{baseUrl}}"], "path": ["enquiries", "{{enquiryId}}", "status"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 - Messages (المحادثة المرتبطة بالطلب)",
+      "item": [
+        {
+          "name": "عرض رسائل وملاحظات الطلب (Get Request Messages)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{customerToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/requests/{{requestId}}/messages",
+              "host": ["{{baseUrl}}"],
+              "path": ["requests", "{{requestId}}", "messages"]
+            }
+          }
+        },
+        {
+          "name": "إرسال رسالة بخصوص الطلب (Send Message)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{customerToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"مرحباً، هل يمكن تأكيد استلام ملف التصميم بدقة جيدة؟\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/requests/{{requestId}}/messages",
+              "host": ["{{baseUrl}}"],
+              "path": ["requests", "{{requestId}}", "messages"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 - Settings & FAQs (الإعدادات والأسئلة الشائعة)",
+      "item": [
+        {
+          "name": "عرض معلومات وإعدادات النشاط (Get Settings)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/settings", "host": ["{{baseUrl}}"], "path": ["settings"] }
+          }
+        }
+      ]
+    }
+  ]
+}

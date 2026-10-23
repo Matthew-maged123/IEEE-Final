@@ -1,0 +1,9 @@
+// Wrap async route handlers to forward errors to express error handler
+module.exports = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch((err) => {
+    console.error('Error:', err.message);
+    if (process.env.NODE_ENV !== 'production' && err.stack) {
+      console.error(err.stack);
+    }
+    next(err);
+  });

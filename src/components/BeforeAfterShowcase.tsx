@@ -37,7 +37,7 @@ export const BeforeAfterShowcase: React.FC = () => {
   };
 
   return (
-    <section className="pt-16 pb-14 sm:pt-24 sm:pb-20 bg-[#F6F1E7] border-b border-[#d9d2c3]/60 relative overflow-hidden">
+    <section className="pt-16 pb-14 sm:pt-24 sm:pb-20 bg-transparent border-b border-[#d9d2c3]/60 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

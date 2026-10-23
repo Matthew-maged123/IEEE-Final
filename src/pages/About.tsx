@@ -19,7 +19,7 @@ import { BrandLogo } from '../components/BrandLogo';
 
 export const About: React.FC = () => {
   return (
-    <div className="py-10 sm:py-16 space-y-16 bg-[#EFEFEA]">
+    <div className="py-10 sm:py-16 space-y-16 bg-transparent">
       {/* Header Banner */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl space-y-5">
         <div className="flex justify-center mb-2">

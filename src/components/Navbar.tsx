@@ -10,9 +10,12 @@ import {
   Menu,
   X,
   ChevronDown,
-  Sparkles
+  Sparkles,
+  Sun,
+  Moon
 } from './ui/icons';
 import { BrandLogo } from './BrandLogo';
+import { useTheme } from '../context/ThemeContext';
 import { YUZERSEF_WHATSAPP, generateWhatsAppLink } from '../lib/utils';
 
 export const Navbar: React.FC = () => {
@@ -21,6 +24,7 @@ export const Navbar: React.FC = () => {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
     { label: 'تيشرتات وهوديز', path: '/request?service=clothing-hoodies' },
@@ -64,7 +68,7 @@ export const Navbar: React.FC = () => {
   }, [mobileMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-transparent transition-all pointer-events-none">
+    <header className="sticky top-0 z-40 w-full bg-[#F6F1E7]/90 backdrop-blur-xs transition-all pointer-events-none relative">
       {/* ─────────────────────────────────────────────────────────────
           1. Top Utility Bar (Dark Charcoal/Emerald - As in Reference)
           (Currently hidden. Set SHOW_TOP_BAR = true above to show it again)
@@ -117,10 +121,10 @@ export const Navbar: React.FC = () => {
       )}
 
       {/* ─────────────────────────────────────────────────────────────
-          2. Floating White Pill Navbar (Capsule Container - Height reduced by 5px)
+          2. Floating Capsule Navbar (Cleanly separated from background)
       ───────────────────────────────────────────────────────────── */}
-      <div className="container mx-auto px-3 sm:px-6 py-1.5 sm:py-2">
-        <div className="bg-white rounded-full shadow-lg border border-slate-200/90 px-3.5 sm:px-6 h-[59px] sm:h-[67px] flex items-center justify-between relative transition-all pointer-events-auto">
+      <div className="container mx-auto px-3 sm:px-6 pt-3 sm:pt-4 pb-3 sm:pb-4">
+        <div className="bg-white rounded-full shadow-[0_12px_36px_-6px_rgba(7,59,53,0.3),0_4px_16px_-2px_rgba(0,0,0,0.12)] border-2 border-[#073B35]/25 dark:border-[#E3A92F]/60 ring-1 ring-black/5 dark:ring-white/10 px-3.5 sm:px-6 h-[59px] sm:h-[67px] flex items-center justify-between relative transition-all pointer-events-auto">
           
           {/* Right (Start in RTL): Logo kept on the right as it is */}
           <Link
@@ -129,7 +133,7 @@ export const Navbar: React.FC = () => {
             aria-label="الصفحة الرئيسية - يوزرسيف"
           >
             <BrandLogo
-              variant="green-on-paper"
+              variant={theme === 'dark' ? 'white-on-deep' : 'green-on-paper'}
               className="h-full max-h-[45px] sm:max-h-[53px] w-auto group-hover:opacity-90 transition-opacity"
             />
           </Link>
@@ -168,11 +172,26 @@ export const Navbar: React.FC = () => {
             <Link
               to="/admin/login"
               title="لوحة تحكم المشرف / الحساب"
-              className="p-2 sm:p-2.5 text-slate-700 hover:text-[#0B5F55] hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
+              className="p-2 sm:p-2.5 text-slate-700 dark:text-slate-200 hover:text-[#0B5F55] dark:hover:text-[#E3A92F] hover:bg-slate-100 dark:hover:bg-emerald-950/50 rounded-full transition-colors cursor-pointer"
               aria-label="تسجيل الدخول / لوحة الإدارة"
             >
               <User className="w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
+
+            {/* Dark / Light Mode Switcher Button */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'التبديل إلى الوضع الفاتح' : 'التبديل إلى الوضع الداكن'}
+              aria-label={theme === 'dark' ? 'التبديل إلى الوضع الفاتح' : 'التبديل إلى الوضع الداكن'}
+              className="p-2 sm:p-2.5 text-slate-700 dark:text-slate-200 hover:text-[#0B5F55] dark:hover:text-[#E3A92F] hover:bg-slate-100 dark:hover:bg-emerald-950/50 rounded-full transition-all cursor-pointer"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-[#E3A92F]" />
+              ) : (
+                <Moon className="w-4 h-4 sm:w-5 sm:h-5" />
+              )}
+            </button>
 
             {/* Shopping Bag / Order Tracking Icon */}
             <Link
@@ -185,14 +204,43 @@ export const Navbar: React.FC = () => {
               <span className="absolute top-1 end-1 w-2 h-2 rounded-full bg-[#E3A92F] ring-2 ring-white" />
             </Link>
 
-            {/* Mobile Menu Hamburger */}
+            {/* Mobile Menu Hamburger Button with Morph & Press Animation */}
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 rounded-full text-slate-700 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#065E5A]"
+              className="xl:hidden relative p-2.5 rounded-full text-slate-700 dark:text-slate-200 hover:text-[#0B5F55] dark:hover:text-[#E3A92F] hover:bg-slate-100 dark:hover:bg-emerald-950/50 active:scale-[0.88] transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#065E5A] cursor-pointer group flex items-center justify-center"
               aria-label={mobileMenuOpen ? 'إغلاق القائمة' : 'فتح القائمة الرئيسية'}
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {/* Animated 3-line Hamburger into X */}
+              <div
+                className={`w-5 h-4 relative flex flex-col justify-between transition-transform duration-300 ease-in-out ${
+                  mobileMenuOpen ? 'rotate-90' : 'rotate-0'
+                }`}
+              >
+                {/* Top Bar */}
+                <span
+                  className={`h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-in-out origin-center ${
+                    mobileMenuOpen
+                      ? 'translate-y-[7px] rotate-45 text-[#0B5F55] dark:text-[#E3A92F]'
+                      : 'translate-y-0 rotate-0'
+                  }`}
+                />
+                {/* Middle Bar */}
+                <span
+                  className={`h-[2px] w-full bg-current rounded-full transition-all duration-200 ease-in-out origin-center ${
+                    mobileMenuOpen ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
+                  }`}
+                />
+                {/* Bottom Bar */}
+                <span
+                  className={`h-[2px] w-full bg-current rounded-full transition-all duration-300 ease-in-out origin-center ${
+                    mobileMenuOpen
+                      ? '-translate-y-[7px] -rotate-45 text-[#0B5F55] dark:text-[#E3A92F]'
+                      : 'translate-y-0 rotate-0'
+                  }`}
+                />
+              </div>
             </button>
           </div>
 
@@ -222,12 +270,15 @@ export const Navbar: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center gap-2"
               >
-                <BrandLogo variant="green-on-paper" className="h-9 w-auto" />
+                <BrandLogo
+                  variant={theme === 'dark' ? 'white-on-deep' : 'green-on-paper'}
+                  className="h-9 w-auto"
+                />
               </Link>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 -m-2 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+                className="p-2 -m-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-[#0B5F55] dark:hover:text-[#E3A92F] hover:bg-slate-100 dark:hover:bg-white/10 hover:rotate-90 active:scale-85 transition-all duration-200 cursor-pointer"
                 aria-label="إغلاق القائمة"
               >
                 <X className="w-5 h-5" />
@@ -305,6 +356,25 @@ export const Navbar: React.FC = () => {
                   <User className="w-4 h-4 text-[#0B5F55]" />
                   <span>لوحة تحكم المشرف</span>
                 </Link>
+
+                {/* Dark / Light Mode Switcher in Drawer */}
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-[#eae4d7] transition-colors cursor-pointer"
+                >
+                  <span className="flex items-center gap-2.5">
+                    {theme === 'dark' ? (
+                      <Sun className="w-4 h-4 text-[#E3A92F]" />
+                    ) : (
+                      <Moon className="w-4 h-4 text-[#0B5F55]" />
+                    )}
+                    <span>{theme === 'dark' ? 'التبديل إلى الوضع الفاتح' : 'التبديل إلى الوضع الداكن'}</span>
+                  </span>
+                  <span className="text-[10px] text-slate-500 bg-black/5 dark:bg-white/10 px-2 py-0.5 rounded-full font-bold">
+                    {theme === 'dark' ? '☀️ فاتح' : '🌙 داكن'}
+                  </span>
+                </button>
               </div>
             </div>
 

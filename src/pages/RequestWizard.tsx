@@ -305,7 +305,7 @@ export const RequestWizard: React.FC = () => {
     );
 
     return (
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 max-w-2xl bg-[#EFEFEA]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 max-w-2xl bg-transparent">
         <Card className="border-[#065E5A]/40 bg-white shadow-2xl overflow-hidden animate-slide-up">
           <div className="bg-[#012C2B] text-white p-6 sm:p-8 text-center space-y-3">
             <div className="flex justify-center mb-1">
@@ -440,7 +440,7 @@ export const RequestWizard: React.FC = () => {
   ];
 
   return (
-    <div className="py-8 sm:py-16 bg-[#EFEFEA] min-h-screen">
+    <div className="py-8 sm:py-16 bg-transparent min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl space-y-8">
         {/* Wizard Header */}
         <div className="text-center space-y-2">

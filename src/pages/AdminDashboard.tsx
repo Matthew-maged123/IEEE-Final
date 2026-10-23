@@ -176,7 +176,7 @@ export const AdminDashboard: React.FC = () => {
   if (!admin) return null;
 
   return (
-    <div className="py-8 sm:py-12 space-y-8 bg-[#EFEFEA] min-h-screen">
+    <div className="py-8 sm:py-12 space-y-8 bg-transparent min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Top Control Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">

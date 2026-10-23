@@ -18,7 +18,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   if (variant === 'white-on-green') {
     src = '/brand/youzersef-logo-white-on-green.png';
   } else if (variant === 'white-on-deep') {
-    src = '/brand/youzersef-logo-white-on-deep.png';
+    src = '/logo/logo-white.png';
   } else if (variant === 'square-icon') {
     src = '/brand/youzersef-icon-square.png';
   }

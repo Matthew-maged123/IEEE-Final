@@ -42,7 +42,7 @@ export const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div className="py-12 sm:py-20 flex items-center justify-center bg-[#EFEFEA] min-h-[80vh]">
+    <div className="py-12 sm:py-20 flex items-center justify-center bg-transparent min-h-[80vh]">
       <div className="container mx-auto px-4 max-w-md space-y-6">
         <div className="text-center space-y-3">
           {/* Logo on paper background */}

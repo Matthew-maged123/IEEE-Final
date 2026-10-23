@@ -33,15 +33,7 @@ export const EmbroideryHero: React.FC = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden min-h-[calc(100vh-100px)] flex flex-col justify-center py-6 sm:py-10 lg:py-12 bg-[#F6F1E7] text-[#073B35] select-none border-b border-[#d9d2c3]/70">
-      {/* Subtle Warm Paper Dot Texture */}
-      <div 
-        className="absolute inset-0 opacity-15 pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #0B5F55 1.5px, transparent 0)`,
-          backgroundSize: '32px 32px',
-        }}
-      />
+    <section className="relative overflow-hidden min-h-[calc(100vh-100px)] flex flex-col justify-center py-6 sm:py-10 lg:py-12 bg-transparent text-[#073B35] select-none border-b border-[#d9d2c3]/70">
       <div className="absolute top-1/4 -start-24 w-96 h-96 bg-[#0B5F55]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 -end-24 w-96 h-96 bg-[#E3A92F]/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -50,22 +42,28 @@ export const EmbroideryHero: React.FC = () => {
         {/* ─────────────────────────────────────────────────────────────
             1. Top Header Area (Grand Headline & Egyptian Brand Kicker)
         ───────────────────────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto space-y-2.5 mb-6 sm:mb-10 lg:mb-12">
+        <div className="text-center max-w-5xl xl:max-w-6xl mx-auto space-y-2.5 mb-6 sm:mb-10 lg:mb-12">
           {/* Eyebrow Kicker Pill */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B5F55]/10 border border-[#0B5F55]/20 text-[#0B5F55] text-xs sm:text-sm font-black tracking-wide shadow-2xs">
             <span>أفكارك. مطبوعة في مصر.</span>
           </div>
 
-          {/* Main Headline (RTL: خلّيها on right, شبهك in middle, Asterisk on left) */}
-          <div className="flex items-center justify-center gap-3 pt-1">
-            <h1 className="text-5xl sm:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tight text-[#073B35] font-display flex items-center gap-3 leading-tight">
-              <span>خلّيها</span>
-              <span className="text-[#0B5F55]">شبهك.</span>
-              {/* Official Youzersef Feather Logo (1.5x Size) */}
+          {/* Main Headline (Strictly One Line) */}
+          <div className="flex items-center justify-center pt-1 w-full overflow-hidden">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight text-[#073B35] font-display flex flex-nowrap whitespace-nowrap items-center justify-center gap-2 sm:gap-3 leading-tight text-center">
+              {/* Official Youzersef Feather Logo (Right) */}
+              <img
+                src="/feather-logo-green.png"
+                alt="شعار يوزرسيف"
+                className="h-[28px] sm:h-[44px] md:h-[54px] lg:h-[64px] xl:h-[74px] w-auto object-contain inline-block shrink-0 drop-shadow-xs -me-1 sm:-me-2"
+              />
+              <span>خليك مختلف،</span>
+              <span className="text-[#0B5F55]">خليك يوزرسيف.</span>
+              {/* Official Youzersef Feather Logo (Left) */}
               <img
                 src="/feather-logo-green2.png"
                 alt="شعار يوزرسيف"
-                className="h-[54px] sm:h-[84px] lg:h-24 xl:h-[120px] w-auto object-contain inline-block shrink-0 drop-shadow-xs"
+                className="h-[28px] sm:h-[44px] md:h-[54px] lg:h-[64px] xl:h-[74px] w-auto object-contain inline-block shrink-0 drop-shadow-xs -ms-1 sm:-ms-2"
               />
             </h1>
           </div>
@@ -154,36 +152,39 @@ export const EmbroideryHero: React.FC = () => {
                 اختار لونك
               </span>
               <div className="flex items-center gap-3.5 justify-center lg:justify-start">
-                {/* White Swatch */}
+                {/* White Swatch (Most Right in RTL) */}
                 <button
                   onClick={() => setSelectedColor('white')}
                   className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
                     selectedColor === 'white'
-                      ? 'ring-3 ring-offset-2 ring-[#0B5F55] scale-110 shadow-md'
-                      : 'hover:scale-105 opacity-90'
+                      ? 'ring-3 ring-offset-2 ring-offset-[#F6F1E7] ring-[#0B5F55] scale-110 shadow-md'
+                      : 'hover:scale-105 shadow-xs'
                   }`}
+                  style={{ backgroundColor: '#ffffff' }}
                   aria-label="اللون الأبيض"
                 />
                 
-                {/* Black Swatch */}
+                {/* Black Swatch (Middle in RTL) */}
                 <button
                   onClick={() => setSelectedColor('black')}
-                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#073B35] border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
                     selectedColor === 'black'
-                      ? 'ring-3 ring-offset-2 ring-[#0B5F55] scale-110 shadow-md'
-                      : 'hover:scale-105 opacity-90'
+                      ? 'ring-3 ring-offset-2 ring-offset-[#F6F1E7] ring-[#0B5F55] scale-110 shadow-md'
+                      : 'hover:scale-105 shadow-xs'
                   }`}
-                  aria-label="اللون الأسود / الأخضر الداكن"
+                  style={{ backgroundColor: '#000000' }}
+                  aria-label="اللون الأسود"
                 />
 
-                {/* Brand Green Swatch */}
+                {/* Brand Green Swatch (Left in RTL) */}
                 <button
                   onClick={() => setSelectedColor('green')}
                   className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0B5F55] border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
                     selectedColor === 'green'
-                      ? 'ring-3 ring-offset-2 ring-[#E3A92F] scale-110 shadow-md'
-                      : 'hover:scale-105 opacity-90'
+                      ? 'ring-3 ring-offset-2 ring-offset-[#F6F1E7] ring-[#E3A92F] scale-110 shadow-md'
+                      : 'hover:scale-105 shadow-xs'
                   }`}
+                  style={{ backgroundColor: '#0B5F55' }}
                   aria-label="أخضر يوزرسيف"
                 />
               </div>

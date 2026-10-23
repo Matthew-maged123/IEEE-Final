@@ -77,6 +77,8 @@ import {
   faPaintbrush,
   faCopyright,
   faCrown,
+  faSun,
+  faMoon,
 } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
@@ -193,6 +195,8 @@ export const Gift = createIcon(faGift, 'Gift');
 export const Paintbrush = createIcon(faPaintbrush, 'Paintbrush');
 export const Copyright = createIcon(faCopyright, 'Copyright');
 export const Crown = createIcon(faCrown, 'Crown');
+export const Sun = createIcon(faSun, 'Sun');
+export const Moon = createIcon(faMoon, 'Moon');
 
 // Re-export FontAwesome core tools and icon definitions for direct usage
 export { FontAwesomeIcon };
@@ -269,5 +273,7 @@ export {
   faPaintbrush,
   faCopyright,
   faCrown,
+  faSun,
+  faMoon,
   faWhatsapp,
 };

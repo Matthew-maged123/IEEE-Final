@@ -37,7 +37,7 @@ export const ServiceDetails: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-20 text-center bg-[#EFEFEA]">
+      <div className="container mx-auto px-4 py-20 text-center bg-transparent">
         <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-[#065E5A] border-t-transparent" />
         <p className="mt-4 text-sm text-slate-500">جاري تحميل مواصفات الخدمة...</p>
       </div>
@@ -46,7 +46,7 @@ export const ServiceDetails: React.FC = () => {
 
   if (!service) {
     return (
-      <div className="container mx-auto px-4 py-20 text-center max-w-md bg-[#EFEFEA]">
+      <div className="container mx-auto px-4 py-20 text-center max-w-md bg-transparent">
         <h2 className="text-2xl font-bold text-slate-900 mb-2">عذراً، الخدمة غير موجودة</h2>
         <p className="text-sm text-slate-500 mb-6">ربما تم تغيير الرابط أو أن الخدمة غير مفعلة حالياً.</p>
         <Link to="/services">
@@ -57,7 +57,7 @@ export const ServiceDetails: React.FC = () => {
   }
 
   return (
-    <div className="py-10 sm:py-16 space-y-12 bg-[#EFEFEA] min-h-screen">
+    <div className="py-10 sm:py-16 space-y-12 bg-transparent min-h-screen">
       {/* Breadcrumb & Navigation */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-6">

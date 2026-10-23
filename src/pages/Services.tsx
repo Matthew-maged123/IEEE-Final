@@ -65,7 +65,7 @@ export const Services: React.FC = () => {
   };
 
   return (
-    <div className="py-10 sm:py-16 space-y-12 bg-[#EFEFEA] min-h-screen">
+    <div className="py-10 sm:py-16 space-y-12 bg-transparent min-h-screen">
       {/* Header */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl space-y-4">
         <Badge variant="demo" className="text-xs bg-[#065E5A]/10 text-[#065E5A] border-[#065E5A]/30">

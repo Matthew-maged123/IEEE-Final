@@ -5,7 +5,6 @@ import {
   Sparkles,
   ChevronLeft,
   Award,
-  MessageCircle,
   ShoppingBag,
   Zap,
   Scissors,
@@ -21,7 +20,6 @@ import { BrandLogo } from '../components/BrandLogo';
 import { EmbroideryHero } from '../components/EmbroideryHero';
 import { BeforeAfterShowcase } from '../components/BeforeAfterShowcase';
 import { SocialDesignsShowcase } from '../components/SocialDesignsShowcase';
-import { generateWhatsAppLink, YUZERSEF_WHATSAPP } from '../lib/utils';
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -105,12 +103,17 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <div className="pb-20 overflow-x-hidden bg-[#F6F1E7]">
-      
-      {/* ─────────────────────────────────────────────────────────────
-          SECTION (a): Cinematic Full-Viewport Hero with Embroidery Animation
-      ───────────────────────────────────────────────────────────── */}
-      <EmbroideryHero />
+    <div className="relative pb-20 overflow-x-hidden bg-transparent min-h-screen">
+      {/* Ambient Glow Orbs for visual depth throughout the scroll */}
+      <div className="absolute top-[15%] -start-24 w-96 h-96 bg-[#0B5F55]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-[40%] -end-24 w-96 h-96 bg-[#E3A92F]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-[70%] -start-24 w-96 h-96 bg-[#0B5F55]/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10">
+        {/* ─────────────────────────────────────────────────────────────
+            SECTION (a): Cinematic Full-Viewport Hero with Embroidery Animation
+        ───────────────────────────────────────────────────────────── */}
+        <EmbroideryHero />
 
       {/* ─────────────────────────────────────────────────────────────
           Follow-up Content Sections (with smooth transition & spacing)
@@ -289,7 +292,7 @@ export const Home: React.FC = () => {
       {/* ─────────────────────────────────────────────────────────────
           SECTION (e): How Ordering Works
       ───────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 sm:py-20 border-y border-[#d9d2c3]/80">
+      <section className="py-16 sm:py-20 border-y border-[#d9d2c3]/80 relative z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-xl mx-auto mb-14 space-y-2">
             <span className="text-xs font-bold text-[#0B5F55] uppercase tracking-wider">سير العمل المعتمد (Customer Journey)</span>
@@ -326,7 +329,7 @@ export const Home: React.FC = () => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-[#F6F1E7] rounded-2xl p-6 border border-[#d9d2c3] shadow-xs relative overflow-hidden"
+                className="bg-white/90 backdrop-blur-xs rounded-2xl p-6 border-2 border-[#d9d2c3] hover:border-[#0B5F55] transition-all shadow-md relative overflow-hidden"
               >
                 <span className="text-4xl font-black text-slate-300/40 absolute top-3 end-3 select-none pointer-events-none font-mono">
                   {item.step}
@@ -358,59 +361,8 @@ export const Home: React.FC = () => {
       ───────────────────────────────────────────────────────────── */}
       <SocialDesignsShowcase />
 
-      {/* ─────────────────────────────────────────────────────────────
-          SECTION (f): Contact CTA
-      ───────────────────────────────────────────────────────────── */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-gradient-to-r from-[#073B35] via-[#0B5F55] to-[#073B35] text-white p-8 sm:p-14 overflow-hidden shadow-2xl border-2 border-[#0B5F55]">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            <div className="lg:col-span-8 space-y-5 text-center sm:text-start">
-              <Badge className="bg-[#E3A92F]/20 text-[#E3A92F] border-[#E3A92F]/40 text-xs">
-                جاهزون لبدء مشروعك
-              </Badge>
-              <h2 className="text-2xl sm:text-4xl font-black leading-tight text-white font-display">
-                هل لديك فكرة أو تصميم وتبحث عن لمسة تليق بعلامتك؟
-              </h2>
-              <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed">
-                استخدم معالج الطلب الذكي الآن وسيقوم المساعد بفحص تفاصيل طلبك وتمريره للمشرف للمراجعة.
-              </p>
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4">
-                <Link to="/request" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#052925] text-[#073B35] font-black text-base py-3 px-8 rounded-xl border-2 border-[#052925] shadow-[4px_4px_0px_#001716] transition-all cursor-pointer inline-flex items-center justify-center gap-2">
-                    <span>ابدأ معالج الطلب</span>
-                    <svg className="w-4 h-4 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7M7 7h10v10" />
-                    </svg>
-                  </button>
-                </Link>
-                
-                <a
-                  href={generateWhatsAppLink(undefined, 'مرحباً، أود الاستفسار عن خدمات يوزرسيف المتاحة.')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto"
-                >
-                  <button className="w-full sm:w-auto bg-white/10 hover:bg-white/20 active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#052925] text-white font-bold text-sm py-3 px-6 rounded-xl border-2 border-white/60 shadow-[4px_4px_0px_#001716] transition-all cursor-pointer inline-flex items-center justify-center gap-2">
-                    <MessageCircle className="w-4 h-4 text-emerald-300" />
-                    <span>تواصل واتساب ({YUZERSEF_WHATSAPP})</span>
-                  </button>
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-4 flex justify-center lg:justify-end">
-              <div className="p-6 rounded-2xl bg-[#0B5F55]/40 border border-white/10 backdrop-blur-xs shadow-inner flex items-center justify-center">
-                <BrandLogo
-                  variant="white-on-green"
-                  className="h-28 sm:h-36 w-auto drop-shadow-md"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       </div>
     </div>
+  </div>
   );
 };

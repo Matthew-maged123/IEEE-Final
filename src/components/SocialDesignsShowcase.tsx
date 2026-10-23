@@ -56,7 +56,7 @@ export const SocialDesignsShowcase: React.FC = () => {
   ];
 
   return (
-    <section className="py-14 sm:py-20 bg-[#F6F1E7] border-t border-[#d9d2c3]/60">
+    <section className="py-14 sm:py-20 bg-transparent border-t border-[#d9d2c3]/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

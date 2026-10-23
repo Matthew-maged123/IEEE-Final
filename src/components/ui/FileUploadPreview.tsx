@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { UploadCloud, File, Image as ImageIcon, X, AlertCircle } from 'lucide-react';
+import { UploadCloud, File, Image as ImageIcon, X, AlertCircle } from './icons';
 import { FileAttachment } from '../../lib/types';
 import { formatFileSize } from '../../lib/utils';
 import { Button } from './button';

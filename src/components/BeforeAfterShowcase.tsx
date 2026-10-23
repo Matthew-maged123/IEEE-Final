@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { ArrowLeftRight } from 'lucide-react';
+import { ArrowLeftRight } from './ui/icons';
 import { Badge } from './ui/badge';
 
 export const BeforeAfterShowcase: React.FC = () => {
@@ -37,14 +37,11 @@ export const BeforeAfterShowcase: React.FC = () => {
   };
 
   return (
-    <section className="py-14 sm:py-20 bg-[#F6F1E7] border-y border-[#d9d2c3]/60 relative overflow-hidden">
+    <section className="pt-16 pb-14 sm:pt-24 sm:pb-20 bg-[#F6F1E7] border-b border-[#d9d2c3]/60 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
-          <Badge className="bg-[#0B5F55]/15 text-[#0B5F55] border-[#0B5F55]/30 text-xs px-3 py-1 font-semibold">
-            رحلة التحول الإبداعي (Before & After)
-          </Badge>
           <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] tracking-tight font-display">
             من فكرة أولية بسيطة إلى منتج مطبوع ومطرّز
           </h2>

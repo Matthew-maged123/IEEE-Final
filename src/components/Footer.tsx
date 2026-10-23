@@ -7,12 +7,12 @@ import {
   Clock,
   ArrowUpRight,
   ShieldAlert,
-} from 'lucide-react';
+} from './ui/icons';
 import { BrandLogo } from './BrandLogo';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#012C2B] text-emerald-100/90 pt-16 pb-12 border-t border-[#065E5A]/40">
+    <footer data-bg="dark-green" className="bg-[#012C2B] text-emerald-100/90 pt-16 pb-12 border-t border-[#065E5A]/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-[#065E5A]/40">
           {/* Col 1: Brand - Using white-on-deep on dark green background #012C2B, NO imitating text next to it */}

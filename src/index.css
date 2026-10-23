@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=Reem+Kufi:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -44,6 +44,7 @@
   --animate-slide-up: slide-up 0.5s ease-out;
   --animate-fade-in: fade-in 0.4s ease-out;
   --animate-slide-in-right: slide-in-right 0.4s ease-out;
+  --animate-slide-in-left: slide-in-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-thread-draw: thread-draw 3s ease-in-out forwards;
@@ -65,6 +66,11 @@
 @keyframes slide-in-right {
   from { opacity: 0; transform: translateX(16px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
 
 @keyframes pulse-slow {
@@ -177,6 +183,13 @@
   /* Display font utility */
   .font-display {
     font-family: var(--font-display);
+  }
+
+  /* Font Awesome SVG sizing compatibility */
+  svg.svg-inline--fa {
+    display: inline-block;
+    box-sizing: content-box;
+    vertical-align: -0.125em;
   }
 }
 

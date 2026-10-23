@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Award, Sparkles, ArrowLeft, Tag, Calendar, CheckCircle2, BookmarkPlus } from 'lucide-react';
+import { Award, Sparkles, ArrowLeft, Tag, Calendar, CheckCircle2, BookmarkPlus } from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';

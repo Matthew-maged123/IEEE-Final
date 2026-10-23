@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, FileText, AlertTriangle, RefreshCw, Lock, Sparkles } from 'lucide-react';
+import { ShieldCheck, FileText, AlertTriangle, RefreshCw, Lock, Sparkles } from '../components/ui/icons';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 

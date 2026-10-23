@@ -11,7 +11,7 @@ import {
   Upload,
   Check,
   Trash2
-} from 'lucide-react';
+} from './ui/icons';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Card, CardContent } from './ui/card';

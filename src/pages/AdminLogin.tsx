@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Lock, AlertCircle, KeyRound } from 'lucide-react';
+import { Lock, AlertCircle, KeyRound } from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input, Label } from '../components/ui/input';

@@ -6,7 +6,7 @@ import {
   ChevronLeft,
   Award,
   MessageCircle,
-} from 'lucide-react';
+} from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -98,17 +98,21 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20 overflow-x-hidden bg-[#F6F1E7]">
+    <div className="pb-20 overflow-x-hidden bg-[#F6F1E7]">
       
       {/* ─────────────────────────────────────────────────────────────
-          SECTION (a): Cinematic Hero with Embroidery Animation
+          SECTION (a): Cinematic Full-Viewport Hero with Embroidery Animation
       ───────────────────────────────────────────────────────────── */}
       <EmbroideryHero />
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION (b): Real Sketch to Polished Product (Before & After)
+          Follow-up Content Sections (with smooth transition & spacing)
       ───────────────────────────────────────────────────────────── */}
-      <BeforeAfterShowcase />
+      <div className="space-y-16 sm:space-y-24 mt-0">
+        {/* ─────────────────────────────────────────────────────────────
+            SECTION (b): Real Sketch to Polished Product (Before & After)
+        ───────────────────────────────────────────────────────────── */}
+        <BeforeAfterShowcase />
 
       {/* ─────────────────────────────────────────────────────────────
           SECTION (c): Services / Products Catalogue (Refined Visual Cards)
@@ -387,6 +391,7 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      </div>
     </div>
   );
 };

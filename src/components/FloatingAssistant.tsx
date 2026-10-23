@@ -14,9 +14,8 @@ import {
   Check,
   AlertTriangle,
   RotateCcw
-} from 'lucide-react';
+} from './ui/icons';
 import { Button } from './ui/button';
-import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { generateWhatsAppLink, YUZERSEF_WHATSAPP } from '../lib/utils';
 import { PRODUCTS_LIST } from '../lib/products-data';
@@ -47,6 +46,8 @@ export const FloatingAssistant: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const chatBottomRef = useRef<HTMLDivElement>(null);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
+  const [isOnGreen, setIsOnGreen] = useState<boolean>(false);
 
   // Initialize session-only chat on mount
   useEffect(() => {
@@ -66,6 +67,128 @@ export const FloatingAssistant: React.FC = () => {
       chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages, isOpen, isTyping]);
+
+  // Adaptive background detection: changes button background based on what is behind it
+  useEffect(() => {
+    const isGreenOrDarkColor = (colorStr: string): boolean => {
+      if (!colorStr || colorStr === 'transparent' || colorStr === 'rgba(0, 0, 0, 0)') return false;
+
+      // Brand greens: #012C2B, #073B35, #0B5F55, #065E5A, #052925
+      if (/(073[bB]35|012[cC]2[bB]|0[bB]5[fF]55|065[eE]5[aA]|052925|001716)/i.test(colorStr)) return true;
+
+      const match = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+      if (match) {
+        const r = parseInt(match[1], 10);
+        const g = parseInt(match[2], 10);
+        const b = parseInt(match[3], 10);
+        const a = match[4] !== undefined ? parseFloat(match[4]) : 1;
+        if (a < 0.2) return false;
+
+        const isGreenish = g > r && g > 25 && r < 80;
+        const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+        return isGreenish || (luminance < 90 && g >= r);
+      }
+      return false;
+    };
+
+    const isGreenClassOrTag = (el: Element): boolean => {
+      if (el.tagName.toLowerCase() === 'footer') return true;
+      if (el.getAttribute('data-bg') === 'dark-green') return true;
+      const classStr = el.getAttribute('class') || '';
+      return (
+        /(bg|from|via|to)-\[#(073[bB]35|012[cC]2[bB]|0[bB]5[fF]55|065[eE]5[aA]|052925|001716)\]/i.test(classStr) ||
+        classStr.includes('bg-emerald-9') ||
+        classStr.includes('bg-emerald-8') ||
+        classStr.includes('bg-teal-9')
+      );
+    };
+
+    const isGreenGradient = (style: CSSStyleDeclaration): boolean => {
+      const bgImg = style.backgroundImage;
+      if (!bgImg || bgImg === 'none') return false;
+      return (
+        /(073[bB]35|012[cC]2[bB]|0[bB]5[fF]55|065[eE]5[aA]|052925|001716)/i.test(bgImg) ||
+        /rgba?\(\s*(?:7,\s*59,\s*53|1,\s*44,\s*43|11,\s*95,\s*85|6,\s*94,\s*90|5,\s*41,\s*37|0,\s*23,\s*22)/i.test(bgImg)
+      );
+    };
+
+    const detectBackground = () => {
+      const btn = triggerButtonRef.current;
+      if (!btn) return;
+
+      const rect = btn.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+
+      // 1. Direct geometric overlap check with designated dark green sections (Hero, Footer, etc.)
+      const darkSections = document.querySelectorAll<HTMLElement>('[data-bg="dark-green"], footer');
+      for (const section of darkSections) {
+        const sRect = section.getBoundingClientRect();
+        if (
+          rect.bottom > sRect.top &&
+          rect.top < sRect.bottom &&
+          rect.right > sRect.left &&
+          rect.left < sRect.right
+        ) {
+          setIsOnGreen(true);
+          return;
+        }
+      }
+
+      // 2. Sample elements under the button's center point
+      if (x >= 0 && x <= window.innerWidth && y >= 0 && y <= window.innerHeight) {
+        const elements = document.elementsFromPoint(x, y);
+        for (const el of elements) {
+          if (el === btn || btn.contains(el)) continue;
+
+          let curr: Element | null = el;
+          while (curr && curr !== document.documentElement) {
+            const style = window.getComputedStyle(curr);
+
+            if (isGreenClassOrTag(curr) || isGreenGradient(style)) {
+              setIsOnGreen(true);
+              return;
+            }
+
+            const bg = style.backgroundColor;
+            if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
+              if (isGreenOrDarkColor(bg)) {
+                setIsOnGreen(true);
+                return;
+              }
+              // Found a solid non-green background (e.g. cream/white)
+              setIsOnGreen(false);
+              return;
+            }
+            curr = curr.parentElement;
+          }
+        }
+      }
+
+      setIsOnGreen(false);
+    };
+
+    let rafId: number | null = null;
+    const onScrollOrResize = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(detectBackground);
+    };
+
+    detectBackground();
+    const timer1 = setTimeout(detectBackground, 50);
+    const timer2 = setTimeout(detectBackground, 250);
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
+    };
+  }, [location.pathname, isOpen]);
 
   // Context Layer A: Detect current page context
   const getPageContext = () => {
@@ -235,18 +358,24 @@ export const FloatingAssistant: React.FC = () => {
       <div className="fixed bottom-6 start-6 z-50">
         {!isOpen && (
           <button
+            ref={triggerButtonRef}
             onClick={() => setIsOpen(true)}
-            className="flex items-center gap-2 bg-[#073B35] hover:bg-[#0B5F55] text-white px-4 py-3 rounded-full shadow-2xl border-2 border-[#E3A92F] transition-all duration-300 hover:scale-105 cursor-pointer group"
+            className={`flex items-center justify-center w-14 h-14 rounded-full shadow-2xl border-2 border-[#E3A92F] transition-all duration-300 hover:scale-110 cursor-pointer group ${
+              isOnGreen
+                ? 'bg-white hover:bg-slate-50 text-[#073B35]'
+                : 'bg-[#073B35] hover:bg-[#0B5F55] text-white'
+            }`}
             aria-label="فتح المساعد الذكي"
           >
-            <div className="relative">
-              <Bot className="w-5 h-5 text-[#E3A92F] group-hover:rotate-12 transition-transform" />
+            <div className="relative translate-y-[1px]">
+              <Bot
+                className={`w-6 h-6 transition-colors duration-300 group-hover:rotate-12 ${
+                  isOnGreen ? 'text-[#073B35]' : 'text-[#E3A92F]'
+                }`}
+              />
               <span className="absolute -top-1 -end-1 w-2.5 h-2.5 rounded-full bg-[#E3A92F] animate-ping" />
+              <span className="absolute -top-1 -end-1 w-2.5 h-2.5 rounded-full bg-[#E3A92F]" />
             </div>
-            <span className="text-xs font-bold font-sans">مساعد يوزرسيف الذكي</span>
-            <Badge className="bg-[#E3A92F] text-[#073B35] font-mono text-[10px] px-1.5 py-0 border-none font-black">
-              RAG
-            </Badge>
           </button>
         )}
       </div>

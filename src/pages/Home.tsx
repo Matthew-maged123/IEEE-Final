@@ -6,6 +6,13 @@ import {
   ChevronLeft,
   Award,
   MessageCircle,
+  ShoppingBag,
+  Zap,
+  Scissors,
+  Gift,
+  Smartphone,
+  Paintbrush,
+  Shirt,
 } from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
@@ -25,43 +32,43 @@ export const Home: React.FC = () => {
       id: 'hoodies',
       title: 'تشرتات وهوديز مطبوعة',
       image: '/services/service-hoodies.jpg',
-      btnText: 'ابدأ تصميمك الآن 🛍️',
+      btnText: 'ابدأ تصميمك الآن', icon: ShoppingBag,
       link: '/request?service=clothing-hoodies',
     },
     {
       id: 'caps',
       title: 'كابات ومطرزات عصرية',
       image: '/services/service-caps.jpg',
-      btnText: 'طلب تطريز خاص 🧵',
+      btnText: 'طلب تطريز خاص', icon: Sparkles,
       link: '/request?service=caps-embroidery',
     },
     {
       id: 'stickers',
       title: 'استيكرات استيكراتك',
       image: '/services/service-stickers.jpg',
-      badge: 'تسليم سريع ⚡',
-      btnText: 'صمم استيكراتك ✂️',
+      badge: 'تسليم سريع',
+      btnText: 'صمم استيكراتك', icon: Scissors,
       link: '/request?service=stickers-labels',
     },
     {
       id: 'mugs',
       title: 'مجات وهدايا ترويجية',
       image: '/services/service-mugs.jpg',
-      btnText: 'طلب كميات وهدايا 🎁',
+      btnText: 'طلب كميات وهدايا', icon: Gift,
       link: '/request?service=mugs-promotional-gifts',
     },
     {
       id: 'cases',
       title: 'جرابات هواتف مخصصة',
       image: '/services/service-cases.jpg',
-      btnText: 'اختر موديل هاتفك 📱',
+      btnText: 'اختر موديل هاتفك', icon: Smartphone,
       link: '/request?service=phone-cases',
     },
     {
       id: 'design',
       title: 'خدمة المساعدة والتصميم الفني',
       image: '/services/service-design.jpg',
-      btnText: 'تواصل مع مصمم 🖌️',
+      btnText: 'تواصل مع مصمم', icon: Paintbrush,
       link: '/contact',
     },
   ];
@@ -133,7 +140,7 @@ export const Home: React.FC = () => {
           </div>
 
           <Link to="/services">
-            <Button variant="outline" className="gap-2 shrink-0 border-[#d9d2c3] hover:bg-white text-slate-800">
+            <Button variant="outline" className="gap-2 shrink-0">
               <span>عرض كل الخدمات</span>
               <ChevronLeft className="w-4 h-4 rtl:rotate-0" />
             </Button>
@@ -170,8 +177,9 @@ export const Home: React.FC = () => {
                 {/* Quick Delivery Badge if exists */}
                 {service.badge && (
                   <div className="absolute top-12 start-4 z-10">
-                    <Badge className="bg-[#E3A92F] text-[#073B35] font-black text-[10px] px-2 py-0.5 shadow-md border-none">
-                      {service.badge}
+                    <Badge className="bg-[#E3A92F] text-[#073B35] font-black text-[10px] px-2 py-0.5 shadow-md border-none flex items-center gap-1">
+                      <Zap className="w-2.5 h-2.5" />
+                      <span>{service.badge}</span>
                     </Badge>
                   </div>
                 )}
@@ -180,11 +188,15 @@ export const Home: React.FC = () => {
               {/* Action Button at bottom */}
               <div className="p-4 pt-1 bg-[#073B35] z-10">
                 <Link to={service.link} className="block w-full">
-                  <Button
-                    className="w-full bg-[#052925] hover:bg-[#0B5F55] text-white border border-emerald-500/40 hover:border-[#E3A92F] text-xs font-bold py-2.5 rounded-xl shadow-md transition-all cursor-pointer"
+                  <button
+                    className="w-full bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#052925] text-[#073B35] font-black text-xs sm:text-sm py-2.5 px-4 rounded-xl border-2 border-[#052925] shadow-[4px_4px_0px_#001716] transition-all cursor-pointer flex items-center justify-center gap-1.5"
                   >
-                    <span>[ {service.btnText} ]</span>
-                  </Button>
+                    {service.icon && <service.icon className="w-3.5 h-3.5 text-[#073B35] shrink-0" />}
+                    <span>{service.btnText}</span>
+                    <svg className="w-3.5 h-3.5 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                  </button>
                 </Link>
               </div>
             </Card>
@@ -211,7 +223,7 @@ export const Home: React.FC = () => {
           </div>
 
           <Link to="/portfolio">
-            <Button variant="outline" className="gap-2 shrink-0 border-[#d9d2c3] hover:bg-white text-slate-800">
+            <Button variant="outline" className="gap-2 shrink-0">
               <span>تصفح كل المعرض</span>
               <ChevronLeft className="w-4 h-4 rtl:rotate-0" />
             </Button>
@@ -256,16 +268,17 @@ export const Home: React.FC = () => {
                 </p>
 
                 <div className="pt-2 border-t border-slate-100">
-                  <Button
-                    size="sm"
+                  <button
                     onClick={() =>
                       navigate(`/request?service=${item.serviceId}&ref=${encodeURIComponent(item.title)}`)
                     }
-                    className="w-full text-xs gap-1.5 bg-[#0B5F55] hover:bg-[#073B35] text-white py-2 rounded-xl"
+                    className="w-full bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] text-[#073B35] font-black text-xs py-2.5 px-4 rounded-xl border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35] transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
                     <span>استخدم هذا العمل كمرجع لطلبك</span>
-                    <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-0" />
-                  </Button>
+                    <svg className="w-3.5 h-3.5 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                  </button>
                 </div>
               </CardContent>
             </Card>
@@ -329,9 +342,12 @@ export const Home: React.FC = () => {
 
           <div className="mt-10 text-center">
             <Link to="/request">
-              <Button size="lg" className="bg-[#E3A92F] hover:bg-[#d49b24] text-[#073B35] font-black px-8">
-                ابدأ رحلة طلبك الآن
-              </Button>
+              <button className="bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] text-[#073B35] font-black text-base py-3.5 px-8 rounded-xl border-2 border-[#073B35] shadow-[4px_4px_0px_#073B35] transition-all cursor-pointer inline-flex items-center justify-center gap-2">
+                <span>ابدأ رحلة طلبك الآن</span>
+                <svg className="w-4 h-4 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 17L17 7M7 7h10v10" />
+                </svg>
+              </button>
             </Link>
           </div>
         </div>
@@ -360,9 +376,12 @@ export const Home: React.FC = () => {
               </p>
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4">
                 <Link to="/request" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto bg-[#E3A92F] text-[#073B35] hover:bg-[#d49b24] font-black shadow-md border-none">
-                    ابدأ معالج الطلب
-                  </Button>
+                  <button className="w-full sm:w-auto bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#052925] text-[#073B35] font-black text-base py-3 px-8 rounded-xl border-2 border-[#052925] shadow-[4px_4px_0px_#001716] transition-all cursor-pointer inline-flex items-center justify-center gap-2">
+                    <span>ابدأ معالج الطلب</span>
+                    <svg className="w-4 h-4 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                  </button>
                 </Link>
                 
                 <a
@@ -371,10 +390,10 @@ export const Home: React.FC = () => {
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto"
                 >
-                  <Button variant="ghost" size="lg" className="w-full sm:w-auto text-white hover:bg-white/10 border border-white/30 gap-2">
+                  <button className="w-full sm:w-auto bg-white/10 hover:bg-white/20 active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#052925] text-white font-bold text-sm py-3 px-6 rounded-xl border-2 border-white/60 shadow-[4px_4px_0px_#001716] transition-all cursor-pointer inline-flex items-center justify-center gap-2">
                     <MessageCircle className="w-4 h-4 text-emerald-300" />
                     <span>تواصل واتساب ({YUZERSEF_WHATSAPP})</span>
-                  </Button>
+                  </button>
                 </a>
               </div>
             </div>

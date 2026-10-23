@@ -238,7 +238,7 @@ export const Contact: React.FC = () => {
                     type="submit"
                     size="lg"
                     isLoading={loading}
-                    className="w-full gap-2 shadow-md bg-[#065E5A] hover:bg-[#012C2B] text-white"
+                    className="w-full gap-2"
                   >
                     <Send className="w-4 h-4 rtl:rotate-180" />
                     <span>إرسال الرسالة الآن</span>

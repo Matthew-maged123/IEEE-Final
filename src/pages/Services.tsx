@@ -86,10 +86,10 @@ export const Services: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all shrink-0 cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-[#065E5A] text-white shadow-sm'
-                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
+                  ? 'bg-[#E3A92F] text-[#073B35] border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35]'
+                  : 'bg-white text-[#073B35] border-2 border-[#d9d2c3] hover:border-[#073B35]'
               }`}
             >
               {cat.label}
@@ -163,12 +163,12 @@ export const Services: React.FC = () => {
                   {/* Actions */}
                   <div className="pt-2 grid grid-cols-2 gap-3">
                     <Link to={`/services/${service.id}`} className="w-full">
-                      <Button variant="outline" size="sm" className="w-full text-xs border-slate-300">
+                      <Button variant="outline" size="sm" className="w-full text-xs">
                         التفاصيل الكاملة
                       </Button>
                     </Link>
                     <Link to={`/request?service=${service.id}`} className="w-full">
-                      <Button size="sm" className="w-full text-xs gap-1 bg-[#065E5A] hover:bg-[#012C2B] text-white">
+                      <Button size="sm" className="w-full text-xs gap-1">
                         <span>طلب فوري</span>
                         <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-0" />
                       </Button>

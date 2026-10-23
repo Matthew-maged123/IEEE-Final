@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Lock, AlertCircle, KeyRound } from '../components/ui/icons';
+import { Lock, AlertCircle, KeyRound, ArrowLeft } from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input, Label } from '../components/ui/input';
@@ -69,7 +69,7 @@ export const AdminLogin: React.FC = () => {
             <button
               type="button"
               onClick={handleFillDemo}
-              className="text-[11px] font-bold text-[#065E5A] bg-[#065E5A]/10 px-2.5 py-1 rounded-md border border-[#065E5A]/30 hover:bg-[#065E5A]/20 transition-colors cursor-pointer"
+              className="text-[11px] font-black text-[#073B35] bg-[#E3A92F] hover:bg-[#d89c25] px-3 py-1 rounded-lg border-2 border-[#073B35] shadow-[2px_2px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] transition-all cursor-pointer"
             >
               تعبئة تلقائية بنقرة واحدة
             </button>
@@ -122,7 +122,7 @@ export const AdminLogin: React.FC = () => {
                 type="submit"
                 size="lg"
                 isLoading={loading}
-                className="w-full gap-2 bg-[#065E5A] hover:bg-[#012C2B] text-white shadow-md shadow-[#065E5A]/25"
+                className="w-full gap-2"
               >
                 <Lock className="w-4 h-4" />
                 <span>دخول لوحة التحكم</span>
@@ -133,7 +133,7 @@ export const AdminLogin: React.FC = () => {
 
         <div className="text-center">
           <Link to="/" className="text-xs text-slate-600 hover:text-[#065E5A] transition-colors font-medium">
-            ← العودة للصفحة الرئيسية للموقع
+            العودة للصفحة الرئيسية للموقع
           </Link>
         </div>
       </div>

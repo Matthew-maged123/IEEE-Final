@@ -120,7 +120,7 @@ export const About: React.FC = () => {
             </div>
           </div>
           <Link to="/request" className="shrink-0 w-full sm:w-auto">
-            <Button size="sm" className="w-full bg-[#065E5A] hover:bg-[#012C2B] text-white gap-1.5">
+            <Button size="sm" className="w-full gap-1.5">
               <span>طلب خدمة الآن</span>
               <ArrowLeft className="w-4 h-4 rtl:rotate-0" />
             </Button>

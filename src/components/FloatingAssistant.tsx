@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   MessageSquare,
+  Shirt,
+  Crown,
+  Coffee,
+  Tag,
   X,
   Send,
   Sparkles,
@@ -360,21 +364,13 @@ export const FloatingAssistant: React.FC = () => {
           <button
             ref={triggerButtonRef}
             onClick={() => setIsOpen(true)}
-            className={`flex items-center justify-center w-14 h-14 rounded-full shadow-2xl border-2 border-[#E3A92F] transition-all duration-300 hover:scale-110 cursor-pointer group ${
-              isOnGreen
-                ? 'bg-white hover:bg-slate-50 text-[#073B35]'
-                : 'bg-[#073B35] hover:bg-[#0B5F55] text-white'
-            }`}
+            className="flex items-center justify-center w-14 h-14 rounded-2xl bg-[#E3A92F] hover:bg-[#d89c25] text-[#073B35] border-2 border-[#073B35] shadow-[4px_4px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] transition-all cursor-pointer group"
             aria-label="فتح المساعد الذكي"
           >
             <div className="relative translate-y-[1px]">
-              <Bot
-                className={`w-6 h-6 transition-colors duration-300 group-hover:rotate-12 ${
-                  isOnGreen ? 'text-[#073B35]' : 'text-[#E3A92F]'
-                }`}
-              />
-              <span className="absolute -top-1 -end-1 w-2.5 h-2.5 rounded-full bg-[#E3A92F] animate-ping" />
-              <span className="absolute -top-1 -end-1 w-2.5 h-2.5 rounded-full bg-[#E3A92F]" />
+              <Bot className="w-6 h-6 text-[#073B35] transition-transform duration-300 group-hover:rotate-12" />
+              <span className="absolute -top-1 -end-1 w-2.5 h-2.5 rounded-full bg-[#073B35] animate-ping" />
+              <span className="absolute -top-1 -end-1 w-2.5 h-2.5 rounded-full bg-[#073B35]" />
             </div>
           </button>
         )}
@@ -423,27 +419,27 @@ export const FloatingAssistant: React.FC = () => {
           <div className="bg-[#F6F1E7] px-3 py-2 border-b border-[#d9d2c3]/60 flex items-center gap-1.5 overflow-x-auto scrollbar-none text-[11px]">
             <button
               onClick={() => generateAssistantResponse('تيشرتات وهوديز')}
-              className="px-2.5 py-1 rounded-full bg-white border border-[#d9d2c3] text-[#073B35] hover:border-[#0B5F55] shrink-0 font-medium"
+              className="px-3 py-1 rounded-xl bg-white border-2 border-[#073B35] shadow-[2px_2px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] text-[#073B35] hover:bg-[#E3A92F]/20 shrink-0 font-bold transition-all cursor-pointer flex items-center gap-1"
             >
-              👕 ملابس وهوديز
+              <Shirt className="w-3.5 h-3.5 text-[#073B35]" /><span>ملابس وهوديز</span>
             </button>
             <button
               onClick={() => generateAssistantResponse('كابات')}
-              className="px-2.5 py-1 rounded-full bg-white border border-[#d9d2c3] text-[#073B35] hover:border-[#0B5F55] shrink-0 font-medium"
+              className="px-3 py-1 rounded-xl bg-white border-2 border-[#073B35] shadow-[2px_2px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] text-[#073B35] hover:bg-[#E3A92F]/20 shrink-0 font-bold transition-all cursor-pointer flex items-center gap-1"
             >
-              🧢 كابات
+              <Crown className="w-3.5 h-3.5 text-[#073B35]" /><span>كابات</span>
             </button>
             <button
               onClick={() => generateAssistantResponse('مجات')}
-              className="px-2.5 py-1 rounded-full bg-white border border-[#d9d2c3] text-[#073B35] hover:border-[#0B5F55] shrink-0 font-medium"
+              className="px-3 py-1 rounded-xl bg-white border-2 border-[#073B35] shadow-[2px_2px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] text-[#073B35] hover:bg-[#E3A92F]/20 shrink-0 font-bold transition-all cursor-pointer flex items-center gap-1"
             >
-              ☕ مجات 360°
+              <Coffee className="w-3.5 h-3.5 text-[#073B35]" /><span>مجات 360°</span>
             </button>
             <button
               onClick={() => generateAssistantResponse('استيكرات')}
-              className="px-2.5 py-1 rounded-full bg-white border border-[#d9d2c3] text-[#073B35] hover:border-[#0B5F55] shrink-0 font-medium"
+              className="px-3 py-1 rounded-xl bg-white border-2 border-[#073B35] shadow-[2px_2px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] text-[#073B35] hover:bg-[#E3A92F]/20 shrink-0 font-bold transition-all cursor-pointer flex items-center gap-1"
             >
-              🏷️ استيكرات
+              <Tag className="w-3.5 h-3.5 text-[#073B35]" /><span>استيكرات</span>
             </button>
           </div>
 
@@ -471,11 +467,7 @@ export const FloatingAssistant: React.FC = () => {
                       <Button
                         size="sm"
                         onClick={() => handleActionClick(m.action!)}
-                        className={`w-full text-[11px] h-8 font-bold gap-1.5 ${
-                          m.action.type === 'handoff'
-                            ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
-                            : 'bg-[#E3A92F] hover:bg-[#d49b24] text-[#073B35]'
-                        }`}
+                        className="w-full text-xs font-black gap-1.5"
                       >
                         {m.action.type === 'handoff' ? (
                           <PhoneCall className="w-3.5 h-3.5" />
@@ -529,7 +521,7 @@ export const FloatingAssistant: React.FC = () => {
               type="submit"
               size="sm"
               disabled={!inputMessage.trim()}
-              className="bg-[#0B5F55] hover:bg-[#073B35] text-white h-10 px-3 shrink-0"
+              className="h-10 px-4 shrink-0"
               aria-label="إرسال"
             >
               <Send className="w-4 h-4 rtl:rotate-180" />

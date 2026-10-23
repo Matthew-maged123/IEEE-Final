@@ -162,7 +162,7 @@ export const ServiceDetails: React.FC = () => {
                 <div className="space-y-3 pt-2">
                   <Button
                     size="lg"
-                    className="w-full gap-2 shadow-md bg-[#065E5A] hover:bg-[#012C2B] text-white"
+                    className="w-full gap-2"
                     onClick={() => navigate(`/request?service=${service.id}`)}
                   >
                     <span>بدء طلب هذه الخدمة الآن</span>
@@ -175,8 +175,8 @@ export const ServiceDetails: React.FC = () => {
                     rel="noopener noreferrer"
                     className="block w-full"
                   >
-                    <Button variant="outline" size="default" className="w-full text-xs gap-1.5 border-slate-300">
-                      <MessageCircle className="w-4 h-4 text-emerald-600" />
+                    <Button variant="outline" size="default" className="w-full text-xs gap-1.5">
+                      <MessageCircle className="w-4 h-4 text-[#073B35]" />
                       <span>استفسار واتساب ({YUZERSEF_WHATSAPP})</span>
                     </Button>
                   </a>

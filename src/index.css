@@ -198,4 +198,23 @@
   .thread-texture {
     background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q5 5 10 10 Q15 15 20 10' stroke='%23d9d2c3' fill='none' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E");
   }
+
+  /* Signature Brand Button (matches the Hero button design) */
+  .btn-signature {
+    background-color: #E3A92F;
+    color: #073B35;
+    border: 2px solid #073B35;
+    box-shadow: 4px 4px 0px #073B35;
+    border-radius: 0.75rem;
+    font-weight: 900;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+  .btn-signature:hover {
+    background-color: #d89c25;
+  }
+  .btn-signature:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #073B35;
+  }
 }

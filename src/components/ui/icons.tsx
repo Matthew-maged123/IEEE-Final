@@ -70,6 +70,13 @@ import {
   faCircleNotch,
   faCircleInfo,
   faBagShopping,
+  faStar,
+  faSpa,
+  faScissors,
+  faGift,
+  faPaintbrush,
+  faCopyright,
+  faCrown,
 } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
@@ -179,6 +186,13 @@ export const Spinner = createIcon(faSpinner, 'Spinner');
 export const CircleNotch = createIcon(faCircleNotch, 'CircleNotch');
 export const Info = createIcon(faCircleInfo, 'Info');
 export const WhatsApp = createIcon(faWhatsapp, 'WhatsApp');
+export const Star = createIcon(faStar, 'Star');
+export const Flower = createIcon(faSpa, 'Flower');
+export const Scissors = createIcon(faScissors, 'Scissors');
+export const Gift = createIcon(faGift, 'Gift');
+export const Paintbrush = createIcon(faPaintbrush, 'Paintbrush');
+export const Copyright = createIcon(faCopyright, 'Copyright');
+export const Crown = createIcon(faCrown, 'Crown');
 
 // Re-export FontAwesome core tools and icon definitions for direct usage
 export { FontAwesomeIcon };
@@ -248,5 +262,12 @@ export {
   faCircleXmark,
   faBolt,
   faBagShopping,
+  faStar,
+  faSpa,
+  faScissors,
+  faGift,
+  faPaintbrush,
+  faCopyright,
+  faCrown,
   faWhatsapp,
 };

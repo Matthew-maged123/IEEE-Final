@@ -158,7 +158,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Prominent Vibrant Capsule Button ("Create Your Shirt / صمم واطلب الآن") */}
             <Link to="/request">
-              <button className="bg-[#E3A92F] hover:bg-[#d89c25] text-[#073B35] font-black text-xs sm:text-sm px-4 sm:px-5 py-1.5 sm:py-2 rounded-full shadow-sm hover:shadow-md transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
+              <button className="bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] text-[#073B35] font-black text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-xl border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35] transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>صمّم واطلب الآن</span>
               </button>
@@ -267,7 +267,7 @@ export const Navbar: React.FC = () => {
                   onClick={() => setMobileMenuOpen(false)}
                   className="block w-full"
                 >
-                  <button className="w-full bg-[#E3A92F] hover:bg-[#d89c25] text-[#073B35] font-black text-sm py-3 rounded-xl shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2">
+                  <button className="w-full bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] text-[#073B35] font-black text-sm py-3 rounded-xl border-2 border-[#073B35] shadow-[4px_4px_0px_#073B35] transition-all cursor-pointer flex items-center justify-center gap-2">
                     <Sparkles className="w-4 h-4" />
                     <span>صمّم واطلب الآن</span>
                   </button>

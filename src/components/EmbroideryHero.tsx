@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Star, Flower } from './ui/icons';
 
 type ProductOption = 'tshirt' | 'totebag' | 'hoodie';
 type ShapeOption = 'words' | 'shapes' | 'flower';
-type ColorOption = 'white' | 'black';
+type ColorOption = 'white' | 'black' | 'green';
 
 export const EmbroideryHero: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<ProductOption>('tshirt');
@@ -32,126 +33,134 @@ export const EmbroideryHero: React.FC = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden min-h-[calc(100vh-105px)] flex flex-col justify-center py-10 sm:py-16 bg-[#e9e5ff] text-slate-900 select-none">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col justify-between my-auto">
+    <section className="relative overflow-hidden min-h-[calc(100vh-100px)] flex flex-col justify-center py-6 sm:py-10 lg:py-12 bg-[#F6F1E7] text-[#073B35] select-none border-b border-[#d9d2c3]/70">
+      {/* Subtle Warm Paper Dot Texture */}
+      <div 
+        className="absolute inset-0 opacity-15 pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, #0B5F55 1.5px, transparent 0)`,
+          backgroundSize: '32px 32px',
+        }}
+      />
+      <div className="absolute top-1/4 -start-24 w-96 h-96 bg-[#0B5F55]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 -end-24 w-96 h-96 bg-[#E3A92F]/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="w-full max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-10 flex flex-col justify-between my-auto">
         
         {/* ─────────────────────────────────────────────────────────────
-            1. Top Header Area (Exact typography from reference image 2)
+            1. Top Header Area (Grand Headline & Egyptian Brand Kicker)
         ───────────────────────────────────────────────────────────── */}
-        <div className="text-center max-w-2xl mx-auto space-y-2 mb-8 sm:mb-12">
-          {/* Eyebrow / Kicker */}
-          <p className="text-xs sm:text-sm font-bold text-slate-800 tracking-wide">
-            أفكارك. مطبوعة في مصر.
-          </p>
+        <div className="text-center max-w-3xl mx-auto space-y-2.5 mb-6 sm:mb-10 lg:mb-12">
+          {/* Eyebrow Kicker Pill */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B5F55]/10 border border-[#0B5F55]/20 text-[#0B5F55] text-xs sm:text-sm font-black tracking-wide shadow-2xs">
+            <span>أفكارك. مطبوعة في مصر.</span>
+          </div>
 
-          {/* Main Headline with Starburst / Asterisk */}
-          <div className="flex items-center justify-center gap-2 flex-wrap">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-950 font-display flex items-center gap-2">
-              {/* Starburst Asterisk Icon (matching image) */}
-              <svg
-                viewBox="0 0 24 24"
-                className="w-7 h-7 sm:w-11 sm:h-11 text-slate-950 fill-current inline-block transform -rotate-12"
-                aria-hidden="true"
-              >
-                <path d="M12 0L13.8 7.5L20.5 4.1L16.2 10.3L23.5 12L16.2 13.7L20.5 19.9L13.8 16.5L12 24L10.2 16.5L3.5 19.9L7.8 13.7L0.5 12L7.8 10.3L3.5 4.1L10.2 7.5Z" />
-              </svg>
-              <span className="text-[#453fc4]">شبهك.</span>
+          {/* Main Headline (RTL: خلّيها on right, شبهك in middle, Asterisk on left) */}
+          <div className="flex items-center justify-center gap-3 pt-1">
+            <h1 className="text-5xl sm:text-7xl lg:text-7xl xl:text-8xl font-black tracking-tight text-[#073B35] font-display flex items-center gap-3 leading-tight">
               <span>خلّيها</span>
+              <span className="text-[#0B5F55]">شبهك.</span>
+              {/* Official Youzersef Feather Logo (1.5x Size) */}
+              <img
+                src="/feather-logo-green2.png"
+                alt="شعار يوزرسيف"
+                className="h-[54px] sm:h-[84px] lg:h-24 xl:h-[120px] w-auto object-contain inline-block shrink-0 drop-shadow-xs"
+              />
             </h1>
           </div>
 
           {/* Subtitle */}
-          <p className="text-xs sm:text-sm text-slate-700 font-medium max-w-lg mx-auto leading-relaxed pt-1">
+          <p className="text-sm sm:text-base lg:text-lg text-[#4d6560] font-bold max-w-2xl mx-auto leading-relaxed">
             رسمة بتحبها، كلمة بتعبّر عنك. حوّل فكرتك لحاجة تستخدمها كل يوم.
           </p>
         </div>
 
         {/* ─────────────────────────────────────────────────────────────
-            2. Interactive Studio Stage (3 Columns: Left Tools, Center Mockup, Right Products)
+            2. Interactive Studio Stage (Expanded Scale to Fill the View)
         ───────────────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-6xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center w-full">
           
           {/* ═══════════════════════════════════════════════════════════
-              LEFT COLUMN: Interactive Design Controls (جرّب شكل يعجبك)
+              LEFT COLUMN: Design Controls (جرّب شكل يعجبك)
           ═══════════════════════════════════════════════════════════ */}
-          <div className="lg:col-span-3 flex flex-col items-center lg:items-start order-2 lg:order-1 space-y-5">
-            {/* Tool Category Label */}
-            <div className="w-full">
-              <span className="block text-xs font-bold text-slate-900 mb-2.5 text-center lg:text-start">
+          <div className="lg:col-span-3 xl:col-span-3 flex flex-col items-center lg:items-start order-2 lg:order-1 space-y-6">
+            {/* Tool Category Label & 3 Option Buttons */}
+            <div className="w-full max-w-sm xl:max-w-md">
+              <span className="block text-sm sm:text-base font-black text-[#073B35] mb-3 text-center lg:text-start">
                 جرّب شكل يعجبك
               </span>
               
-              {/* 3 Shape/Design Option Buttons */}
-              <div className="grid grid-cols-3 gap-2.5 w-full max-w-xs mx-auto lg:mx-0">
-                {/* 1. Words / Text Button */}
+              <div className="grid grid-cols-3 gap-3 w-full">
+                {/* 1. Words / Logo Button */}
                 <button
                   onClick={() => setSelectedShape('words')}
-                  className={`flex flex-col items-center justify-center p-2.5 rounded-xl border-2 border-black transition-all cursor-pointer ${
+                  className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
                     selectedShape === 'words'
-                      ? 'bg-[#453fc4] text-white shadow-[2px_2px_0px_#000] -translate-y-0.5'
-                      : 'bg-white text-slate-800 shadow-[2px_2px_0px_#000] hover:bg-slate-50'
+                      ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] -translate-y-0.5'
+                      : 'bg-white text-[#073B35] shadow-[3px_3px_0px_#073B35] hover:bg-[#F6F1E7]'
                   }`}
-                  title="تصميم كلمات ونصوص"
+                  title="طباعة شعار يوزرسيف الرسمي"
                 >
-                  <svg className="w-5 h-5 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 7V4h16v3M9 20h6M12 4v16" />
                   </svg>
-                  <span className="text-[11px] font-bold">كلمات</span>
+                  <span className="text-xs sm:text-sm font-black">الشعار</span>
                 </button>
 
                 {/* 2. Shapes Button */}
                 <button
                   onClick={() => setSelectedShape('shapes')}
-                  className={`flex flex-col items-center justify-center p-2.5 rounded-xl border-2 border-black transition-all cursor-pointer ${
+                  className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
                     selectedShape === 'shapes'
-                      ? 'bg-[#453fc4] text-white shadow-[2px_2px_0px_#000] -translate-y-0.5'
-                      : 'bg-white text-slate-800 shadow-[2px_2px_0px_#000] hover:bg-slate-50'
+                      ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] -translate-y-0.5'
+                      : 'bg-white text-[#073B35] shadow-[3px_3px_0px_#073B35] hover:bg-[#F6F1E7]'
                   }`}
                   title="تصميم أشكال هندسية"
                 >
-                  <svg className="w-5 h-5 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 3l6 10H6z" />
                     <rect x="3" y="15" width="6" height="6" rx="1" />
                     <circle cx="18" cy="18" r="3" />
                   </svg>
-                  <span className="text-[11px] font-bold">أشكال</span>
+                  <span className="text-xs sm:text-sm font-black">أشكال</span>
                 </button>
 
                 {/* 3. Flower / Pattern Button */}
                 <button
                   onClick={() => setSelectedShape('flower')}
-                  className={`flex flex-col items-center justify-center p-2.5 rounded-xl border-2 border-black transition-all cursor-pointer ${
+                  className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
                     selectedShape === 'flower'
-                      ? 'bg-[#453fc4] text-white shadow-[2px_2px_0px_#000] -translate-y-0.5'
-                      : 'bg-white text-slate-800 shadow-[2px_2px_0px_#000] hover:bg-slate-50'
+                      ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] -translate-y-0.5'
+                      : 'bg-white text-[#073B35] shadow-[3px_3px_0px_#073B35] hover:bg-[#F6F1E7]'
                   }`}
                   title="تصميم رسمة ووردة"
                 >
-                  <svg className="w-5 h-5 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="3" />
                     <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
                     <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
                     <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
                     <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
                   </svg>
-                  <span className="text-[11px] font-bold">وردة</span>
+                  <span className="text-xs sm:text-sm font-black">وردة</span>
                 </button>
               </div>
             </div>
 
             {/* Color Swatch Picker */}
-            <div className="w-full">
-              <span className="block text-xs font-bold text-slate-900 mb-2 text-center lg:text-start">
+            <div className="w-full max-w-sm xl:max-w-md">
+              <span className="block text-sm sm:text-base font-black text-[#073B35] mb-2.5 text-center lg:text-start">
                 اختار لونك
               </span>
-              <div className="flex items-center gap-2.5 justify-center lg:justify-start">
+              <div className="flex items-center gap-3.5 justify-center lg:justify-start">
                 {/* White Swatch */}
                 <button
                   onClick={() => setSelectedColor('white')}
-                  className={`w-7 h-7 rounded-full bg-white border-2 border-black transition-transform cursor-pointer ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
                     selectedColor === 'white'
-                      ? 'ring-2 ring-offset-2 ring-[#453fc4] scale-110 shadow-xs'
-                      : 'hover:scale-105'
+                      ? 'ring-3 ring-offset-2 ring-[#0B5F55] scale-110 shadow-md'
+                      : 'hover:scale-105 opacity-90'
                   }`}
                   aria-label="اللون الأبيض"
                 />
@@ -159,22 +168,33 @@ export const EmbroideryHero: React.FC = () => {
                 {/* Black Swatch */}
                 <button
                   onClick={() => setSelectedColor('black')}
-                  className={`w-7 h-7 rounded-full bg-[#111827] border-2 border-black transition-transform cursor-pointer ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#073B35] border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
                     selectedColor === 'black'
-                      ? 'ring-2 ring-offset-2 ring-[#453fc4] scale-110 shadow-xs'
-                      : 'hover:scale-105'
+                      ? 'ring-3 ring-offset-2 ring-[#0B5F55] scale-110 shadow-md'
+                      : 'hover:scale-105 opacity-90'
                   }`}
-                  aria-label="اللون الأسود"
+                  aria-label="اللون الأسود / الأخضر الداكن"
+                />
+
+                {/* Brand Green Swatch */}
+                <button
+                  onClick={() => setSelectedColor('green')}
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0B5F55] border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
+                    selectedColor === 'green'
+                      ? 'ring-3 ring-offset-2 ring-[#E3A92F] scale-110 shadow-md'
+                      : 'hover:scale-105 opacity-90'
+                  }`}
+                  aria-label="أخضر يوزرسيف"
                 />
               </div>
             </div>
 
-            {/* Big Action Button (خلّيه بتصميمك ↗) with Neo-Brutalist Shadow */}
-            <div className="w-full pt-1">
-              <Link to={`/request?service=${selectedProduct === 'totebag' ? 'stickers-labels' : 'clothing-hoodies'}`} className="block w-full max-w-xs mx-auto lg:mx-0">
-                <button className="w-full bg-[#453fc4] hover:bg-[#3833a6] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#000] text-white font-extrabold text-sm sm:text-base py-3 px-6 rounded-xl border-2 border-black shadow-[4px_4px_0px_#000] transition-all cursor-pointer flex items-center justify-center gap-2">
+            {/* Big Action Button (خلّيه بتصميمك) in Grand Scale */}
+            <div className="w-full max-w-sm xl:max-w-md pt-2">
+              <Link to={`/request?service=${selectedProduct === 'totebag' ? 'stickers-labels' : 'clothing-hoodies'}`} className="block w-full">
+                <button className="w-full bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] text-[#073B35] font-black text-base sm:text-lg lg:text-xl py-4 sm:py-4.5 px-8 rounded-2xl border-[2.5px] border-[#073B35] shadow-[5px_5px_0px_#073B35] transition-all cursor-pointer flex items-center justify-center gap-3">
                   <span>خلّيه بتصميمك</span>
-                  <svg className="w-4 h-4 rtl:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-5 h-5 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M7 17L17 7M7 7h10v10" />
                   </svg>
                 </button>
@@ -183,54 +203,52 @@ export const EmbroideryHero: React.FC = () => {
           </div>
 
           {/* ═══════════════════════════════════════════════════════════
-              CENTER STAGE: Product Canvas with Circular Orbit Ring
+              CENTER STAGE: Expanded Product Canvas & Huge Orbit Ring
           ═══════════════════════════════════════════════════════════ */}
-          <div className="lg:col-span-6 flex items-center justify-center relative order-1 lg:order-2 min-h-[300px] sm:min-h-[380px]">
-            {/* Subtle Circular Orbit Ring from reference */}
-            <div className="absolute w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-full border border-[#d6ceff] pointer-events-none" />
+          <div className="lg:col-span-6 xl:col-span-6 flex items-center justify-center relative order-1 lg:order-2 min-h-[380px] sm:min-h-[480px] lg:min-h-[540px]">
+            {/* Grand Orbit Ring filling the central area */}
+            <div className="absolute w-[360px] h-[360px] sm:w-[480px] sm:h-[480px] lg:w-[560px] lg:h-[560px] xl:w-[620px] xl:h-[620px] rounded-full border-2 border-[#0B5F55]/15 pointer-events-none" />
 
-            {/* Product Mockup Container */}
-            <div className="relative w-72 sm:w-80 h-72 sm:h-80 flex items-center justify-center transition-all duration-300">
+            {/* Product Mockup Container (Greatly Scaled Up) */}
+            <div className="relative w-80 sm:w-[420px] lg:w-[480px] xl:w-[540px] h-[360px] sm:h-[450px] lg:h-[490px] xl:h-[530px] flex items-center justify-center transition-all duration-300">
               
-              {/* Product 1: T-Shirt */}
+              {/* Product 1: T-Shirt (Large Display) */}
               {selectedProduct === 'tshirt' && (
                 <div className="relative w-full h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-300">
                   <img
                     src={
                       selectedColor === 'white'
-                        ? '/showcase/hero-tshirt-trans.png'
+                        ? '/products/tshirt-white-front-trans.png'
+                        : selectedColor === 'green'
+                        ? '/products/tshirt-green-front.png'
                         : '/products/tshirt-black-front-trans.png'
                     }
                     alt="تيشيرت مخصص"
-                    className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(69,63,196,0.12)]"
+                    className="w-full h-full object-contain filter drop-shadow-[0_16px_32px_rgba(7,59,53,0.15)]"
                   />
 
                   {/* Dynamic Chest Print Area */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-4">
-                    {/* Words Graphic (MAKE IT yours.) */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-8 sm:pb-12">
+                    {/* Official Brand Logo from /public/logo */}
                     {selectedShape === 'words' && (
-                      <div className="flex flex-col items-center justify-center font-black select-none tracking-tight">
-                        <span className={`text-xl sm:text-2xl tracking-wider leading-none font-sans font-black ${selectedColor === 'white' ? 'text-[#453fc4]' : 'text-[#8c85ff]'}`}>
-                          MAKE
-                        </span>
-                        <span className={`text-xl sm:text-2xl tracking-wider leading-none font-sans font-black mt-1 ${selectedColor === 'white' ? 'text-[#453fc4]' : 'text-[#8c85ff]'}`}>
-                          IT
-                        </span>
-                        <span className="text-xl sm:text-2xl tracking-tight leading-none text-[#e8503a] font-sans font-black lowercase mt-1">
-                          yours.
-                        </span>
+                      <div className="flex items-center justify-center select-none w-36 sm:w-44 lg:w-48">
+                        <img
+                          src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
+                          alt="لوجو يوزرسيف الرسمي"
+                          className="w-full h-auto object-contain filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)]"
+                        />
                       </div>
                     )}
 
-                    {/* Shapes Graphic (Geometric Composition) */}
+                    {/* Shapes Graphic (Geometric Bauhaus Composition) */}
                     {selectedShape === 'shapes' && (
-                      <div className="flex flex-col items-center justify-center gap-1.5 p-2 select-none">
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-5 h-5 rounded-full bg-[#e8503a]" />
-                          <div className="w-5 h-5 bg-[#453fc4] rotate-45" />
+                      <div className="flex flex-col items-center justify-center gap-2 p-3 select-none">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-full bg-[#E3A92F]" />
+                          <div className="w-8 h-8 bg-[#0B5F55] rotate-45" />
                         </div>
-                        <div className="w-12 h-3.5 bg-[#453fc4] rounded-xs" />
-                        <span className="text-[10px] font-bold text-slate-800 font-mono tracking-widest">
+                        <div className="w-20 h-5 bg-[#073B35] rounded-xs mt-1" />
+                        <span className="text-xs sm:text-sm font-black text-[#073B35] font-mono tracking-widest mt-1">
                           YUZERSEF
                         </span>
                       </div>
@@ -239,14 +257,14 @@ export const EmbroideryHero: React.FC = () => {
                     {/* Flower Graphic */}
                     {selectedShape === 'flower' && (
                       <div className="flex flex-col items-center justify-center select-none">
-                        <svg className={`w-12 h-12 ${selectedColor === 'white' ? 'text-[#453fc4]' : 'text-[#e5f28a]'} animate-pulse`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg className={`w-16 h-16 sm:w-20 sm:h-20 ${selectedColor === 'white' ? 'text-[#0B5F55]' : 'text-[#E3A92F]'} animate-pulse`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <circle cx="12" cy="12" r="3" />
                           <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
                           <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
                           <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
                           <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
                         </svg>
-                        <span className="text-[10px] font-black text-[#e8503a] mt-1 tracking-wider">
+                        <span className="text-xs sm:text-sm font-black text-[#E3A92F] mt-2 tracking-widest">
                           FLOWER ART
                         </span>
                       </div>
@@ -255,75 +273,106 @@ export const EmbroideryHero: React.FC = () => {
                 </div>
               )}
 
-              {/* Product 2: Tote Bag */}
+              {/* Product 2: Tote Bag (Large Display) */}
               {selectedProduct === 'totebag' && (
-                <div className="relative w-64 sm:w-72 h-64 sm:h-72 flex items-center justify-center animate-in fade-in zoom-in-95 duration-300">
-                  {/* Clean Canvas Tote Bag Illustration */}
-                  <div className={`relative w-48 sm:w-56 h-56 sm:h-64 rounded-b-2xl border-2 border-black p-4 flex flex-col items-center justify-center shadow-[4px_4px_0px_#000] ${
-                    selectedColor === 'white' ? 'bg-[#faf8f5]' : 'bg-[#18181b] text-white'
-                  }`}>
-                    {/* Tote Handles */}
-                    <div className="absolute -top-12 inset-x-12 h-16 border-2 border-black rounded-t-full pointer-events-none" />
-                    
-                    {/* Tote Print */}
-                    <div className="flex flex-col items-center justify-center pt-2">
-                      {selectedShape === 'words' && (
-                        <div className="text-center font-black leading-tight">
-                          <span className="block text-lg font-black text-[#453fc4]">TOTE</span>
-                          <span className="block text-sm font-bold text-[#e8503a]">BAG ART</span>
-                        </div>
-                      )}
-                      {selectedShape === 'shapes' && (
-                        <div className="w-10 h-10 rounded-full border-2 border-[#453fc4] flex items-center justify-center">
-                          <svg className="w-5 h-5 text-[#e8503a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 3l6 10H6z" />
-                            <rect x="3" y="15" width="6" height="6" rx="1" />
-                          </svg>
-                        </div>
-                      )}
-                      {selectedShape === 'flower' && (
-                        <svg className="w-10 h-10 text-[#453fc4]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <circle cx="12" cy="12" r="3" />
-                          <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
-                        </svg>
-                      )}
+                <div className="relative w-full h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-300">
+                  <div className="relative w-full h-full flex items-center justify-center scale-110 sm:scale-125">
+                    <img
+                      src="/products/Tote_Bag_Mockup.png"
+                      alt="شنطة توت باج مخصصة"
+                      className={`w-full h-full object-contain filter drop-shadow-[0_16px_32px_rgba(7,59,53,0.15)] transition-all duration-300 ${
+                        selectedColor === 'black'
+                          ? 'brightness-[0.25] contrast-[1.15]'
+                          : selectedColor === 'green'
+                          ? 'brightness-[0.55] sepia-[0.8] hue-rotate-[105deg] saturate-[2.8] contrast-[1.1]'
+                          : ''
+                      }`}
+                    />
+
+                    {/* Dynamic Tote Bag Print Area (Precisely aligned to bag canvas body) */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="translate-y-[17%] sm:translate-y-[18%] flex items-center justify-center">
+                        {selectedShape === 'words' && (
+                          <div className="flex items-center justify-center select-none w-24 sm:w-28 lg:w-32">
+                            <img
+                              src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
+                              alt="لوجو يوزرسيف"
+                              className="w-full h-auto object-contain filter drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
+                            />
+                          </div>
+                        )}
+                        {selectedShape === 'shapes' && (
+                          <div className="flex flex-col items-center justify-center gap-1.5 p-2 select-none scale-90 sm:scale-100">
+                            <div className="flex items-center gap-2">
+                              <div className="w-5 h-5 rounded-full bg-[#E3A92F]" />
+                              <div className="w-5 h-5 bg-[#0B5F55] rotate-45" />
+                            </div>
+                            <div className="w-14 h-3.5 bg-[#073B35] rounded-xs mt-0.5" />
+                            <span className={`text-[10px] sm:text-xs font-black font-mono tracking-widest mt-0.5 ${
+                              selectedColor === 'white' ? 'text-[#073B35]' : 'text-white'
+                            }`}>
+                              YUZERSEF
+                            </span>
+                          </div>
+                        )}
+                        {selectedShape === 'flower' && (
+                          <div className="flex flex-col items-center justify-center select-none scale-90 sm:scale-100">
+                            <svg className={`w-12 h-12 sm:w-14 sm:h-14 ${selectedColor === 'white' ? 'text-[#0B5F55]' : 'text-[#E3A92F]'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <circle cx="12" cy="12" r="3" />
+                              <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
+                              <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
+                              <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
+                              <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
+                            </svg>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Product 3: Hoodie */}
+              {/* Product 3: Hoodie (Large Display) */}
               {selectedProduct === 'hoodie' && (
                 <div className="relative w-full h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-300">
                   <img
                     src={
                       selectedColor === 'white'
-                        ? '/products/hoodie-white-front.png'
+                        ? '/products/hoodie-white-front-trans.png'
+                        : selectedColor === 'green'
+                        ? '/products/hoodie-green-front.png'
                         : '/products/hoodie-black-front-trans.png'
                     }
                     alt="هودي مخصص"
-                    className="w-full h-full object-contain filter drop-shadow-[0_12px_20px_rgba(69,63,196,0.12)]"
+                    className="w-full h-full object-contain filter drop-shadow-[0_16px_32px_rgba(7,59,53,0.15)]"
                   />
 
                   {/* Hoodie Chest Print */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-2">
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-6 sm:pb-8">
                     {selectedShape === 'words' && (
-                      <div className="text-center font-black">
-                        <span className={`block text-base sm:text-lg font-black leading-none ${selectedColor === 'white' ? 'text-[#453fc4]' : 'text-white'}`}>
-                          MAKE IT
-                        </span>
-                        <span className="block text-base sm:text-lg text-[#e8503a] font-black leading-none mt-0.5">
-                          yours.
-                        </span>
+                      <div className="flex items-center justify-center select-none w-32 sm:w-40 lg:w-44">
+                        <img
+                          src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
+                          alt="لوجو يوزرسيف"
+                          className="w-full h-auto object-contain filter drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
+                        />
                       </div>
                     )}
                     {selectedShape === 'shapes' && (
-                      <div className="w-8 h-8 rounded-full bg-[#453fc4] flex items-center justify-center text-[#e5f28a]">
-                        ★
+                      <div className="w-12 h-12 rounded-full bg-[#E3A92F] flex items-center justify-center text-[#073B35] font-black text-xl shadow-xs">
+                        <svg className="w-6 h-6 fill-current text-[#073B35]" viewBox="0 0 24 24">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
                       </div>
                     )}
                     {selectedShape === 'flower' && (
-                      <span className="text-2xl text-[#e8503a]">🌸</span>
+                      <svg className="w-12 h-12 text-[#E3A92F] drop-shadow-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
+                        <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
+                        <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
+                        <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
+                      </svg>
                     )}
                   </div>
                 </div>
@@ -335,35 +384,35 @@ export const EmbroideryHero: React.FC = () => {
           {/* ═══════════════════════════════════════════════════════════
               RIGHT COLUMN: Product Selector Cards (اختار منتجك)
           ═══════════════════════════════════════════════════════════ */}
-          <div className="lg:col-span-3 flex flex-col items-center lg:items-end order-3 space-y-3">
-            <div className="w-full max-w-xs">
-              <span className="block text-xs font-bold text-slate-900 mb-2.5 text-center lg:text-end">
+          <div className="lg:col-span-3 xl:col-span-3 flex flex-col items-center lg:items-end order-3 space-y-4">
+            <div className="w-full max-w-sm xl:max-w-md">
+              <span className="block text-sm sm:text-base font-black text-[#073B35] mb-3 text-center lg:text-end">
                 اختار منتجك
               </span>
 
-              {/* 3 Stacked Cards matching reference image 2 */}
-              <div className="flex flex-col space-y-2.5">
+              {/* 3 Stacked Cards (Expanded & Bold) */}
+              <div className="flex flex-col space-y-3.5">
                 {productsList.map((prod) => {
                   const isSelected = selectedProduct === prod.id;
                   return (
                     <button
                       key={prod.id}
                       onClick={() => setSelectedProduct(prod.id)}
-                      className={`w-full p-3 sm:p-3.5 rounded-xl sm:rounded-2xl border-2 border-black flex items-center justify-between text-start transition-all cursor-pointer ${
+                      className={`w-full p-4 sm:p-5 rounded-2xl border-[2.5px] border-[#073B35] flex items-center justify-between text-start transition-all cursor-pointer ${
                         isSelected
-                          ? 'bg-[#e5f28a] text-black shadow-[4px_4px_0px_#000] -translate-x-1 -translate-y-0.5'
-                          : 'bg-white text-slate-900 shadow-[3px_3px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:-translate-y-0.5'
+                          ? 'bg-[#E3A92F] text-[#073B35] shadow-[5px_5px_0px_#073B35] -translate-x-1.5 -translate-y-1'
+                          : 'bg-white text-[#073B35] shadow-[3px_3px_0px_#073B35] hover:shadow-[5px_5px_0px_#073B35] hover:bg-[#faf7f0] hover:-translate-y-0.5'
                       }`}
                     >
-                      {/* Arrow Icon */}
-                      <svg className="w-4 h-4 text-black shrink-0 rtl:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      {/* Arrow Icon in deep green */}
+                      <svg className="w-5 h-5 text-[#073B35] shrink-0 rtl:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M7 17L17 7M7 7h10v10" />
                       </svg>
 
-                      {/* Number & Name */}
-                      <div className="flex items-center gap-2 font-black text-xs sm:text-sm">
+                      {/* Number & Name in Bold Scale */}
+                      <div className="flex items-center gap-2.5 font-black text-sm sm:text-base lg:text-lg">
                         <span>{prod.title}</span>
-                        <span className="text-[11px] font-mono opacity-60">{prod.num}</span>
+                        <span className="text-xs sm:text-sm font-mono opacity-70">{prod.num}</span>
                       </div>
                     </button>
                   );
@@ -378,7 +427,7 @@ export const EmbroideryHero: React.FC = () => {
             3. Bottom Centered Caption
         ───────────────────────────────────────────────────────────── */}
         <div className="text-center pt-8 sm:pt-10">
-          <p className="text-[11px] sm:text-xs text-slate-500 font-medium tracking-wide">
+          <p className="text-xs sm:text-sm text-[#4d6560] font-black tracking-wide">
             مثال توضيحي - ابدأ تصميمك من الصفر في الاستوديو
           </p>
         </div>

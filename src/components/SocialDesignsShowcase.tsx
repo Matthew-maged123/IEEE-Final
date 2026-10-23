@@ -17,7 +17,7 @@ export const SocialDesignsShowcase: React.FC = () => {
       description: 'تصميم احترافي لحسابات التواصل يبرز تنوع منتجات يوزرسيف (تيشيرتات، هوديز، كابات) مع توجيه مباشر للموقع.',
       imageSrc: '/social/social-design-1-showcase.png',
       badge: 'بوست 1: الخدمات والمنتجات',
-      ctaText: 'اطلب من الموقع 🛍️',
+      ctaText: 'اطلب من الموقع',
       ctaLink: '/services',
       tag: '1080×1350 (4:5)',
     },
@@ -28,7 +28,7 @@ export const SocialDesignsShowcase: React.FC = () => {
       description: 'بوست تفاعلي يركز على سهولة رفع التصميم وبدء الطلب خلال دقيقتين مع ميزة فحص الجاهزية الذكي.',
       imageSrc: '/social/social-design-2-personalize.png',
       badge: 'بوست 2: ابدأ طلبك',
-      ctaText: 'ابدأ طلبك الآن ⚡',
+      ctaText: 'ابدأ طلبك الآن',
       ctaLink: '/request',
       tag: '1080×1350 (4:5)',
     },
@@ -75,30 +75,30 @@ export const SocialDesignsShowcase: React.FC = () => {
           <div className="pt-2 flex justify-center gap-2">
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 activeTab === 'all'
-                  ? 'bg-[#0B5F55] text-white shadow-xs'
-                  : 'bg-white text-slate-700 border border-[#d9d2c3] hover:bg-slate-50'
+                  ? 'bg-[#E3A92F] text-[#073B35] border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35]'
+                  : 'bg-white text-[#073B35] border-2 border-[#d9d2c3] hover:border-[#073B35]'
               }`}
             >
               الكل
             </button>
             <button
               onClick={() => setActiveTab('social')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 activeTab === 'social'
-                  ? 'bg-[#0B5F55] text-white shadow-xs'
-                  : 'bg-white text-slate-700 border border-[#d9d2c3] hover:bg-slate-50'
+                  ? 'bg-[#E3A92F] text-[#073B35] border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35]'
+                  : 'bg-white text-[#073B35] border-2 border-[#d9d2c3] hover:border-[#073B35]'
               }`}
             >
               بوستات السوشيال ميديا (Step 2)
             </button>
             <button
               onClick={() => setActiveTab('studio')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 activeTab === 'studio'
-                  ? 'bg-[#0B5F55] text-white shadow-xs'
-                  : 'bg-white text-slate-700 border border-[#d9d2c3] hover:bg-slate-50'
+                  ? 'bg-[#E3A92F] text-[#073B35] border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35]'
+                  : 'bg-white text-[#073B35] border-2 border-[#d9d2c3] hover:border-[#073B35]'
               }`}
             >
               فوتوغرافيا الاستوديو والتطريز
@@ -164,7 +164,7 @@ export const SocialDesignsShowcase: React.FC = () => {
 
                     <div className="pt-2 border-t border-slate-100 flex flex-col sm:flex-row items-center gap-2.5">
                       <Link to={post.ctaLink} className="w-full sm:flex-1">
-                        <Button className="w-full gap-1.5 bg-[#0B5F55] hover:bg-[#073B35] text-white text-xs font-bold py-2 rounded-xl shadow-xs cursor-pointer">
+                        <Button className="w-full gap-1.5 text-xs">
                           <span>{post.ctaText}</span>
                           <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-0" />
                         </Button>
@@ -273,7 +273,7 @@ export const SocialDesignsShowcase: React.FC = () => {
                         rel="noopener noreferrer"
                         className="flex-1"
                       >
-                        <Button className="w-full gap-2 bg-[#0B5F55] hover:bg-[#073B35] text-white text-xs cursor-pointer shadow-sm rounded-xl">
+                        <Button className="w-full gap-2 text-xs">
                           <Download className="w-4 h-4" />
                           <span>تحميل الصورة بدقة عالية</span>
                         </Button>
@@ -374,7 +374,7 @@ export const SocialDesignsShowcase: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="sm" className="bg-[#E3A92F] hover:bg-[#d49b24] text-[#073B35] font-black text-xs gap-1.5 border-none px-5 py-2.5 rounded-xl">
+                <Button size="sm" className="text-xs gap-1.5 px-5 py-2.5">
                   <span>تواصل معنا لتطبيق هذا الاستايل</span>
                 </Button>
               </a>

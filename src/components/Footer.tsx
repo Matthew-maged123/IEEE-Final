@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  Copyright,
   MapPin,
   Phone,
   Mail,
@@ -133,7 +134,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-100/60">
-          <p>© {new Date().getFullYear()} وكالة يوزرسيف للحلول الإبداعية والطباعة. جميع الحقوق محفوظة (نسخة تجريبية Frontend).</p>
+          <p className="flex items-center gap-1.5"><Copyright className="w-3.5 h-3.5 text-emerald-100/60 inline shrink-0" /> {new Date().getFullYear()} وكالة يوزرسيف للحلول الإبداعية والطباعة. جميع الحقوق محفوظة (نسخة تجريبية Frontend).</p>
           <div className="flex items-center gap-4">
             <Link to="/policies" className="hover:text-white transition-colors">
               سياسة الخصوصية

@@ -56,10 +56,10 @@ export const Portfolio: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all shrink-0 cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-[#065E5A] text-white shadow-sm'
-                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
+                  ? 'bg-[#E3A92F] text-[#073B35] border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35]'
+                  : 'bg-white text-[#073B35] border-2 border-[#d9d2c3] hover:border-[#073B35]'
               }`}
             >
               {cat.label}
@@ -144,7 +144,7 @@ export const Portfolio: React.FC = () => {
                           `/request?service=${item.serviceId}&ref=${encodeURIComponent(item.title)}`
                         )
                       }
-                      className="w-full gap-2 text-xs bg-[#065E5A] hover:bg-[#012C2B] text-white shadow-xs"
+                      className="w-full gap-2 text-xs"
                     >
                       <BookmarkPlus className="w-4 h-4" />
                       <span>استخدم هذا العمل كمرجع لطلبك (Use as reference)</span>

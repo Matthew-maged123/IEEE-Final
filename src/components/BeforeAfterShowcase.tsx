@@ -52,9 +52,9 @@ export const BeforeAfterShowcase: React.FC = () => {
           <div className="pt-2 flex justify-center">
             <button
               onClick={() => setIsSideBySide(!isSideBySide)}
-              className="inline-flex items-center gap-1.5 text-xs text-[#0B5F55] hover:text-[#073B35] font-semibold bg-white border border-[#d9d2c3] rounded-full px-3.5 py-1.5 shadow-xs transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 text-xs text-[#073B35] hover:bg-[#F6F1E7] font-bold bg-white border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] rounded-xl px-4 py-2 transition-all cursor-pointer"
             >
-              <ArrowLeftRight className="w-3.5 h-3.5" />
+              <ArrowLeftRight className="w-3.5 h-3.5 text-[#073B35]" />
               <span>{isSideBySide ? 'التبديل إلى شريط السحب التفاعلي' : 'عرض جنباً إلى جنب (مقارنة ثابتة)'}</span>
             </button>
           </div>
@@ -169,8 +169,9 @@ export const BeforeAfterShowcase: React.FC = () => {
 
           {/* User helper tip */}
           <div className="mt-4 text-center">
-            <span className="text-xs text-slate-500 font-medium">
-              ↔ اسحب المقبض في المنتصف يميناً ويساراً لمشاهدة التحول الكامل من السكتش إلى المنتج الواقعي
+            <span className="text-xs text-slate-500 font-medium inline-flex items-center gap-1.5 justify-center">
+              <ArrowLeftRight className="w-3.5 h-3.5 text-slate-400" />
+              <span>اسحب المقبض في المنتصف يميناً ويساراً لمشاهدة التحول الكامل من السكتش إلى المنتج الواقعي</span>
             </span>
           </div>
         </div>

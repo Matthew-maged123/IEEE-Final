@@ -218,8 +218,8 @@ export const EmbroideryHero: React.FC = () => {
                       selectedColor === 'white'
                         ? '/products/tshirt-white-front-trans.png'
                         : selectedColor === 'green'
-                        ? '/products/tshirt-green-front.png'
-                        : '/products/tshirt-black-front-trans.png'
+                        ? '/products/tshirt-white-front-trans-green.png'
+                        : '/products/tshirt-white-front-trans-black.png'
                     }
                     alt="تيشيرت مخصص"
                     className="w-full h-full object-contain filter drop-shadow-[0_16px_32px_rgba(7,59,53,0.15)]"
@@ -229,7 +229,7 @@ export const EmbroideryHero: React.FC = () => {
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-8 sm:pb-12">
                     {/* Official Brand Logo from /public/logo */}
                     {selectedShape === 'words' && (
-                      <div className="flex items-center justify-center select-none w-36 sm:w-44 lg:w-48">
+                      <div className="flex items-center justify-center select-none w-36 sm:w-44 lg:w-48 scale-[0.80]">
                         <img
                           src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
                           alt="لوجو يوزرسيف الرسمي"
@@ -274,7 +274,7 @@ export const EmbroideryHero: React.FC = () => {
               {/* Product 2: Tote Bag (Large Display) */}
               {selectedProduct === 'totebag' && (
                 <div className="relative w-full h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-300">
-                  <div className="relative w-full h-full flex items-center justify-center scale-110 sm:scale-125">
+                  <div className="relative aspect-square h-full max-w-full flex items-center justify-center scale-110 sm:scale-125">
                     <img
                       src="/products/Tote_Bag_Mockup.png"
                       alt="شنطة توت باج مخصصة"
@@ -288,43 +288,41 @@ export const EmbroideryHero: React.FC = () => {
                     />
 
                     {/* Dynamic Tote Bag Print Area (Precisely aligned to bag canvas body) */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div className="translate-y-[17%] sm:translate-y-[18%] flex items-center justify-center">
-                        {selectedShape === 'words' && (
-                          <div className="flex items-center justify-center select-none w-24 sm:w-28 lg:w-32">
-                            <img
-                              src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
-                              alt="لوجو يوزرسيف"
-                              className="w-full h-auto object-contain filter drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
-                            />
+                    <div className="absolute top-[42%] left-[29%] w-[38.5%] h-[42%] flex items-center justify-center pointer-events-none">
+                      {selectedShape === 'words' && (
+                        <div className="flex items-center justify-center select-none w-24 sm:w-28 lg:w-32">
+                          <img
+                            src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
+                            alt="لوجو يوزرسيف"
+                            className="w-full h-auto object-contain filter drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
+                          />
+                        </div>
+                      )}
+                      {selectedShape === 'shapes' && (
+                        <div className="flex flex-col items-center justify-center gap-1.5 p-2 select-none scale-90 sm:scale-100">
+                          <div className="flex items-center gap-2">
+                            <div className="w-5 h-5 rounded-full bg-[#E3A92F]" />
+                            <div className="w-5 h-5 bg-[#0B5F55] rotate-45" />
                           </div>
-                        )}
-                        {selectedShape === 'shapes' && (
-                          <div className="flex flex-col items-center justify-center gap-1.5 p-2 select-none scale-90 sm:scale-100">
-                            <div className="flex items-center gap-2">
-                              <div className="w-5 h-5 rounded-full bg-[#E3A92F]" />
-                              <div className="w-5 h-5 bg-[#0B5F55] rotate-45" />
-                            </div>
-                            <div className="w-14 h-3.5 bg-[#073B35] rounded-xs mt-0.5" />
-                            <span className={`text-[10px] sm:text-xs font-black font-mono tracking-widest mt-0.5 ${
-                              selectedColor === 'white' ? 'text-[#073B35]' : 'text-white'
-                            }`}>
-                              YUZERSEF
-                            </span>
-                          </div>
-                        )}
-                        {selectedShape === 'flower' && (
-                          <div className="flex flex-col items-center justify-center select-none scale-90 sm:scale-100">
-                            <svg className={`w-12 h-12 sm:w-14 sm:h-14 ${selectedColor === 'white' ? 'text-[#0B5F55]' : 'text-[#E3A92F]'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <circle cx="12" cy="12" r="3" />
-                              <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
-                              <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
-                              <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
-                              <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
-                            </svg>
-                          </div>
-                        )}
-                      </div>
+                          <div className="w-14 h-3.5 bg-[#073B35] rounded-xs mt-0.5" />
+                          <span className={`text-[10px] sm:text-xs font-black font-mono tracking-widest mt-0.5 ${
+                            selectedColor === 'white' ? 'text-[#073B35]' : 'text-white'
+                          }`}>
+                            YUZERSEF
+                          </span>
+                        </div>
+                      )}
+                      {selectedShape === 'flower' && (
+                        <div className="flex flex-col items-center justify-center select-none scale-90 sm:scale-100">
+                          <svg className={`w-12 h-12 sm:w-14 sm:h-14 ${selectedColor === 'white' ? 'text-[#0B5F55]' : 'text-[#E3A92F]'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
+                            <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
+                            <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
+                            <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
+                          </svg>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -338,8 +336,8 @@ export const EmbroideryHero: React.FC = () => {
                       selectedColor === 'white'
                         ? '/products/hoodie-white-front-trans.png'
                         : selectedColor === 'green'
-                        ? '/products/hoodie-green-front.png'
-                        : '/products/hoodie-black-front-trans.png'
+                        ? '/products/hoodie-white-front-trans-green.png'
+                        : '/products/hoodie-white-front-trans-black.png'
                     }
                     alt="هودي مخصص"
                     className="w-full h-full object-contain filter drop-shadow-[0_16px_32px_rgba(7,59,53,0.15)]"
@@ -348,7 +346,7 @@ export const EmbroideryHero: React.FC = () => {
                   {/* Hoodie Chest Print */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-6 sm:pb-8">
                     {selectedShape === 'words' && (
-                      <div className="flex items-center justify-center select-none w-32 sm:w-40 lg:w-44">
+                      <div className="flex items-center justify-center select-none w-32 sm:w-40 lg:w-44 scale-90">
                         <img
                           src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
                           alt="لوجو يوزرسيف"

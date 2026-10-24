@@ -40,11 +40,11 @@ Home (src/pages/Home.tsx)
  │    ├── Main Headline: Single-Line ("خليك مختلف، خليك يوزرسيف.")
  │    ├── Brand Feather Logos (feather-logo-green.png & feather-logo-green2.png مع دعم الإضاءة في الوضع الليلي)
  │    ├── Product Switcher (تيشيرت عادي، شنطة توت باج بسوستة، هودي ميلتون أوفر سايز)
- │    │    ├── T-Shirt: شفاف عالي الدقة (أبيض / أخضر / أسود)
+ │    │    ├── T-Shirt: موك اب شفاف عالي الدقة يدعم 3 ألوان حقيقية (أبيض: tshirt-white-front-trans.png / أسود: tshirt-white-front-trans-black.png / أخضر: tshirt-white-front-trans-green.png)
  │    │    ├── Tote Bag: موك اب حقيقي (Tote_Bag_Mockup.png) بارتفاع موازٍ ومعدل 20px للأعلى مع فلاتر خامة القماش
- │    │    └── Hoodie: موك اب واقعي مفرغ شفاف
+ │    │    └── Hoodie: موك اب واقعي مفرغ شفاف عالي الدقة (أبيض: hoodie-white-front-trans.png / أسود: hoodie-white-front-trans-black.png / أخضر: hoodie-white-front-trans-green.png)
  │    ├── Dynamic Artwork Modes:
- │    │    ├── الشعار (Official Youzersef Calligraphy Logo: logo-green.png / logo-white.png)
+ │    │    ├── الشعار (Official Youzersef Calligraphy Logo: logo-green.png / logo-white.png بمقياس متناسق: scale-90 للهودي و scale-[0.80] للتيشيرت)
  │    │    ├── أشكال (Bauhaus Geometric Art)
  │    │    └── وردة (Heritage Floral Art)
  │    ├── Color Swatches (أبيض، أسود، أخضر يوزرسيف)

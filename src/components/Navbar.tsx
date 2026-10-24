@@ -68,7 +68,7 @@ export const Navbar: React.FC = () => {
   }, [mobileMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#F6F1E7]/90 backdrop-blur-xs transition-all pointer-events-none relative">
+    <header className="sticky top-0 z-40 w-full bg-transparent transition-all pointer-events-none">
       {/* ─────────────────────────────────────────────────────────────
           1. Top Utility Bar (Dark Charcoal/Emerald - As in Reference)
           (Currently hidden. Set SHOW_TOP_BAR = true above to show it again)

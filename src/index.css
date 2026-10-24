@@ -233,9 +233,25 @@ html.dark body {
   color: #e6f1ee;
 }
 
-html.dark .bg-white {
+html.dark .bg-white:not([data-navbar-capsule]) {
   background-color: #0c2b26;
   color: #e6f1ee;
+}
+
+/* Ensure navbar capsule stays pristine white in both light and dark mode */
+html.dark [data-navbar-capsule] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html.dark [data-navbar-capsule] .text-slate-900,
+html.dark [data-navbar-capsule] .text-slate-800,
+html.dark [data-navbar-capsule] .text-slate-700 {
+  color: #0f172a !important;
+}
+
+html.dark [data-navbar-capsule] .hover\:bg-slate-100:hover {
+  background-color: #f1f5f9 !important;
 }
 
 html.dark .bg-\[\#F6F1E7\],

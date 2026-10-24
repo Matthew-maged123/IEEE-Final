@@ -11,7 +11,7 @@ import {
   Printer,
   ShieldAlert,
   ArrowLeft
-} from '../components/ui/icons';
+} from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -19,27 +19,51 @@ import { BrandLogo } from '../components/BrandLogo';
 
 export const About: React.FC = () => {
   return (
-    <div className="py-10 sm:py-16 space-y-16 bg-transparent">
+    <div className="py-10 sm:py-16 space-y-16 bg-[#F8F7F3] min-h-screen">
       {/* Header Banner */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl space-y-5">
         <div className="flex justify-center mb-2">
           <BrandLogo variant="green-on-paper" className="h-16 w-auto" />
         </div>
         <Badge variant="demo" className="text-xs bg-[#065E5A]/10 text-[#065E5A] border-[#065E5A]/30">
-          عن وكالة يوزرسيف (بيانات نموذجية Demo)
+          عن وكالة يوزرسيف في أسوان
         </Badge>
         <h1 className="text-3xl sm:text-5xl font-black text-[#012C2B] tracking-tight">
           نبني هويات ملهمة ونطبع بدقة لا تساوم
         </h1>
         <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-          انطلقت وكالة «يوزرسيف» بهدف ردم الفجوة بين التصاميم الرقمية الأنيقة والواقع المطبوع، وتوفير تجربة استثنائية لأصحاب الأعمال والمتاجر الراغبين في الارتقاء بمنتجاتهم.
+          انطلقت وكالة «يوزرسيف» من قلب أسوان لردم الفجوة بين التصاميم الرقمية الأنيقة والواقع المطبوع والمطرز، وتوفير تجربة استثنائية لأصحاب الأعمال والمتاجر والشباب الباحثين عن التميز الحقيقي.
         </p>
+      </section>
+
+      {/* Visual Showcase Banner */}
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <div className="rounded-2xl overflow-hidden border border-[#065E5A]/20 shadow-xl bg-white">
+          <img
+            src="/showcase/luxury-flat-lay.png"
+            alt="ورشة عمل واستوديو يوزرسيف أسوان"
+            className="w-full h-72 sm:h-96 object-cover"
+          />
+          <div className="p-6 bg-gradient-to-r from-[#012C2B] to-[#073B35] text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <h3 className="font-bold text-lg text-[#E3A92F]">استوديو التصميم وورشة التطريز المباشر في أسوان</h3>
+              <p className="text-xs text-emerald-100/80 mt-1">
+                تطريز بخيوط ميتاليك ألمانية، طباعة DTF عالية الصمود، وتغليف يدوي فاخر لكل قطعة.
+              </p>
+            </div>
+            <Link to="/request">
+              <Button size="sm" className="bg-[#E3A92F] hover:bg-[#c99222] text-[#012C2B] font-bold">
+                ابدأ مشروعك معنا
+              </Button>
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* Vision & Mission */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card className="border-[#065E5A]/20 bg-white shadow-sm p-8 space-y-4">
+          <Card className="border-[#065E5A]/20 bg-white shadow-sm p-8 space-y-4 rounded-2xl">
             <div className="w-12 h-12 rounded-xl bg-[#065E5A] text-white flex items-center justify-center">
               <Eye className="w-6 h-6" />
             </div>
@@ -120,7 +144,7 @@ export const About: React.FC = () => {
             </div>
           </div>
           <Link to="/request" className="shrink-0 w-full sm:w-auto">
-            <Button size="sm" className="w-full gap-1.5">
+            <Button size="sm" className="w-full bg-[#065E5A] hover:bg-[#012C2B] text-white gap-1.5">
               <span>طلب خدمة الآن</span>
               <ArrowLeft className="w-4 h-4 rtl:rotate-0" />
             </Button>

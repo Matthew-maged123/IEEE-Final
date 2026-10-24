@@ -9,12 +9,13 @@ import {
   AlertCircle,
   MessageSquare,
   ShieldAlert
-} from '../components/ui/icons';
+} from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input, Textarea, Label } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { submitContactMessage } from '../lib/mock-api';
+import { FAQS } from '../data/initialData';
 
 export const Contact: React.FC = () => {
   const [name, setName] = useState('');
@@ -68,17 +69,17 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <div className="py-10 sm:py-16 space-y-12">
+    <div className="py-10 sm:py-16 space-y-12 bg-[#F8F7F3] min-h-screen">
       {/* Header */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-2xl space-y-4">
-        <Badge variant="demo" className="text-xs">
-          قنوات التواصل (بيانات نموذجية Demo)
+        <Badge variant="demo" className="text-xs bg-[#065E5A]/10 text-[#065E5A] border-[#065E5A]/30">
+          تواصل مع يوزرسيف في أسوان
         </Badge>
-        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-black text-[#012C2B] tracking-tight">
           تواصل معنا واستشر خبراءنا
         </h1>
         <p className="text-base text-slate-600 leading-relaxed">
-          يسعدنا استقبال استفساراتكم واقتراحاتكم وتقديم عروض الأسعار المخصصة للمشاريع الكبرى.
+          يسعدنا استقبال استفساراتكم واقتراحاتكم وتقديم عروض الأسعار المخصصة للمشاريع الكبرى وتجهيزات الملابس والشركات.
         </p>
       </section>
 
@@ -193,7 +194,7 @@ export const Contact: React.FC = () => {
                         dir="ltr"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="+966 50 000 0000"
+                        placeholder="011 1689 1025"
                         error={errors.phone}
                         className="text-start font-mono"
                       />
@@ -238,7 +239,7 @@ export const Contact: React.FC = () => {
                     type="submit"
                     size="lg"
                     isLoading={loading}
-                    className="w-full gap-2"
+                    className="w-full gap-2 shadow-md bg-[#065E5A] hover:bg-[#012C2B] text-white"
                   >
                     <Send className="w-4 h-4 rtl:rotate-180" />
                     <span>إرسال الرسالة الآن</span>
@@ -246,6 +247,32 @@ export const Contact: React.FC = () => {
                 </form>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl pt-6">
+        <div className="bg-white rounded-3xl border border-[#065E5A]/15 p-6 sm:p-10 shadow-sm space-y-6">
+          <div className="text-center space-y-2">
+            <span className="text-xs font-bold text-[#0B5F55] uppercase tracking-wider">الأسئلة الشائعة</span>
+            <h2 className="text-xl sm:text-3xl font-black text-[#012C2B]">كل ما تحتاج معرفته عن خدمات يوزرسيف بأسوان</h2>
+          </div>
+
+          <div className="space-y-4 pt-4 divide-y divide-slate-100">
+            {FAQS.map((faq, idx) => (
+              <div key={idx} className="pt-4 first:pt-0 space-y-2">
+                <h3 className="font-bold text-sm sm:text-base text-[#073B35] flex items-start gap-2">
+                  <span className="w-5 h-5 rounded-full bg-[#0B5F55]/10 text-[#0B5F55] text-xs flex items-center justify-center shrink-0 mt-0.5">
+                    ؟
+                  </span>
+                  <span>{faq.q}</span>
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed ps-7">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

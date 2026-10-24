@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { cn } from '../../lib/utils';
-import { X } from './icons';
+import { X } from 'lucide-react';
 
 export interface ModalProps {
   isOpen: boolean;

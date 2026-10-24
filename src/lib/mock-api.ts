@@ -15,11 +15,11 @@ import {
 
 // Storage Keys
 const STORAGE_KEYS = {
-  SERVICES: 'yuzersef_services_v2',
-  PORTFOLIO: 'yuzersef_portfolio_v2',
-  REQUESTS: 'yuzersef_requests_v2',
-  MESSAGES: 'yuzersef_messages_v2',
-  ADMIN_SESSION: 'yuzersef_admin_session_v2',
+  SERVICES: 'yuzersef_services_v4',
+  PORTFOLIO: 'yuzersef_portfolio_v4',
+  REQUESTS: 'yuzersef_requests_v4',
+  MESSAGES: 'yuzersef_messages_v4',
+  ADMIN_SESSION: 'yuzersef_admin_session_v4',
 };
 
 // Helper: simulate network latency

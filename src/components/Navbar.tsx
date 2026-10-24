@@ -14,7 +14,8 @@ import {
   Sun,
   Moon,
   LogOut,
-  ShieldCheck
+  ShieldCheck,
+  Scissors
 } from './ui/icons';
 import { BrandLogo } from './BrandLogo';
 import { useTheme } from '../context/ThemeContext';
@@ -200,7 +201,7 @@ export const Navbar: React.FC = () => {
             {/* Prominent Vibrant Capsule Button ("Create Your Shirt / صمم واطلب الآن") */}
             <Link to="/request">
               <button className="bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] text-[#073B35] font-black text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-xl border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35] transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
-                <Sparkles className="w-3.5 h-3.5" />
+                <Scissors className="w-3.5 h-3.5" />
                 <span>صمّم واطلب الآن</span>
               </button>
             </Link>

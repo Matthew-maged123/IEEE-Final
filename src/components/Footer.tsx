@@ -1,19 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Copyright,
   MapPin,
   Phone,
   Mail,
   Clock,
   ArrowUpRight,
   ShieldAlert,
-} from './ui/icons';
+} from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
 export const Footer: React.FC = () => {
   return (
-    <footer data-bg="dark-green" className="bg-[#012C2B] text-emerald-100/90 pt-16 pb-12 border-t border-[#065E5A]/40">
+    <footer className="bg-[#012C2B] text-emerald-100/90 pt-16 pb-12 border-t border-[#065E5A]/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-[#065E5A]/40">
           {/* Col 1: Brand - Using white-on-deep on dark green background #012C2B, NO imitating text next to it */}
@@ -27,10 +26,38 @@ export const Footer: React.FC = () => {
             <p className="text-sm text-emerald-100/70 leading-relaxed pt-1">
               وكالة تصميم وطباعة متكاملة تجمع بين الفكر الإبداعي والتقنيات الطباعية الحديثة لتحويل أفكارك إلى هوية ملموسة وواقعية.
             </p>
-            <div className="pt-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#065E5A]/40 border border-[#065E5A] text-xs text-amber-300">
-                <ShieldAlert className="w-4 h-4 shrink-0" />
-                <span>واجهة برمجية تجريبية Frontend Only</span>
+            <div className="pt-2 flex flex-col gap-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#065E5A]/40 border border-[#065E5A] text-xs text-[#E3A92F]">
+                <span>مشروع مسابقة Brand & Build × IEEE Aswan Student Branch</span>
+              </div>
+
+              {/* Direct Brand Package & Brief PDF Downloads for Judges */}
+              <div className="flex flex-wrap gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-brand-guide'))}
+                  className="px-2.5 py-1 rounded-md bg-[#E3A92F] hover:bg-[#d89c25] text-[#073B35] font-black text-[11px] transition-all cursor-pointer inline-flex items-center gap-1 shadow-xs"
+                >
+                  <span>حقيبة الهوية والتحكيم 🏆</span>
+                </button>
+
+                <a
+                  href="/briefs/Brand-and-Build-Client-Brief-English_0e6dce5b.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 text-emerald-100 text-[11px] font-bold transition-all border border-white/15"
+                >
+                  بريف المسابقة (PDF)
+                </a>
+
+                <a
+                  href="/briefs/Yuzersef-Project-Documentation_e75af4b9.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 text-emerald-100 text-[11px] font-bold transition-all border border-white/15"
+                >
+                  ملف التوثيق (PDF)
+                </a>
               </div>
             </div>
           </div>
@@ -124,7 +151,7 @@ export const Footer: React.FC = () => {
             </div>
             <Link
               to="/admin/login"
-              className="inline-flex items-center gap-1.5 text-xs text-[#6A994E] hover:text-white font-medium"
+              className="inline-flex items-center gap-1.5 text-xs text-[#5ee7cf] hover:text-white font-medium"
             >
               الانتقال لبوابة المسؤول التجريبية
               <ArrowUpRight className="w-3.5 h-3.5 rtl:rotate-[-90deg]" />
@@ -134,7 +161,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-100/60">
-          <p className="flex items-center gap-1.5"><Copyright className="w-3.5 h-3.5 text-emerald-100/60 inline shrink-0" /> {new Date().getFullYear()} وكالة يوزرسيف للحلول الإبداعية والطباعة. جميع الحقوق محفوظة (نسخة تجريبية Frontend).</p>
+          <p>© {new Date().getFullYear()} وكالة يوزرسيف للحلول الإبداعية والطباعة. جميع الحقوق محفوظة (نسخة تجريبية Frontend).</p>
           <div className="flex items-center gap-4">
             <Link to="/policies" className="hover:text-white transition-colors">
               سياسة الخصوصية

@@ -11,7 +11,7 @@ import {
   Upload,
   Check,
   Trash2
-} from './ui/icons';
+} from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Card, CardContent } from './ui/card';
@@ -23,6 +23,7 @@ import {
   getProductsForService,
   getLogoOverlayPath
 } from '../lib/products-data';
+import { InteractiveCustomizer } from './InteractiveCustomizer';
 
 interface ProductStudioProps {
   serviceId?: string;
@@ -41,6 +42,7 @@ export const ProductStudio: React.FC<ProductStudioProps> = ({
     availableProducts[0] ||
     null;
 
+  const [studioMode, setStudioMode] = useState<'360' | 'vector'>('360');
   const [activeProduct, setActiveProduct] = useState<ProductItem | null>(initialProduct);
   const [selectedColor, setSelectedColor] = useState<string>(
     initialProduct?.defaultColor || 'white'
@@ -192,25 +194,58 @@ export const ProductStudio: React.FC<ProductStudioProps> = ({
           </div>
         </div>
 
-        {availableProducts.length > 1 && (
-          <div className="flex items-center gap-1.5 bg-[#0B5F55]/60 p-1 rounded-lg border border-emerald-600/30">
-            {availableProducts.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => handleProductChange(p)}
-                className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
-                  activeProduct.id === p.id
-                    ? 'bg-white text-[#073B35] shadow-xs'
-                    : 'text-emerald-100 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                {p.id === 'tshirt' ? 'تيشرت' : p.id === 'hoodie' ? 'هودي' : p.name}
-              </button>
-            ))}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Mode Switcher */}
+          <div className="flex items-center gap-1 bg-[#052925] p-1 rounded-xl border border-emerald-700/50">
+            <button
+              type="button"
+              onClick={() => setStudioMode('360')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                studioMode === '360'
+                  ? 'bg-[#E3A92F] text-[#073B35] shadow-xs'
+                  : 'text-emerald-200 hover:text-white'
+              }`}
+            >
+              استوديو 360° والألوان
+            </button>
+            <button
+              type="button"
+              onClick={() => setStudioMode('vector')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                studioMode === 'vector'
+                  ? 'bg-[#E3A92F] text-[#073B35] shadow-xs'
+                  : 'text-emerald-200 hover:text-white'
+              }`}
+            >
+              مواضع الطباعة 2D
+            </button>
           </div>
-        )}
+
+          {availableProducts.length > 1 && studioMode === '360' && (
+            <div className="flex items-center gap-1.5 bg-[#0B5F55]/60 p-1 rounded-lg border border-emerald-600/30">
+              {availableProducts.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => handleProductChange(p)}
+                  className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                    activeProduct.id === p.id
+                      ? 'bg-white text-[#073B35] shadow-xs'
+                      : 'text-emerald-100 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {p.id === 'tshirt' ? 'تيشرت' : p.id === 'hoodie' ? 'هودي' : p.name}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
+      {studioMode === 'vector' ? (
+        <div className="py-4">
+          <InteractiveCustomizer />
+        </div>
+      ) : (
       <CardContent className="px-0 py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#EFEFEA]">
         {/* Left / Center: Interactive Preview Canvas (cols-7) */}
         <div className="lg:col-span-7 flex flex-col items-center">
@@ -418,7 +453,11 @@ export const ProductStudio: React.FC<ProductStudioProps> = ({
                     type="button"
                     variant={selectedView === v.id ? 'default' : 'outline'}
                     size="sm"
-                    className="text-xs h-9"
+                    className={`text-xs h-9 font-semibold ${
+                      selectedView === v.id
+                        ? 'bg-[#0B5F55] text-white hover:bg-[#073B35]'
+                        : 'border-slate-200 text-slate-700 bg-white hover:bg-slate-50'
+                    }`}
                     onClick={() => handleViewSelect(v.id)}
                   >
                     {v.label}
@@ -510,9 +549,8 @@ export const ProductStudio: React.FC<ProductStudioProps> = ({
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-semibold text-slate-700 truncate">{customArtworkName}</p>
-                    <p className="text-[10px] text-emerald-700 font-medium flex items-center gap-1">
-                      <Check className="w-3 h-3 text-emerald-600 shrink-0" />
-                      <span>تم ضبط القياس تلقائياً ليتطابق مع موضع الطباعة المحدد</span>
+                    <p className="text-[10px] text-emerald-700 font-medium">
+                      ✓ تم ضبط القياس تلقائياً ليتطابق مع موضع الطباعة المحدد
                     </p>
                   </div>
                 </div>
@@ -546,12 +584,24 @@ export const ProductStudio: React.FC<ProductStudioProps> = ({
               </div>
             )}
 
-            <p className="text-[11px] text-slate-400">
-              * يتم تبديل لون الشعار تلقائياً (أبيض على الغامق وأخضر على الفاتح) ليظل مقروءاً ومضبوطاً في حدود القالب.
+            <p className="text-[11px] text-[#4d6560]">
+              * يتم ضبط لون الشعار تلقائياً ومطابقته على أبعاد القماش لضمان أرقى جودة في خطوط إنتاج أسوان.
             </p>
+
+            {/* Direct Order Button */}
+            <div className="pt-2">
+              <a
+                href={`/request?service=${activeProduct.serviceId}&color=${selectedColor}&view=${selectedView}`}
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-white bg-[#0B5F55] hover:bg-[#073B35] shadow-md transition-all hover:scale-[1.01] active:scale-[0.99]"
+              >
+                <span>اعتمد هذه المواصفات وابدأ طلبك الآن</span>
+                <Check className="w-4 h-4 text-[#E3A92F]" />
+              </a>
+            </div>
           </div>
         </div>
       </CardContent>
+      )}
     </Card>
   );
 };

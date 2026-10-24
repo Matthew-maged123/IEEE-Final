@@ -8,7 +8,7 @@ type ColorOption = 'white' | 'black' | 'green';
 
 export const EmbroideryHero: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<ProductOption>('tshirt');
-  const [selectedShape, setSelectedShape] = useState<ShapeOption>('words');
+  const [selectedShape, setSelectedShape] = useState<ShapeOption>('flower');
   const [selectedColor, setSelectedColor] = useState<ColorOption>('white');
 
   const productsList = [
@@ -45,7 +45,7 @@ export const EmbroideryHero: React.FC = () => {
         <div className="text-center max-w-5xl xl:max-w-6xl mx-auto space-y-2 mb-3 sm:mb-5 lg:mb-6">
           {/* Eyebrow Kicker Pill */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B5F55]/10 dark:bg-[#6A994E]/10 border border-[#0B5F55]/20 dark:border-[#6A994E]/30 text-[#0B5F55] dark:text-[#6A994E] text-xs sm:text-sm font-black tracking-wide shadow-2xs">
-            <span>أفكارك. مطبوعة في أسوان.</span>
+            <span>أفكارك، مطبوعة في أسوان.</span>
           </div>
 
           {/* Main Headline (Strictly One Line) */}
@@ -70,7 +70,7 @@ export const EmbroideryHero: React.FC = () => {
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base lg:text-lg text-[#4d6560] dark:text-[#9CB5AF] font-bold max-w-2xl mx-auto leading-relaxed">
-            رسمة بتحبها، كلمة بتعبّر عنك. حوّل فكرتك لحاجة تستخدمها كل يوم.
+            رسمة بتحبها، كلمة بتعبّر عنك، حوّل فكرتك لحاجة تستخدمها كل يوم.
           </p>
         </div>
 
@@ -423,7 +423,7 @@ export const EmbroideryHero: React.FC = () => {
         ───────────────────────────────────────────────────────────── */}
         <div className="text-center pt-2 sm:pt-3 lg:pt-4">
           <p className="text-xs sm:text-sm text-[#4d6560] font-black tracking-wide">
-            مثال توضيحي - ابدأ تصميمك من الصفر في الاستوديو
+            مثال توضيحي - ابدأ تصميمك من الصفر في الاستوديو .
           </p>
         </div>
 

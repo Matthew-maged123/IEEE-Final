@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { UploadCloud, File, Image as ImageIcon, X, AlertCircle } from './icons';
+import { UploadCloud, File, Image as ImageIcon, X, AlertCircle } from 'lucide-react';
 import { FileAttachment } from '../../lib/types';
 import { formatFileSize } from '../../lib/utils';
 import { Button } from './button';
@@ -78,8 +78,8 @@ export const FileUploadPreview: React.FC<FileUploadPreviewProps> = ({
         onClick={() => fileInputRef.current?.click()}
         className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-colors duration-200 flex flex-col items-center justify-center gap-3 ${
           dragOver
-            ? 'border-blue-500 bg-blue-50/50'
-            : 'border-slate-300 hover:border-blue-400 hover:bg-slate-50/80 bg-white'
+            ? 'border-[#065E5A] bg-[#065E5A]/10'
+            : 'border-[#065E5A]/30 hover:border-[#065E5A] hover:bg-emerald-50/30 bg-white'
         }`}
         role="button"
         tabIndex={0}
@@ -99,7 +99,7 @@ export const FileUploadPreview: React.FC<FileUploadPreviewProps> = ({
           onChange={(e) => handleFiles(e.target.files)}
         />
 
-        <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+        <div className="w-12 h-12 rounded-full bg-[#065E5A]/10 flex items-center justify-center text-[#065E5A]">
           <UploadCloud className="w-6 h-6" />
         </div>
 

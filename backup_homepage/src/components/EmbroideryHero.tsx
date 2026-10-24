@@ -33,7 +33,7 @@ export const EmbroideryHero: React.FC = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden min-h-[calc(100vh-100px)] flex flex-col justify-center py-6 sm:py-10 lg:py-12 bg-transparent text-[#073B35] select-none border-b border-[#d9d2c3]/70">
+    <section className="relative overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-center pt-2 pb-3 sm:pt-4 sm:pb-4 lg:pt-5 lg:pb-5 bg-transparent text-[#073B35] select-none border-b border-[#d9d2c3]/70">
       <div className="absolute top-1/4 -start-24 w-96 h-96 bg-[#0B5F55]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 -end-24 w-96 h-96 bg-[#E3A92F]/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -42,23 +42,23 @@ export const EmbroideryHero: React.FC = () => {
         {/* ─────────────────────────────────────────────────────────────
             1. Top Header Area (Grand Headline & Egyptian Brand Kicker)
         ───────────────────────────────────────────────────────────── */}
-        <div className="text-center max-w-5xl xl:max-w-6xl mx-auto space-y-2.5 mb-6 sm:mb-10 lg:mb-12">
+        <div className="text-center max-w-5xl xl:max-w-6xl mx-auto space-y-2 mb-3 sm:mb-5 lg:mb-6">
           {/* Eyebrow Kicker Pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B5F55]/10 border border-[#0B5F55]/20 text-[#0B5F55] text-xs sm:text-sm font-black tracking-wide shadow-2xs">
-            <span>أفكارك. مطبوعة في مصر.</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B5F55]/10 dark:bg-[#6A994E]/10 border border-[#0B5F55]/20 dark:border-[#6A994E]/30 text-[#0B5F55] dark:text-[#6A994E] text-xs sm:text-sm font-black tracking-wide shadow-2xs">
+            <span>أفكارك. مطبوعة في أسوان.</span>
           </div>
 
           {/* Main Headline (Strictly One Line) */}
           <div className="flex items-center justify-center pt-1 w-full overflow-hidden">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight text-[#073B35] font-display flex flex-nowrap whitespace-nowrap items-center justify-center gap-2 sm:gap-3 leading-tight text-center">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight text-[#073B35] dark:text-[#F6F1E7] font-display flex flex-nowrap whitespace-nowrap items-center justify-center gap-2 sm:gap-3 leading-tight text-center">
               {/* Official Youzersef Feather Logo (Right) */}
               <img
                 src="/feather-logo-green.png"
                 alt="شعار يوزرسيف"
                 className="h-[28px] sm:h-[44px] md:h-[54px] lg:h-[64px] xl:h-[74px] w-auto object-contain inline-block shrink-0 drop-shadow-xs -me-1 sm:-me-2"
               />
-              <span>خليك مختلف،</span>
-              <span className="text-[#0B5F55]">خليك يوزرسيف.</span>
+              <span className="text-[#073B35] dark:text-[#F6F1E7]">خليك مختلف،</span>
+              <span className="text-[#0B5F55] dark:text-[#6A994E]">خليك يوزرسيف.</span>
               {/* Official Youzersef Feather Logo (Left) */}
               <img
                 src="/feather-logo-green2.png"
@@ -69,7 +69,7 @@ export const EmbroideryHero: React.FC = () => {
           </div>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base lg:text-lg text-[#4d6560] font-bold max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-[#4d6560] dark:text-[#9CB5AF] font-bold max-w-2xl mx-auto leading-relaxed">
             رسمة بتحبها، كلمة بتعبّر عنك. حوّل فكرتك لحاجة تستخدمها كل يوم.
           </p>
         </div>
@@ -85,7 +85,7 @@ export const EmbroideryHero: React.FC = () => {
           <div className="lg:col-span-3 xl:col-span-3 flex flex-col items-center lg:items-start order-2 lg:order-1 space-y-6">
             {/* Tool Category Label & 3 Option Buttons */}
             <div className="w-full max-w-sm xl:max-w-md">
-              <span className="block text-sm sm:text-base font-black text-[#073B35] mb-3 text-center lg:text-start">
+              <span className="block text-sm sm:text-base font-black text-[#073B35] dark:text-[#F6F1E7] mb-3 text-center lg:text-start">
                 جرّب شكل يعجبك
               </span>
               
@@ -94,9 +94,8 @@ export const EmbroideryHero: React.FC = () => {
                 <button
                   onClick={() => setSelectedShape('words')}
                   className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
-                    selectedShape === 'words'
-                      ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] -translate-y-0.5'
-                      : 'bg-white text-[#073B35] shadow-[3px_3px_0px_#073B35] hover:bg-[#F6F1E7]'
+                    selectedShape === 'words' ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] -translate-y-0.5'
+                      : 'bg-white dark:bg-[#0c2b26] text-[#073B35] dark:text-[#F6F1E7] border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] hover:bg-[#F6F1E7] dark:hover:bg-[#113831]'
                   }`}
                   title="طباعة شعار يوزرسيف الرسمي"
                 >
@@ -110,9 +109,8 @@ export const EmbroideryHero: React.FC = () => {
                 <button
                   onClick={() => setSelectedShape('shapes')}
                   className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
-                    selectedShape === 'shapes'
-                      ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] -translate-y-0.5'
-                      : 'bg-white text-[#073B35] shadow-[3px_3px_0px_#073B35] hover:bg-[#F6F1E7]'
+                    selectedShape === 'shapes' ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] -translate-y-0.5'
+                      : 'bg-white dark:bg-[#0c2b26] text-[#073B35] dark:text-[#F6F1E7] border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] hover:bg-[#F6F1E7] dark:hover:bg-[#113831]'
                   }`}
                   title="تصميم أشكال هندسية"
                 >
@@ -128,9 +126,8 @@ export const EmbroideryHero: React.FC = () => {
                 <button
                   onClick={() => setSelectedShape('flower')}
                   className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
-                    selectedShape === 'flower'
-                      ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] -translate-y-0.5'
-                      : 'bg-white text-[#073B35] shadow-[3px_3px_0px_#073B35] hover:bg-[#F6F1E7]'
+                    selectedShape === 'flower' ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] -translate-y-0.5'
+                      : 'bg-white dark:bg-[#0c2b26] text-[#073B35] dark:text-[#F6F1E7] border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] hover:bg-[#F6F1E7] dark:hover:bg-[#113831]'
                   }`}
                   title="تصميم رسمة ووردة"
                 >
@@ -148,7 +145,7 @@ export const EmbroideryHero: React.FC = () => {
 
             {/* Color Swatch Picker */}
             <div className="w-full max-w-sm xl:max-w-md">
-              <span className="block text-sm sm:text-base font-black text-[#073B35] mb-2.5 text-center lg:text-start">
+              <span className="block text-sm sm:text-base font-black text-[#073B35] dark:text-[#F6F1E7] mb-2.5 text-center lg:text-start">
                 اختار لونك
               </span>
               <div className="flex items-center gap-3.5 justify-center lg:justify-start">
@@ -193,7 +190,7 @@ export const EmbroideryHero: React.FC = () => {
             {/* Big Action Button (خلّيه بتصميمك) in Grand Scale */}
             <div className="w-full max-w-sm xl:max-w-md pt-2">
               <Link to={`/request?service=${selectedProduct === 'totebag' ? 'stickers-labels' : 'clothing-hoodies'}`} className="block w-full">
-                <button className="w-full bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] text-[#073B35] font-black text-base sm:text-lg lg:text-xl py-4 sm:py-4.5 px-8 rounded-2xl border-[2.5px] border-[#073B35] shadow-[5px_5px_0px_#073B35] transition-all cursor-pointer flex items-center justify-center gap-3">
+                <button className="w-full bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] dark:active:shadow-[2px_2px_0px_#6A994E] text-[#073B35] font-black text-base sm:text-lg lg:text-xl py-4 sm:py-4.5 px-8 rounded-2xl border-[2.5px] border-[#073B35] shadow-[5px_5px_0px_#073B35] dark:shadow-[5px_5px_0px_#6A994E] transition-all cursor-pointer flex items-center justify-center gap-3">
                   <span>خلّيه بتصميمك</span>
                   <svg className="w-5 h-5 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M7 17L17 7M7 7h10v10" />
@@ -206,12 +203,12 @@ export const EmbroideryHero: React.FC = () => {
           {/* ═══════════════════════════════════════════════════════════
               CENTER STAGE: Expanded Product Canvas & Huge Orbit Ring
           ═══════════════════════════════════════════════════════════ */}
-          <div className="lg:col-span-6 xl:col-span-6 flex items-center justify-center relative order-1 lg:order-2 min-h-[380px] sm:min-h-[480px] lg:min-h-[540px]">
+          <div className="lg:col-span-6 xl:col-span-6 flex items-center justify-center relative order-1 lg:order-2 min-h-[320px] sm:min-h-[400px] lg:min-h-[440px] xl:min-h-[470px] -translate-y-4 sm:-translate-y-6 lg:-translate-y-8">
             {/* Grand Orbit Ring filling the central area */}
-            <div className="absolute w-[360px] h-[360px] sm:w-[480px] sm:h-[480px] lg:w-[560px] lg:h-[560px] xl:w-[620px] xl:h-[620px] rounded-full border-2 border-[#0B5F55]/15 pointer-events-none" />
+            <div className="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[480px] lg:h-[480px] xl:w-[530px] xl:h-[530px] rounded-full border-2 border-[#0B5F55]/15 dark:border-[#6A994E]/20 pointer-events-none" />
 
             {/* Product Mockup Container (Greatly Scaled Up) */}
-            <div className="relative w-80 sm:w-[420px] lg:w-[480px] xl:w-[540px] h-[360px] sm:h-[450px] lg:h-[490px] xl:h-[530px] flex items-center justify-center transition-all duration-300">
+            <div className="relative w-72 sm:w-[380px] lg:w-[430px] xl:w-[480px] h-[320px] sm:h-[390px] lg:h-[430px] xl:h-[460px] flex items-center justify-center transition-all duration-300">
               
               {/* Product 1: T-Shirt (Large Display) */}
               {selectedProduct === 'tshirt' && (
@@ -387,7 +384,7 @@ export const EmbroideryHero: React.FC = () => {
           ═══════════════════════════════════════════════════════════ */}
           <div className="lg:col-span-3 xl:col-span-3 flex flex-col items-center lg:items-end order-3 space-y-4">
             <div className="w-full max-w-sm xl:max-w-md">
-              <span className="block text-sm sm:text-base font-black text-[#073B35] mb-3 text-center lg:text-end">
+              <span className="block text-sm sm:text-base font-black text-[#073B35] dark:text-[#F6F1E7] mb-3 text-center lg:text-end">
                 اختار منتجك
               </span>
 
@@ -400,9 +397,8 @@ export const EmbroideryHero: React.FC = () => {
                       key={prod.id}
                       onClick={() => setSelectedProduct(prod.id)}
                       className={`w-full p-4 sm:p-5 rounded-2xl border-[2.5px] border-[#073B35] flex items-center justify-between text-start transition-all cursor-pointer ${
-                        isSelected
-                          ? 'bg-[#E3A92F] text-[#073B35] shadow-[5px_5px_0px_#073B35] -translate-x-1.5 -translate-y-1'
-                          : 'bg-white text-[#073B35] shadow-[3px_3px_0px_#073B35] hover:shadow-[5px_5px_0px_#073B35] hover:bg-[#faf7f0] hover:-translate-y-0.5'
+                        isSelected ? 'bg-[#E3A92F] text-[#073B35] shadow-[5px_5px_0px_#073B35] dark:shadow-[5px_5px_0px_#6A994E] -translate-x-1.5 -translate-y-1'
+                          : 'bg-white dark:bg-[#0c2b26] text-[#073B35] dark:text-[#F6F1E7] border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] hover:shadow-[5px_5px_0px_#073B35] dark:hover:shadow-[5px_5px_0px_#6A994E] hover:bg-[#faf7f0] dark:hover:bg-[#113831] hover:-translate-y-0.5'
                       }`}
                     >
                       {/* Arrow Icon in deep green */}
@@ -427,7 +423,7 @@ export const EmbroideryHero: React.FC = () => {
         {/* ─────────────────────────────────────────────────────────────
             3. Bottom Centered Caption
         ───────────────────────────────────────────────────────────── */}
-        <div className="text-center pt-8 sm:pt-10">
+        <div className="text-center pt-2 sm:pt-3 lg:pt-4">
           <p className="text-xs sm:text-sm text-[#4d6560] font-black tracking-wide">
             مثال توضيحي - ابدأ تصميمك من الصفر في الاستوديو
           </p>

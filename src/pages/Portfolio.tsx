@@ -106,13 +106,13 @@ export const Portfolio: React.FC = () => {
                   </div>
 
                   <div className="relative z-10 max-w-[65%]">
-                    <span className="text-xs text-[#5ee7cf] font-semibold">{item.clientName}</span>
+                    <span className="text-xs text-[#6A994E] font-semibold">{item.clientName}</span>
                     <h3 className="text-base font-black leading-snug mt-1 group-hover:text-emerald-100 transition-colors">
                       {item.title}
                     </h3>
                   </div>
 
-                  <div className="absolute -bottom-8 -end-8 w-32 h-32 rounded-full bg-[#5ee7cf]/10 blur-xl pointer-events-none" />
+                  <div className="absolute -bottom-8 -end-8 w-32 h-32 rounded-full bg-[#6A994E]/10 blur-xl pointer-events-none" />
                 </div>
 
                 <CardContent className="p-6 space-y-4">

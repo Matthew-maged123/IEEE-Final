@@ -130,14 +130,14 @@ export const Home: React.FC = () => {
       <section className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-[#0B5F55] font-bold text-xs mb-1">
+            <div className="inline-flex items-center gap-1.5 text-[#0B5F55] dark:text-[#6A994E] font-bold text-xs mb-1">
               <Sparkles className="w-3.5 h-3.5" />
               <span>كتالوج الخدمات والمنتجات المعتمدة</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] font-display">
+            <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] dark:text-[#F6F1E7] font-display">
               حلول متكاملة للطباعة والتطريز في مكان واحد
             </h2>
-            <p className="text-sm text-[#4d6560] mt-1">
+            <p className="text-sm text-[#4d6560] dark:text-[#9CB5AF] mt-1">
               نغطي كافة منتجات الملابس، الكابات، المجات، وجرابات الهواتف بجودة تشطيب استثنائية.
             </p>
           </div>
@@ -213,14 +213,14 @@ export const Home: React.FC = () => {
       <section className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-[#0B5F55] font-bold text-xs mb-1">
+            <div className="inline-flex items-center gap-1.5 text-[#0B5F55] dark:text-[#6A994E] font-bold text-xs mb-1">
               <Award className="w-3.5 h-3.5" />
               <span>معرض الأعمال والنماذج السابقة</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] font-display">
+            <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] dark:text-[#F6F1E7] font-display">
               أعمال نفذناها بكل شغف ودقة
             </h2>
-            <p className="text-sm text-[#4d6560] mt-1">
+            <p className="text-sm text-[#4d6560] dark:text-[#9CB5AF] mt-1">
               نماذج واقعية مصورة بجودة عالية؛ يمكنك اختيار أي نموذج واستخدامه كمرجع مباشر لطلبك!
             </p>
           </div>
@@ -295,11 +295,11 @@ export const Home: React.FC = () => {
       <section className="py-16 sm:py-20 border-y border-[#d9d2c3]/80 relative z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-xl mx-auto mb-14 space-y-2">
-            <span className="text-xs font-bold text-[#0B5F55] uppercase tracking-wider">سير العمل المعتمد (Customer Journey)</span>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#073B35] font-display">
+            <span className="text-xs font-bold text-[#0B5F55] dark:text-[#6A994E] uppercase tracking-wider">سير العمل المعتمد (Customer Journey)</span>
+            <h2 className="text-2xl sm:text-3xl font-black text-[#073B35] dark:text-[#F6F1E7] font-display">
               رحلة طلبك من الفكرة حتى الاستلام
             </h2>
-            <p className="text-sm text-[#4d6560]">
+            <p className="text-sm text-[#4d6560] dark:text-[#9CB5AF]">
               خطوات منظمة ومباشرة مدعومة بفحص الجاهزية الذكي لضمان استيفاء كافة المواصفات.
             </p>
           </div>

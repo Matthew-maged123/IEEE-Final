@@ -156,7 +156,7 @@ export const TrackRequest: React.FC = () => {
             {/* Header info strip */}
             <div className="p-6 sm:p-8 bg-[#012C2B] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#065E5A]/40">
               <div className="space-y-1">
-                <span className="text-xs font-mono text-[#5ee7cf]">طلب رقم:</span>
+                <span className="text-xs font-mono text-[#6A994E]">طلب رقم:</span>
                 <h2 className="text-3xl font-black font-mono tracking-wider">{request.id}</h2>
                 <p className="text-xs text-emerald-100/70">{request.serviceTitle}</p>
               </div>

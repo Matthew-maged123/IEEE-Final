@@ -124,7 +124,7 @@ export const Footer: React.FC = () => {
             </div>
             <Link
               to="/admin/login"
-              className="inline-flex items-center gap-1.5 text-xs text-[#5ee7cf] hover:text-white font-medium"
+              className="inline-flex items-center gap-1.5 text-xs text-[#6A994E] hover:text-white font-medium"
             >
               الانتقال لبوابة المسؤول التجريبية
               <ArrowUpRight className="w-3.5 h-3.5 rtl:rotate-[-90deg]" />

@@ -1078,7 +1078,7 @@ export const RequestWizard: React.FC = () => {
             <Card className="border-[#065E5A]/30 bg-white shadow-lg overflow-hidden">
               <div className="bg-[#065E5A] text-white p-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#5ee7cf] animate-pulse" />
+                  <Sparkles className="w-4 h-4 text-[#6A994E] animate-pulse" />
                   <h3 className="font-bold text-xs sm:text-sm">مساعد الجاهزية الذكي (Feature)</h3>
                 </div>
                 <Badge className="bg-white/20 text-white border-none text-[10px]">
@@ -1123,7 +1123,7 @@ export const RequestWizard: React.FC = () => {
 
             {/* Quick WhatsApp Help */}
             <div className="p-3.5 rounded-xl bg-[#012C2B] text-white text-xs space-y-2 shadow-xs">
-              <span className="font-bold text-[#5ee7cf] block">تحتاج استشارة سريعة قبل الطلب؟</span>
+              <span className="font-bold text-[#6A994E] block">تحتاج استشارة سريعة قبل الطلب؟</span>
               <p className="text-[11px] text-emerald-100/70">
                 تواصل مع فريق يوزرسيف مباشرة عبر واتساب للمساعدة في تفاصيل طلبك.
               </p>
@@ -1131,7 +1131,7 @@ export const RequestWizard: React.FC = () => {
                 href={generateWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-[#5ee7cf] hover:text-white font-medium"
+                className="inline-flex items-center gap-1.5 text-xs text-[#6A994E] hover:text-white font-medium"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
                 <span>واتساب: {YUZERSEF_WHATSAPP}</span>

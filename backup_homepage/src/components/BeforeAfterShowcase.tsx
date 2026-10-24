@@ -42,17 +42,17 @@ export const BeforeAfterShowcase: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
-          <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] tracking-tight font-display">
+          <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] dark:text-[#F6F1E7] tracking-tight font-display">
             من فكرة أولية بسيطة إلى منتج مطبوع ومطرّز
           </h2>
-          <p className="text-sm sm:text-base text-[#4d6560] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#4d6560] dark:text-[#9CB5AF] leading-relaxed">
             لا تشغل بالك بجودة الرسمة المبدئية؛ نحن في «يوزرسيف» نستلم فكرتك ولو كانت خطوطاً مرسومة بالقلم الرصاص، ونحولها إلى فيكتور متقن وتطريز أو طباعة احترافية عالية الدقة.
           </p>
 
           <div className="pt-2 flex justify-center">
             <button
               onClick={() => setIsSideBySide(!isSideBySide)}
-              className="inline-flex items-center gap-2 text-xs text-[#073B35] hover:bg-[#F6F1E7] font-bold bg-white border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] rounded-xl px-4 py-2 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 text-xs text-[#073B35] dark:text-[#F6F1E7] hover:bg-[#F6F1E7] dark:hover:bg-[#113831] font-bold bg-white dark:bg-[#0c2b26] border-2 border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] rounded-xl px-4 py-2 transition-all cursor-pointer"
             >
               <ArrowLeftRight className="w-3.5 h-3.5 text-[#073B35]" />
               <span>{isSideBySide ? 'التبديل إلى شريط السحب التفاعلي' : 'عرض جنباً إلى جنب (مقارنة ثابتة)'}</span>

@@ -22,7 +22,7 @@
   --color-primary-50: #f0fdf9;
   --color-primary-100: #ccfbef;
   --color-primary-200: #9af5e1;
-  --color-primary-300: #5ee7cf;
+  --color-primary-300: #6A994E;
   --color-primary-400: #2ccbb7;
   --color-primary-500: #14af9d;
   --color-primary-600: #0B5F55;
@@ -231,11 +231,28 @@ html.dark {
 html.dark body {
   background-color: #071f1c;
   color: #e6f1ee;
+  background-image: radial-gradient(circle at 2px 2px, rgba(106, 153, 78, 0.12) 1.5px, transparent 0);
 }
 
-html.dark .bg-white {
+html.dark .bg-white:not([data-navbar-capsule]) {
   background-color: #0c2b26;
   color: #e6f1ee;
+}
+
+/* Ensure navbar capsule stays pristine white in both light and dark mode */
+html.dark [data-navbar-capsule] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html.dark [data-navbar-capsule] .text-slate-900,
+html.dark [data-navbar-capsule] .text-slate-800,
+html.dark [data-navbar-capsule] .text-slate-700 {
+  color: #0f172a !important;
+}
+
+html.dark [data-navbar-capsule] .hover\:bg-slate-100:hover {
+  background-color: #f1f5f9 !important;
 }
 
 html.dark .bg-\[\#F6F1E7\],
@@ -245,24 +262,123 @@ html.dark .bg-\[\#FBF9F5\] {
   background-color: #061917 !important;
 }
 
+html.dark .bg-\[\#F6F1E7\]\/90 {
+  background-color: rgba(6, 25, 23, 0.9) !important;
+}
+
 html.dark .border-slate-200,
 html.dark .border-slate-200\/90,
 html.dark .border-\[\#d9d2c3\],
+html.dark .border-\[\#d9d2c3\]\/40,
+html.dark .border-\[\#d9d2c3\]\/60,
+html.dark .border-\[\#d9d2c3\]\/70,
+html.dark .border-\[\#d9d2c3\]\/80,
 html.dark .border-\[\#e2dbce\] {
   border-color: #123d36 !important;
 }
 
-html.dark .text-slate-900,
-html.dark .text-slate-800 {
-  color: #f1f5f4 !important;
+/* Primary deep green text -> becomes crisp warm ivory in dark mode, UNLESS inside gold/amber buttons */
+html.dark .text-\[\#073B35\]:not([class*="bg-\[#E3A92F\]"]):not([class*="bg-\[#E3A92F\]"] *):not(.btn-signature):not(.btn-signature *),
+html.dark .text-\[\#012C2B\]:not([class*="bg-\[#E3A92F\]"]):not([class*="bg-\[#E3A92F\]"] *):not(.btn-signature):not(.btn-signature *),
+html.dark .text-\[\#052925\]:not([class*="bg-\[#E3A92F\]"]):not([class*="bg-\[#E3A92F\]"] *):not(.btn-signature):not(.btn-signature *) {
+  color: #F6F1E7 !important;
 }
 
-html.dark .text-slate-700,
-html.dark .text-slate-600 {
+/* Brand emerald accent text -> becomes vibrant luminous mint in dark mode */
+html.dark .text-\[\#0B5F55\]:not([class*="bg-\[#E3A92F\]"]):not([class*="bg-\[#E3A92F\]"] *),
+html.dark .text-\[\#065E5A\]:not([class*="bg-\[#E3A92F\]"]):not([class*="bg-\[#E3A92F\]"] *) {
+  color: #6A994E !important;
+}
+
+/* Muted descriptive text -> becomes readable soft silver-mint in dark mode */
+html.dark .text-\[\#4d6560\],
+html.dark .text-slate-600,
+html.dark .text-slate-500 {
   color: #9cb5af !important;
 }
 
+html.dark .text-slate-700,
+html.dark .text-slate-800,
+html.dark .text-slate-900:not([data-navbar-capsule] *) {
+  color: #f1f5f4 !important;
+}
+
+/* Eyebrow kicker pills & badges with green tint */
+html.dark .bg-\[\#0B5F55\]\/10,
+html.dark .bg-\[\#065E5A\]\/10 {
+  background-color: rgba(106, 153, 78, 0.12) !important;
+}
+
+html.dark .border-\[\#0B5F55\]\/20,
+html.dark .border-\[\#065E5A\]\/30 {
+  border-color: rgba(106, 153, 78, 0.3) !important;
+}
+
+/* Feather logos next to headline: luminous white in dark mode */
+html.dark img[src*="feather-logo-green"] {
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(106, 153, 78, 0.45));
+}
+
+/* Studio orbit ring in dark mode */
+html.dark .border-\[\#0B5F55\]\/15 {
+  border-color: rgba(106, 153, 78, 0.18) !important;
+}
+
+/* Interactive customizer buttons borders and shadows in dark mode (except gold CTA buttons) */
+html.dark .border-\[\#073B35\]:not([class*="bg-\[#E3A92F\]"]):not(.btn-signature) {
+  border-color: rgba(106, 153, 78, 0.35) !important;
+}
+
+/* Hard offset button shadows in dark mode -> #6A994E */
+html.dark .shadow-\[5px_5px_0px_\#073B35\],
+html.dark .shadow-\[5px_5px_0px_\#052925\],
+html.dark [class*="shadow-[5px_5px_0px"] {
+  box-shadow: 5px 5px 0px #6A994E !important;
+}
+
+html.dark .shadow-\[4px_4px_0px_\#073B35\],
+html.dark .shadow-\[4px_4px_0px_\#001716\],
+html.dark .shadow-\[4px_4px_0px_\#052925\],
+html.dark [class*="shadow-[4px_4px_0px"] {
+  box-shadow: 4px 4px 0px #6A994E !important;
+}
+
+html.dark .shadow-\[3px_3px_0px_\#073B35\],
+html.dark .shadow-\[3px_3px_0px_\#052925\],
+html.dark [class*="shadow-[3px_3px_0px"] {
+  box-shadow: 3px 3px 0px #6A994E !important;
+}
+
+html.dark .shadow-\[2px_2px_0px_\#073B35\],
+html.dark .shadow-\[2px_2px_0px_\#052925\],
+html.dark [class*="shadow-[2px_2px_0px"] {
+  box-shadow: 2px 2px 0px #6A994E !important;
+}
+
+html.dark .shadow-\[1px_1px_0px_\#073B35\],
+html.dark [class*="shadow-[1px_1px_0px"] {
+  box-shadow: 1px 1px 0px #6A994E !important;
+}
+
+html.dark .hover\:shadow-\[5px_5px_0px_\#073B35\]:hover,
+html.dark [class*="hover:shadow-[5px_5px_0px"]:hover {
+  box-shadow: 5px 5px 0px #6A994E !important;
+}
+
+html.dark .active\:shadow-\[2px_2px_0px_\#073B35\]:active,
+html.dark .active\:shadow-\[2px_2px_0px_\#052925\]:active,
+html.dark [class*="active:shadow-[2px_2px_0px"]:active {
+  box-shadow: 2px 2px 0px #6A994E !important;
+}
+
+html.dark .active\:shadow-\[1px_1px_0px_\#073B35\]:active,
+html.dark [class*="active:shadow-[1px_1px_0px"]:active {
+  box-shadow: 1px 1px 0px #6A994E !important;
+}
+
 html.dark .hover\:bg-slate-100:hover,
-html.dark .hover\:bg-\[\#eae4d7\]:hover {
+html.dark .hover\:bg-\[\#eae4d7\]:hover,
+html.dark .hover\:bg-\[\#F6F1E7\]:hover,
+html.dark .hover\:bg-\[\#faf7f0\]:hover {
   background-color: #113831 !important;
 }

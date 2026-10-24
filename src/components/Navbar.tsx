@@ -27,12 +27,36 @@ export const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
-    { label: 'تيشرتات وهوديز', path: '/request?service=clothing-hoodies' },
-    { label: 'كابات ومطرزات', path: '/request?service=caps-embroidery' },
-    { label: 'مجات وهدايا', path: '/request?service=mugs-promotional-gifts' },
-    { label: 'معرض الأعمال', path: '/portfolio' },
-    { label: 'الخدمات', path: '/services' },
-    { label: 'من نحن', path: '/about' },
+    {
+      label: 'تيشرتات وهوديز',
+      path: '/request?service=clothing-hoodies',
+      responsiveClass: 'hidden min-[600px]:inline-flex',
+    },
+    {
+      label: 'كابات ومطرزات',
+      path: '/request?service=caps-embroidery',
+      responsiveClass: 'hidden min-[750px]:inline-flex',
+    },
+    {
+      label: 'مجات وهدايا',
+      path: '/request?service=mugs-promotional-gifts',
+      responsiveClass: 'hidden min-[900px]:inline-flex',
+    },
+    {
+      label: 'معرض الأعمال',
+      path: '/portfolio',
+      responsiveClass: 'hidden min-[1050px]:inline-flex',
+    },
+    {
+      label: 'الخدمات',
+      path: '/services',
+      responsiveClass: 'hidden min-[1200px]:inline-flex',
+    },
+    {
+      label: 'من نحن',
+      path: '/about',
+      responsiveClass: 'hidden min-[1350px]:inline-flex',
+    },
   ];
 
   const isActive = (path: string) => {
@@ -121,11 +145,13 @@ export const Navbar: React.FC = () => {
       )}
 
       {/* ─────────────────────────────────────────────────────────────
-          2. Floating Capsule Navbar (Cleanly separated from background)
+          2. Floating White Pill Navbar (Gradual responsive button collapse)
       ───────────────────────────────────────────────────────────── */}
       <div className="container mx-auto px-3 sm:px-6 pt-3 sm:pt-4 pb-3 sm:pb-4">
-        <div className="bg-white rounded-full shadow-[0_12px_36px_-6px_rgba(7,59,53,0.3),0_4px_16px_-2px_rgba(0,0,0,0.12)] border-2 border-[#073B35]/25 dark:border-[#E3A92F]/60 ring-1 ring-black/5 dark:ring-white/10 px-3.5 sm:px-6 h-[59px] sm:h-[67px] flex items-center justify-between relative transition-all pointer-events-auto">
-          
+        <div
+          data-navbar-capsule
+          className="bg-white rounded-full shadow-lg border border-slate-200/90 px-3 sm:px-5 h-[59px] sm:h-[67px] flex items-center justify-between relative transition-all pointer-events-auto"
+        >
           {/* Right (Start in RTL): Logo kept on the right as it is */}
           <Link
             to="/"
@@ -133,36 +159,36 @@ export const Navbar: React.FC = () => {
             aria-label="الصفحة الرئيسية - يوزرسيف"
           >
             <BrandLogo
-              variant={theme === 'dark' ? 'white-on-deep' : 'green-on-paper'}
+              variant="green-on-paper"
               className="h-full max-h-[45px] sm:max-h-[53px] w-auto group-hover:opacity-90 transition-opacity"
             />
           </Link>
 
-          {/* Middle: Desktop Navigation Category Links */}
-          <nav className="hidden xl:flex items-center gap-1 lg:gap-2">
+          {/* Middle: Navigation Category Links (Gradually hides buttons one by one as window narrows) */}
+          <nav className="flex items-center gap-0.5 sm:gap-1 lg:gap-1.5 shrink-0">
             {navLinks.map((link) => {
               const active = isActive(link.path);
               return (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`px-3 py-1.5 rounded-full text-[13px] sm:text-sm font-extrabold transition-all duration-200 ${
+                  className={`${link.responsiveClass} px-2.5 sm:px-3 py-1.5 rounded-full text-[13px] sm:text-sm font-black whitespace-nowrap transition-all duration-200 ${
                     active
                       ? 'text-[#0B5F55] bg-emerald-50 font-black shadow-2xs'
-                      : 'text-slate-900 hover:text-[#0B5F55] hover:bg-slate-100'
+                      : 'text-slate-900 font-extrabold hover:text-[#0B5F55] hover:bg-slate-100'
                   }`}
                 >
-                  <span className="font-extrabold">{link.label}</span>
+                  <span className="font-black tracking-tight">{link.label}</span>
                 </Link>
               );
             })}
           </nav>
 
-          {/* Left (End in RTL): Pill CTA Button + User Icon + Bag Icon + Mobile Hamburger */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Left (End in RTL): Pill CTA Button + User Icon + Theme Icon + Bag Icon + Mobile Hamburger */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
             {/* Prominent Vibrant Capsule Button ("Create Your Shirt / صمم واطلب الآن") */}
             <Link to="/request">
-              <button className="bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] text-[#073B35] font-black text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-xl border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35] transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
+              <button className="bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] text-[#073B35] font-black text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-xl border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35] transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>صمّم واطلب الآن</span>
               </button>
@@ -172,7 +198,7 @@ export const Navbar: React.FC = () => {
             <Link
               to="/admin/login"
               title="لوحة تحكم المشرف / الحساب"
-              className="p-2 sm:p-2.5 text-slate-700 dark:text-slate-200 hover:text-[#0B5F55] dark:hover:text-[#E3A92F] hover:bg-slate-100 dark:hover:bg-emerald-950/50 rounded-full transition-colors cursor-pointer"
+              className="p-2 sm:p-2.5 text-slate-700 hover:text-[#0B5F55] hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
               aria-label="تسجيل الدخول / لوحة الإدارة"
             >
               <User className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -184,7 +210,7 @@ export const Navbar: React.FC = () => {
               onClick={toggleTheme}
               title={theme === 'dark' ? 'التبديل إلى الوضع الفاتح' : 'التبديل إلى الوضع الداكن'}
               aria-label={theme === 'dark' ? 'التبديل إلى الوضع الفاتح' : 'التبديل إلى الوضع الداكن'}
-              className="p-2 sm:p-2.5 text-slate-700 dark:text-slate-200 hover:text-[#0B5F55] dark:hover:text-[#E3A92F] hover:bg-slate-100 dark:hover:bg-emerald-950/50 rounded-full transition-all cursor-pointer"
+              className="p-2 sm:p-2.5 text-slate-700 hover:text-[#0B5F55] hover:bg-slate-100 rounded-full transition-all cursor-pointer"
             >
               {theme === 'dark' ? (
                 <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-[#E3A92F]" />
@@ -208,7 +234,7 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden relative p-2.5 rounded-full text-slate-700 dark:text-slate-200 hover:text-[#0B5F55] dark:hover:text-[#E3A92F] hover:bg-slate-100 dark:hover:bg-emerald-950/50 active:scale-[0.88] transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#065E5A] cursor-pointer group flex items-center justify-center"
+              className="min-[1350px]:hidden relative p-2 sm:p-2.5 rounded-full text-slate-700 hover:text-[#0B5F55] hover:bg-slate-100 active:scale-[0.88] transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#065E5A] cursor-pointer group flex items-center justify-center shrink-0"
               aria-label={mobileMenuOpen ? 'إغلاق القائمة' : 'فتح القائمة الرئيسية'}
               aria-expanded={mobileMenuOpen}
             >
@@ -298,13 +324,13 @@ export const Navbar: React.FC = () => {
                       key={link.path}
                       to={link.path}
                       onClick={() => setMobileMenuOpen(false)}
-                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-extrabold transition-all ${
                         active
-                          ? 'bg-[#0B5F55] text-white font-bold shadow-xs'
-                          : 'text-slate-700 hover:bg-[#eae4d7] hover:text-[#0B5F55]'
+                          ? 'bg-[#0B5F55] text-white font-black shadow-xs'
+                          : 'text-slate-900 font-extrabold hover:bg-[#eae4d7] hover:text-[#0B5F55]'
                       }`}
                     >
-                      <span>{link.label}</span>
+                      <span className="font-extrabold">{link.label}</span>
                       <ChevronDown className="w-4 h-4 -rotate-90 rtl:rotate-90 opacity-60" />
                     </Link>
                   );

@@ -24,6 +24,9 @@ import {
   Truck,
   Package,
   Plus,
+  UploadCloud,
+  X,
+  Trash2,
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
@@ -78,7 +81,7 @@ export const AdminDashboard: React.FC = () => {
   const emptyVariant = (): ProductVariant => ({
     colorName: '',
     colorHex: '#000000',
-    images: [''],
+    images: [],
     sizes: CLOTHING_SIZES.map((s) => ({ size: s, inStock: true })),
   });
 
@@ -126,6 +129,40 @@ export const AdminDashboard: React.FC = () => {
     setNewProduct({ title: '', category: 'clothing', description: '', basePrice: 0, isActive: true, variants: [emptyVariant()] });
   };
   const getCategoryLabel = (cat: string) => CATEGORY_OPTIONS.find((c) => c.value === cat)?.label ?? cat;
+
+  const handleVariantImageUpload = (vi: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    Array.from(files).forEach((file) => {
+      if (!file.type.startsWith('image/')) {
+        alert(`الملف "${file.name}" ليس صورة صالحة`);
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (uploadEvent) => {
+        const result = uploadEvent.target?.result as string;
+        if (result) {
+          setNewProduct((prev) => ({
+            ...prev,
+            variants: prev.variants.map((v, i) =>
+              i === vi ? { ...v, images: [...v.images.filter(Boolean), result] } : v
+            ),
+          }));
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+    e.target.value = '';
+  };
+
+  const handleRemoveVariantImage = (vi: number, imgIdx: number) => {
+    setNewProduct((prev) => ({
+      ...prev,
+      variants: prev.variants.map((v, i) =>
+        i === vi ? { ...v, images: v.images.filter((_, j) => j !== imgIdx) } : v
+      ),
+    }));
+  };
 
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [loading, setLoading] = useState(true);
@@ -577,15 +614,44 @@ export const AdminDashboard: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="space-y-1">
-                    <Label>روابط الصور</Label>
-                    {variant.images.map((img, imgIdx) => (
-                      <div key={imgIdx} className="flex gap-2">
-                        <Input value={img} onChange={(e) => setNewProduct((p) => ({ ...p, variants: p.variants.map((v, i) => i === vi ? { ...v, images: v.images.map((im, j) => j === imgIdx ? e.target.value : im) } : v) }))} placeholder="/uploads/product-color-front.png" className="font-mono text-xs" />
-                        {variant.images.length > 1 && <button type="button" onClick={() => setNewProduct((p) => ({ ...p, variants: p.variants.map((v, i) => i === vi ? { ...v, images: v.images.filter((_, j) => j !== imgIdx) } : v) }))} className="text-rose-400 px-2">×</button>}
-                      </div>
-                    ))}
-                    {variant.images.length < 4 && <button type="button" onClick={() => setNewProduct((p) => ({ ...p, variants: p.variants.map((v, i) => i === vi ? { ...v, images: [...v.images, ''] } : v) }))} className="text-xs text-[#065E5A] hover:underline">+ إضافة صورة</button>}
+                  {/* Images Upload from Device */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <Label>صور المنتج لهذا اللون ({variant.images.length})</Label>
+                      <span className="text-[11px] text-slate-400">ارفع الصور من جهازك مباشرة (JPG, PNG)</span>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2.5 pt-1">
+                      {variant.images.map((img, imgIdx) => (
+                        <div key={imgIdx} className="relative group w-20 h-20 rounded-xl overflow-hidden border-2 border-slate-200 bg-white shadow-xs shrink-0">
+                          <img src={img} alt={`صورة ${imgIdx + 1}`} className="w-full h-full object-cover" />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveVariantImage(vi, imgIdx)}
+                            title="حذف الصورة"
+                            className="absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white flex items-center justify-center opacity-90 hover:opacity-100 shadow-sm transition-opacity"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </div>
+                      ))}
+
+                      <label
+                        htmlFor={`upload-variant-${vi}`}
+                        className="w-20 h-20 rounded-xl border-2 border-dashed border-[#065E5A]/40 hover:border-[#065E5A] bg-[#065E5A]/5 hover:bg-[#065E5A]/10 flex flex-col items-center justify-center gap-1 cursor-pointer transition-all shrink-0 text-[#065E5A]"
+                      >
+                        <UploadCloud className="w-5 h-5" />
+                        <span className="text-[10px] font-bold">رفع صورة</span>
+                        <input
+                          type="file"
+                          id={`upload-variant-${vi}`}
+                          accept="image/*"
+                          multiple
+                          onChange={(e) => handleVariantImageUpload(vi, e)}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
                   </div>
                   <div className="space-y-1">
                     <Label>المقاسات (اضغط لتفعيل/تعطيل)</Label>

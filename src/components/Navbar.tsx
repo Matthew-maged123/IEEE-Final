@@ -12,10 +12,13 @@ import {
   ChevronDown,
   Sparkles,
   Sun,
-  Moon
+  Moon,
+  LogOut,
+  ShieldCheck
 } from './ui/icons';
 import { BrandLogo } from './BrandLogo';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import { YUZERSEF_WHATSAPP, generateWhatsAppLink } from '../lib/utils';
 
 export const Navbar: React.FC = () => {
@@ -23,8 +26,16 @@ export const Navbar: React.FC = () => {
   const SHOW_TOP_BAR = false;
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
+
+  // Close menus on route change
+  useEffect(() => {
+    setUserMenuOpen(false);
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     {
@@ -194,15 +205,97 @@ export const Navbar: React.FC = () => {
               </button>
             </Link>
 
-            {/* User Icon (Account / Admin Panel) */}
-            <Link
-              to="/admin/login"
-              title="لوحة تحكم المشرف / الحساب"
-              className="p-2 sm:p-2.5 text-slate-700 hover:text-[#0B5F55] hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
-              aria-label="تسجيل الدخول / لوحة الإدارة"
-            >
-              <User className="w-4 h-4 sm:w-5 sm:h-5" />
-            </Link>
+            {/* User Icon & Account Dropdown */}
+            {isAuthenticated && user ? (
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-1.5 p-1.5 sm:px-2.5 sm:py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-[#073B35] hover:bg-emerald-100 transition-all cursor-pointer text-xs font-black"
+                  title={`حسابي (${user.name})`}
+                  aria-expanded={userMenuOpen}
+                >
+                  <div className="w-6 h-6 rounded-full bg-[#073B35] text-white flex items-center justify-center text-[10px] font-bold">
+                    {user.name.charAt(0)}
+                  </div>
+                  <span className="hidden sm:inline max-w-[80px] truncate">{user.name.split(' ')[0]}</span>
+                  <ChevronDown className={`w-3 h-3 text-[#073B35] transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* User Dropdown Menu */}
+                {userMenuOpen && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setUserMenuOpen(false)}
+                    />
+                    <div className="absolute end-0 mt-2 w-64 bg-white rounded-2xl border-2 border-[#073B35] shadow-[4px_4px_0px_#073B35] z-50 p-3 space-y-2 text-right">
+                      <div className="p-2 bg-[#FAF8F5] rounded-xl border border-slate-200">
+                        <div className="font-black text-sm text-[#012C2B] truncate">{user.name}</div>
+                        <div className="text-[11px] text-slate-500 truncate" dir="ltr">{user.email}</div>
+                        <div className="mt-1 flex items-center gap-1">
+                          <span className="text-[10px] font-bold bg-[#E3A92F]/20 text-[#073B35] px-2 py-0.5 rounded-md border border-[#E3A92F]/40">
+                            {user.role === 'admin' ? 'مشرف معتمد 🛡️' : 'عميل يوزرسيف 🌟'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1 text-xs font-bold text-slate-700">
+                        {user.role === 'admin' && (
+                          <Link
+                            to="/admin"
+                            onClick={() => setUserMenuOpen(false)}
+                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-amber-50 hover:text-[#073B35] transition-colors"
+                          >
+                            <ShieldCheck className="w-4 h-4 text-[#E3A92F]" />
+                            <span>لوحة تحكم المشرف</span>
+                          </Link>
+                        )}
+                        <Link
+                          to="/track"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-2 p-2 rounded-lg hover:bg-[#FAF8F5] hover:text-[#0B5F55] transition-colors"
+                        >
+                          <ShoppingBag className="w-4 h-4 text-[#0B5F55]" />
+                          <span>تتبع حالة طلباتي</span>
+                        </Link>
+                        <Link
+                          to="/request"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-2 p-2 rounded-lg hover:bg-[#FAF8F5] hover:text-[#0B5F55] transition-colors"
+                        >
+                          <Sparkles className="w-4 h-4 text-[#E3A92F]" />
+                          <span>طلب تفصيل وتطريز جديد</span>
+                        </Link>
+                      </div>
+
+                      <div className="border-t border-slate-100 pt-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            logout();
+                            setUserMenuOpen(false);
+                          }}
+                          className="w-full flex items-center gap-2 p-2 rounded-lg text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          <span>تسجيل الخروج</span>
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            ) : (
+              <Link
+                to="/auth"
+                title="تسجيل الدخول / إنشاء حساب"
+                className="p-2 sm:p-2.5 text-slate-700 hover:text-[#0B5F55] hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
+                aria-label="تسجيل الدخول أو إنشاء حساب"
+              >
+                <User className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Link>
+            )}
 
             {/* Dark / Light Mode Switcher Button */}
             <button
@@ -374,14 +467,68 @@ export const Navbar: React.FC = () => {
                   <span>مركز المساعدة والسياسات</span>
                 </Link>
 
-                <Link
-                  to="/admin/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-[#eae4d7] transition-colors"
-                >
-                  <User className="w-4 h-4 text-[#0B5F55]" />
-                  <span>لوحة تحكم المشرف</span>
-                </Link>
+                {/* Authentication Links in Drawer */}
+                {isAuthenticated && user ? (
+                  <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 rounded-full bg-[#073B35] text-white flex items-center justify-center text-xs font-bold">
+                          {user.name.charAt(0)}
+                        </div>
+                        <div>
+                          <div className="font-bold text-xs text-[#012C2B]">{user.name}</div>
+                          <div className="text-[10px] text-slate-500">{user.email}</div>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-bold bg-[#E3A92F] text-[#073B35] px-1.5 py-0.5 rounded">
+                        {user.role === 'admin' ? 'مشرف' : 'عميل'}
+                      </span>
+                    </div>
+
+                    {user.role === 'admin' && (
+                      <Link
+                        to="/admin"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-bold text-[#073B35] hover:bg-emerald-100 transition-colors"
+                      >
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#E3A92F]" />
+                        <span>لوحة تحكم المشرف</span>
+                      </Link>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        logout();
+                        setMobileMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-bold text-rose-600 hover:bg-rose-100 transition-colors cursor-pointer"
+                    >
+                      <LogOut className="w-3.5 h-3.5" />
+                      <span>تسجيل الخروج</span>
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <Link
+                      to="/auth?mode=signin"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-bold text-[#073B35] bg-amber-50 hover:bg-amber-100 transition-colors"
+                    >
+                      <User className="w-4 h-4 text-[#0B5F55]" />
+                      <span>تسجيل الدخول / حساب جديد</span>
+                    </Link>
+
+                    <Link
+                      to="/admin/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 hover:bg-[#eae4d7] transition-colors"
+                    >
+                      <ShieldCheck className="w-4 h-4 text-slate-500" />
+                      <span>لوحة تحكم المشرف</span>
+                    </Link>
+                  </>
+                )}
 
                 {/* Dark / Light Mode Switcher in Drawer */}
                 <button

@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   ShieldCheck,
@@ -21,8 +21,12 @@ import {
   Shirt,
   Smartphone,
   Tag,
-  Truck
-} from 'lucide-react';
+  Truck,
+  Plus,
+  Package,
+  X,
+  UploadCloud
+} from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';

@@ -26,6 +26,7 @@ import {
   faDownload,
   faUpRightFromSquare,
   faEye,
+  faEyeSlash,
   faFeatherPointed,
   faFile,
   faFileLines,
@@ -35,6 +36,7 @@ import {
   faLayerGroup,
   faLock,
   faRightFromBracket,
+  faRightToBracket,
   faEnvelope,
   faLocationDot,
   faBars,
@@ -53,6 +55,8 @@ import {
   faShield,
   faShieldHalved,
   faShirt,
+  faPlus,
+  faBox,
   faMobileScreenButton,
   faWandMagicSparkles,
   faTag,
@@ -62,6 +66,7 @@ import {
   faUpload,
   faCloudArrowUp,
   faUser,
+  faUserPlus,
   faUsers,
   faXmark,
   faCircleXmark,
@@ -80,7 +85,7 @@ import {
   faSun,
   faMoon,
 } from '@fortawesome/free-solid-svg-icons';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faWhatsapp, faGoogle, faApple, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 export interface IconProps extends React.HTMLAttributes<SVGSVGElement> {
   className?: string;
@@ -141,6 +146,7 @@ export const Cpu = createIcon(faMicrochip, 'Cpu');
 export const Download = createIcon(faDownload, 'Download');
 export const ExternalLink = createIcon(faUpRightFromSquare, 'ExternalLink');
 export const Eye = createIcon(faEye, 'Eye');
+export const EyeSlash = createIcon(faEyeSlash, 'EyeSlash');
 export const Feather = createIcon(faFeatherPointed, 'Feather');
 export const File = createIcon(faFile, 'File');
 export const FileText = createIcon(faFileLines, 'FileText');
@@ -149,13 +155,16 @@ export const Image = createIcon(faImage, 'Image');
 export const KeyRound = createIcon(faKey, 'KeyRound');
 export const Layers = createIcon(faLayerGroup, 'Layers');
 export const Lock = createIcon(faLock, 'Lock');
+export const LogIn = createIcon(faRightToBracket, 'LogIn');
 export const LogOut = createIcon(faRightFromBracket, 'LogOut');
 export const Mail = createIcon(faEnvelope, 'Mail');
 export const MapPin = createIcon(faLocationDot, 'MapPin');
 export const Menu = createIcon(faBars, 'Menu');
 export const MessageCircle = createIcon(faComment, 'MessageCircle');
 export const MessageSquare = createIcon(faCommentDots, 'MessageSquare');
+export const Package = createIcon(faBox, 'Package');
 export const PackageCheck = createIcon(faBoxOpen, 'PackageCheck');
+export const Plus = createIcon(faPlus, 'Plus');
 export const Palette = createIcon(faPalette, 'Palette');
 export const Phone = createIcon(faPhone, 'Phone');
 export const PhoneCall = createIcon(faPhoneVolume, 'PhoneCall');
@@ -177,6 +186,7 @@ export const Truck = createIcon(faTruckFast, 'Truck');
 export const Upload = createIcon(faUpload, 'Upload');
 export const UploadCloud = createIcon(faCloudArrowUp, 'UploadCloud');
 export const User = createIcon(faUser, 'User');
+export const UserPlus = createIcon(faUserPlus, 'UserPlus');
 export const Users = createIcon(faUsers, 'Users');
 export const X = createIcon(faXmark, 'X');
 export const XCircle = createIcon(faCircleXmark, 'XCircle');
@@ -188,6 +198,9 @@ export const Spinner = createIcon(faSpinner, 'Spinner');
 export const CircleNotch = createIcon(faCircleNotch, 'CircleNotch');
 export const Info = createIcon(faCircleInfo, 'Info');
 export const WhatsApp = createIcon(faWhatsapp, 'WhatsApp');
+export const Google = createIcon(faGoogle, 'Google');
+export const Apple = createIcon(faApple, 'Apple');
+export const Facebook = createIcon(faFacebook, 'Facebook');
 export const Star = createIcon(faStar, 'Star');
 export const Flower = createIcon(faSpa, 'Flower');
 export const Scissors = createIcon(faScissors, 'Scissors');
@@ -225,6 +238,7 @@ export {
   faDownload,
   faUpRightFromSquare,
   faEye,
+  faEyeSlash,
   faFeatherPointed,
   faFile,
   faFileLines,
@@ -234,6 +248,7 @@ export {
   faLayerGroup,
   faLock,
   faRightFromBracket,
+  faRightToBracket,
   faEnvelope,
   faLocationDot,
   faBars,
@@ -252,6 +267,8 @@ export {
   faShield,
   faShieldHalved,
   faShirt,
+  faPlus,
+  faBox,
   faMobileScreenButton,
   faWandMagicSparkles,
   faTag,
@@ -261,6 +278,7 @@ export {
   faUpload,
   faCloudArrowUp,
   faUser,
+  faUserPlus,
   faUsers,
   faXmark,
   faCircleXmark,
@@ -276,4 +294,7 @@ export {
   faSun,
   faMoon,
   faWhatsapp,
+  faGoogle,
+  faApple,
+  faFacebook,
 };

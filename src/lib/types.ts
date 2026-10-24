@@ -124,3 +124,20 @@ export interface AdminUser {
   role: 'admin';
   token: string;
 }
+
+export type UserRole = 'customer' | 'admin';
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: UserRole;
+  createdAt?: string;
+}
+
+export interface AuthResponse {
+  user: User;
+  token?: string;
+  message?: string;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { ChevronLeft, Plus, Send, Palette } from 'lucide-react';
+import { ChevronLeft, Plus, Send, Palette } from '../components/ui/icons';
 import { getShopProductById, type ShopProductColor, type ShopProductSize } from '../lib/shop-data';
 
 // ─── Size Guide Modal ──────────────────────────────────────────────────────────

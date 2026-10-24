@@ -10,8 +10,9 @@
 | **المسار (Route)** | `/` |
 | **مسار الملف المصدري** | `src/pages/Home.tsx` |
 | **المكون البرمجي الأساسي** | `export const Home: React.FC` |
+| **شريط التنقل العلوي** | `src/components/Navbar.tsx` (كبسولة عائمة مستقلة بيضاء مع انهيار تدريجي وقائمة جانبية ووضع ليلي/نهاري) |
 | **مستوى الصلاحية (Access Level)** | عام (Public) - متاح لكافة الزوار والعملاء |
-| **المظهر والاتجاه (Theme & Layout)** | يدعم اتجاه الكتابة من اليمين لليسار (RTL - اللغة العربية)، وتدرجات ألوان هوية يوزرسيف (الزيتي الملكي `#073B35`، الأخضر الزمردي `#0B5F55`، والذهبي المائل للصفرة `#E3A92F`، مع خلفية الورق الطبيعي `#F6F1E7`). متوافق بالكامل مع الوضع الليلي (Dark Mode) بتدرجات الزمردي الليلي `#071f1c` والنعناعي المضيء `#5EE7CF`. |
+| **المظهر والاتجاه (Theme & Layout)** | يدعم اتجاه الكتابة من اليمين لليسار (RTL - اللغة العربية)، وتدرجات ألوان هوية يوزرسيف (الزيتي الملكي `#073B35`، الأخضر الزمردي `#0B5F55`، والذهبي المائل للصفرة `#E3A92F`، مع خلفية الورق الطبيعي `#F6F1E7`). متوافق بالكامل مع الوضع الليلي (Dark Mode) بتدرجات الزمردي الليلي `#071f1c` والأخضر العشبي المتوهج `#6A994E` والنعناعي المضيء `#5EE7CF`. يتميز شريط التنقل (Navbar) باحتفاظه باللون الأبيض الصافي والخطوط الغامقة في كلا الوضعين لتحقيق تباين جمالي فريد. |
 
 ---
 
@@ -22,74 +23,143 @@
 ### الأهداف الاستراتيجية للصفحة:
 1. **جذب الانتباه الفوري (Instant Engagement):** من خلال استعراض بصري تفاعلي واستوديو تخصيص رقمي متقدم في قسم الهيرو (`EmbroideryHero`) يتيح تجربة المنتجات، الخامات، الألوان، والشعار الحي على شاشة العميل مباشرة.
 2. **شعار الهوية والروح البصرية:** إبراز الشعار اللفظي المعتمد **"خليك مختلف، خليك يوزرسيف."** محاطاً بريشة يوزرسيف الرسمية في سطر واحد متصل.
-3. **بناء الثقة وإثبات الكفاءة (Social Proof & Craftsmanship):** استعراض المقارنة التفاعلية بين الاسكتش الأولي للمصمم والمنتج النهائي بعد التنفيذ الفعلي عبر قسم (`BeforeAfterShowcase`).
-4. **التوجيه السريع لمعالج الطلبات (Streamlined Conversion Funnel):** نقل الزائر مباشرة إلى معالج الطلبات مع تحديد نوع الخدمة مسبقاً (`/request?service=...`) أو الاستناد إلى أحد أعمال البورتفوليو كمرجع (`/request?service=...&ref=...`).
-5. **شرح دورة حياة الطلب (Customer Journey Transparency):** توضيح الخطوات الأربع المعتمدة لتقديم الطلب وفحص الجاهزية وصولاً للاستلام من معمل أسوان أو التوصيل.
-6. **معرض الأنماط والتصوير الاحترافي:** استعراض واقعي للمنتجات في بيئة تصوير احترافية ومشاريع السوشيال ميديا عبر قسم (`SocialDesignsShowcase`).
+3. **التنقل فائق السلاسة والتكيف (Fluid Navigation & Accessibility):** شريط تنقل علوي عائم ومستقل بنظام كبسولة بيضاء لا تحجب خلفية الصفحة، يتميز بانهيار تدريجي للأزرار حسب المساحة المتاحة، وقائمة جانبية فاخرة (Drawer) تنزلق من اليسار عبر Portal، ومفتاح تبديل فوري بين الوضع الليلي والنهاري.
+4. **بناء الثقة وإثبات الكفاءة (Social Proof & Craftsmanship):** استعراض المقارنة التفاعلية بين الاسكتش الأولي للمصمم والمنتج النهائي بعد التنفيذ الفعلي عبر قسم (`BeforeAfterShowcase`).
+5. **التوجيه السريع لمعالج الطلبات (Streamlined Conversion Funnel):** نقل الزائر مباشرة إلى معالج الطلبات مع تحديد نوع الخدمة مسبقاً (`/request?service=...`) أو الاستناد إلى أحد أعمال البورتفوليو كمرجع (`/request?service=...&ref=...`).
+6. **شرح دورة حياة الطلب (Customer Journey Transparency):** توضيح الخطوات الأربع المعتمدة لتقديم الطلب وفحص الجاهزية وصولاً للاستلام من معمل أسوان أو التوصيل.
+7. **معرض الأنماط والتصوير الاحترافي:** استعراض واقعي للمنتجات في بيئة تصوير احترافية ومشاريع السوشيال ميديا عبر قسم (`SocialDesignsShowcase`).
 
 ---
 
 ## 3. الهيكل المعماري وشجرة المكونات (Component Architecture)
 
 ```
-Home (src/pages/Home.tsx)
- ├── Universal Paper Texture & Dotted Blueprint Grid (شبكة النقاط الورقية الهندسية المتصلة بالموقع بالكامل)
- ├── Background Ambient Glow Orbs (عناصر توهج عميقة عند top-15%, top-40%, top-70%)
- ├── Section (a): EmbroideryHero (src/components/EmbroideryHero.tsx)
- │    ├── Eyebrow Kicker Pill ("أفكارك. مطبوعة في أسوان.")
- │    ├── Main Headline: Single-Line ("خليك مختلف، خليك يوزرسيف.")
- │    ├── Brand Feather Logos (feather-logo-green.png & feather-logo-green2.png مع دعم الإضاءة في الوضع الليلي)
- │    ├── Product Switcher (تيشيرت عادي، شنطة توت باج بسوستة، هودي ميلتون أوفر سايز)
- │    │    ├── T-Shirt: موك اب شفاف عالي الدقة يدعم 3 ألوان حقيقية (أبيض: tshirt-white-front-trans.png / أسود: tshirt-white-front-trans-black.png / أخضر: tshirt-white-front-trans-green.png)
- │    │    ├── Tote Bag: موك اب حقيقي (Tote_Bag_Mockup.png) بارتفاع موازٍ ومعدل 20px للأعلى مع فلاتر خامة القماش
- │    │    └── Hoodie: موك اب واقعي مفرغ شفاف عالي الدقة (أبيض: hoodie-white-front-trans.png / أسود: hoodie-white-front-trans-black.png / أخضر: hoodie-white-front-trans-green.png)
- │    ├── Dynamic Artwork Modes:
- │    │    ├── الشعار (Official Youzersef Calligraphy Logo: logo-green.png / logo-white.png بمقياس متناسق: scale-90 للهودي و scale-[0.80] للتيشيرت)
- │    │    ├── أشكال (Bauhaus Geometric Art)
- │    │    └── وردة (Heritage Floral Art)
- │    ├── Color Swatches (أبيض، أسود، أخضر يوزرسيف)
- │    └── Grand Orbit Ring & CTA Button ("خلّيه بتصميمك ->")
- ├── Section (b): BeforeAfterShowcase (src/components/BeforeAfterShowcase.tsx)
- │    ├── Interactive Drag Slider / Split Comparison
- │    ├── Sketch Layer (الرسم المبدئي بالقلم الرصاص)
- │    └── Embroidered Final Product Layer (المنتج المطرز والمطبوع المتقن)
- ├── Section (c): Services Catalogue Grid (كتالوج الخدمات المعتمدة)
- │    ├── Section Header & "عرض كل الخدمات" Link -> /services
- │    └── 6 Interactive Service Cards:
- │         ├── Card 1: تشرتات وهوديز مطبوعة -> /request?service=clothing-hoodies
- │         ├── Card 2: كابات ومطرزات عصرية -> /request?service=caps-embroidery
- │         ├── Card 3: استيكرات استيكراتك (شارة تسليم سريع) -> /request?service=stickers-labels
- │         ├── Card 4: مجات وهدايا ترويجية -> /request?service=mugs-promotional-gifts
- │         ├── Card 5: جرابات هواتف مخصصة -> /request?service=phone-cases
- │         └── Card 6: خدمة المساعدة والتصميم الفني -> /contact
- ├── Section (d): Portfolio Highlights (نماذج واقعية من معرض الأعمال)
- │    ├── Section Header & "تصفح كل المعرض" Link -> /portfolio
- │    └── 3 Verified Showcase Cards:
- │         ├── Model 1: هوديز طلاب كلية الهندسة بأسوان (تطريز وطباعة 120 قطعة)
- │         ├── Model 2: استيكرات فينيل Die-cut مقاومة للماء لبراند أسوان كرافت
- │         └── Model 3: جرابات هواتف بتصاميم مستوحاة من التراث النوبي
- │         └── Action Button: "استخدم هذا العمل كمرجع لطلبك" -> /request?service=...&ref=...
- ├── Section (e): How Ordering Works (سير العمل المعتمد - 4 خطوات)
- │    ├── Container: شفاف ومندمج مع الخلفية الورقية العامة
- │    ├── 4 Clean Glass/Stationery Cards:
- │    │    ├── Step 01: اختر وحدد المواصفات
- │    │    ├── Step 02: فحص الجاهزية الذكي (Smart Readiness Check)
- │    │    ├── Step 03: إصدار كود المتابعة (YZ-xxxx)
- │    │    └── Step 04: اعتماد المعمل والتنفيذ
- │    └── CTA Button: "ابدأ رحلة طلبك الآن" -> /request
- ├── Section (f): SocialDesignsShowcase (src/components/SocialDesignsShowcase.tsx)
- │    ├── بوستات السوشيال ميديا الرسمية (Instagram 4:5 Aspect Ratio)
- │    └── فوتوغرافيا الاستوديو والتطريز الماكرو عالي الدقة (4K Macro View)
- └── Section (g): Contact CTA Banner (بانر التواصل المباشر ومعالج الطلب)
-      ├── Gradient Emerald Card (#073B35 to #0B5F55)
-      ├── "ابدأ معالج الطلب" Button -> /request
-      ├── "تواصل واتساب" Button -> WhatsApp Direct Link
-      └── Official Brand Logo Display
+App.tsx (Root Layout)
+ ├── Navbar (src/components/Navbar.tsx) [شريط التنقل العلوي العائم المستقل]
+ │    ├── Floating Capsule Container ([data-navbar-capsule] - كبسولة بيضاء مستقلة دائمة)
+ │    │    ├── Brand Logo Link (BrandLogo.tsx -> /logo/logo-green.png)
+ │    │    ├── Progressive Responsive Navigation Buttons (الانهيار التدريجي الذكي):
+ │    │    │    ├── Button: "تيشرتات وهوديز" (مخفي تحت 600px - max-[600px]:hidden)
+ │    │    │    ├── Button: "كابات ومطرزات" (مخفي تحت 750px - max-[750px]:hidden)
+ │    │    │    ├── Button: "مجات وهدايا" (مخفي تحت 900px - max-[900px]:hidden)
+ │    │    │    ├── Button: "معرض الأعمال" (مخفي تحت 1050px - max-[1050px]:hidden)
+ │    │    │    ├── Button: "الخدمات" (مخفي تحت 1200px - max-[1200px]:hidden)
+ │    │    │    └── Button: "من نحن" (مخفي تحت 1350px - max-[1350px]:hidden)
+ │    │    ├── Action Icons Group:
+ │    │    │    ├── Track Order Button (تتبع الطلب -> /track)
+ │    │    │    ├── Theme Toggle Button (مفتاح التبديل الفوري بين الوضع الليلي/النهاري Sun/Moon)
+ │    │    │    └── Admin Dashboard Button (بوابة الدخول للوحة الإدارة -> /admin)
+ │    │    └── Animated Hamburger Button (أيقونة 3 خطوط تتحول إلى X مع أنيميشن ضغط تفاعلي - تظهر تحت 1350px)
+ │    └── Slide-over Offcanvas Drawer (React createPortal -> document.body)
+ │         ├── Dimmed Backdrop Overlay (خلفية سوداء ضبابية مع إغلاق بالنقر وقفل تمرير الصفحة)
+ │         └── Left-Slide Drawer Panel (لوحة منسابة من أقصى اليسار بعرض 320px)
+ │              ├── Drawer Header (شعار البراند + زر إغلاق X دائري)
+ │              ├── Category Nav Links (أقسام الموقع كاملة مع أيقونات بصرية)
+ │              └── Direct Action CTA Buttons (بدء طلب جديد + تتبع الطلبات)
+ └── Home (src/pages/Home.tsx)
+      ├── Universal Paper Texture & Dotted Blueprint Grid (شبكة النقاط الورقية الهندسية المتصلة)
+      ├── Background Ambient Glow Orbs (عناصر توهج عميقة عند top-15%, top-40%, top-70%)
+      ├── Section (a): EmbroideryHero (src/components/EmbroideryHero.tsx)
+      │    ├── Eyebrow Kicker Pill ("أفكارك. مطبوعة في أسوان.")
+      │    ├── Main Headline: Single-Line ("خليك مختلف، خليك يوزرسيف.")
+      │    ├── Brand Feather Logos (feather-logo-green.png & feather-logo-green2.png مع دعم الإضاءة في الوضع الليلي)
+      │    ├── Product Switcher (تيشيرت عادي، شنطة توت باج بسوستة، هودي ميلتون أوفر سايز)
+      │    │    ├── T-Shirt: موك اب شفاف عالي الدقة يدعم 3 ألوان حقيقية (أبيض: tshirt-white-front-trans.png / أسود: tshirt-white-front-trans-black.png / أخضر: tshirt-white-front-trans-green.png)
+      │    │    ├── Tote Bag: موك اب حقيقي (Tote_Bag_Mockup.png) بحاوية مربعة aspect-square وإحداثيات نسيج محسوبة هندسياً (top-[42%] left-[29%] w-[38.5%] h-[42%]) مع فلاتر خامة القماش
+      │    │    └── Hoodie: موك اب واقعي مفرغ شفاف عالي الدقة (أبيض: hoodie-white-front-trans.png / أسود: hoodie-white-front-trans-black.png / أخضر: hoodie-white-front-trans-green.png)
+      │    ├── Dynamic Artwork Modes:
+      │    │    ├── الشعار (Official Youzersef Calligraphy Logo: logo-green.png / logo-white.png بمقياس متناسق: scale-90 للهودي و scale-[0.80] للتيشيرت)
+      │    │    ├── أشكال (Bauhaus Geometric Art)
+      │    │    └── وردة (Heritage Floral Art)
+      │    ├── Color Swatches (أبيض، أسود، أخضر يوزرسيف)
+      │    └── Grand Orbit Ring & CTA Button ("خلّيه بتصميمك ->")
+      ├── Section (b): BeforeAfterShowcase (src/components/BeforeAfterShowcase.tsx)
+      │    ├── Interactive Drag Slider / Split Comparison
+      │    ├── Sketch Layer (الرسم المبدئي بالقلم الرصاص)
+      │    └── Embroidered Final Product Layer (المنتج المطرز والمطبوع المتقن)
+      ├── Section (c): Services Catalogue Grid (كتالوج الخدمات المعتمدة مع صور الأصول المكتشفة)
+      │    ├── Section Header & "عرض كل الخدمات" Link -> /services
+      │    └── 6 Interactive Service Cards:
+      │         ├── Card 1: تشرتات وهوديز مطبوعة (/services/service-hoodies.jpg) -> /request?service=clothing-hoodies
+      │         ├── Card 2: كابات ومطرزات عصرية (/services/service-caps.jpg) -> /request?service=caps-embroidery
+      │         ├── Card 3: استيكرات استيكراتك (/services/service-stickers.jpg) -> /request?service=stickers-labels
+      │         ├── Card 4: مجات وهدايا ترويجية (/services/service-mugs.jpg) -> /request?service=mugs-promotional-gifts
+      │         ├── Card 5: جرابات هواتف مخصصة (/services/service-cases.jpg) -> /request?service=phone-cases
+      │         └── Card 6: خدمة المساعدة والتصميم الفني (/services/service-design.jpg) -> /contact
+      ├── Section (d): Portfolio Highlights (نماذج واقعية من معرض الأعمال)
+      │    ├── Section Header & "تصفح كل المعرض" Link -> /portfolio
+      │    └── 3 Verified Showcase Cards:
+      │         ├── Model 1: هوديز طلاب كلية الهندسة بأسوان (تطريز وطباعة 120 قطعة)
+      │         ├── Model 2: استيكرات فينيل Die-cut مقاومة للماء لبراند أسوان كرافت
+      │         └── Model 3: جرابات هواتف بتصاميم مستوحاة من التراث النوبي
+      │         └── Action Button: "استخدم هذا العمل كمرجع لطلبك" -> /request?service=...&ref=...
+      ├── Section (e): How Ordering Works (سير العمل المعتمد - 4 خطوات)
+      │    ├── Container: شفاف ومندمج مع الخلفية الورقية العامة
+      │    ├── 4 Clean Glass/Stationery Cards:
+      │    │    ├── Step 01: اختر وحدد المواصفات
+      │    │    ├── Step 02: فحص الجاهزية الذكي (Smart Readiness Check)
+      │    │    ├── Step 03: إصدار كود المتابعة (YZ-xxxx)
+      │    │    └── Step 04: اعتماد المعمل والتنفيذ
+      │    └── CTA Button: "ابدأ رحلة طلبك الآن" -> /request
+      ├── Section (f): SocialDesignsShowcase (src/components/SocialDesignsShowcase.tsx)
+      │    ├── بوستات السوشيال ميديا الرسمية (Instagram 4:5 Aspect Ratio)
+      │    └── فوتوغرافيا الاستوديو والتطريز الماكرو عالي الدقة (4K Macro View)
+      └── Section (g): Contact CTA Banner (بانر التواصل المباشر ومعالج الطلب)
+           ├── Gradient Emerald Card (#073B35 to #0B5F55)
+           ├── "ابدأ معالج الطلب" Button -> /request
+           ├── "تواصل واتساب" Button -> WhatsApp Direct Link
+           └── Official Brand Logo Display
 ```
 
 ---
 
 ## 4. تفصيل أقسام الصفحة ومحتواها (In-Depth Section Breakdown)
+
+### 4.0. شريط التنقل العلوي التفاعلي (Floating Dynamic Capsule Navbar - `Navbar.tsx`)
+
+يعد شريط التنقل من أهم المكونات البصرية والوظيفية التي تمت إعادة هندستها بالكامل لتوفير تجربة مستخدم عصرية وفائقة التجاوب:
+
+1. **العزل الكامل للكبسولة العائمة (Decoupled Floating Capsule):**
+   - تم تفريغ الحاوية الرئيسية `<header>` من أي خلفيات كريمية أو زجاجية لاصقة (`bg-transparent pointer-events-none`) مع تثبيتها في أعلى الشاشة `sticky top-0 z-50`.
+   - كبسولة التنقل الداخلية تعمل كجزيرة بيضاء مستقلة (`pointer-events-auto bg-white rounded-full`) محاطة بإطار زيتي رقيق وظل ثلاثي الأبعاد هندسي ناعم `shadow-[0_4px_20px_rgba(0,0,0,0.08)]`.
+   - عند تمرير الصفحة (Scroll)، تطفو الكبسولة وحدها فوق المحتوى دون أن يظهر خلفها أي شريط لوني أو مستطيل عاتم، مما يتيح لخلفية الصفحة وشبكة النقاط الهندسية التدفق بسلاسة تامة.
+
+2. **الاحتفاظ باللون الأبيض الناصع في الوضع الليلي (`[data-navbar-capsule]`):**
+   - في حين تتحول الصفحة بكاملها إلى الوضع الليلي الداكن `#071f1c`، تم استثناء كبسولة الـ Navbar برمجياً عبر سمة `data-navbar-capsule` في كود `src/index.css`.
+   - تظل الكبسولة بيضاء نقية مع نصوص سوداء/زيتية عريضة وشعار يوزرسيف الأخضر الزمردي، مما يمنح الموقع هوية بصرية متميزة وشريط تحكم طافياً وفائق التباين والوضوح ليلاً ونهاراً.
+
+3. **الانهيار التدريجي للأزرار مع تصغير النافذة (Progressive Responsive Collapse):**
+   - بدلاً من اختفاء كافة الأزرار النصية معاً فجأة عند مقاس معين، تم تطبيق استراتيجية الانهيار التدريجي (Gradual Pruning) الذكية بناءً على أولوية الرابط والمساحة المتاحة:
+     | زر التنقل | نقطة الاختفاء (Breakpoint) | الكلاس البرمجي المستخدم |
+     | :--- | :--- | :--- |
+     | **من نحن** | أقل من 1350px | `max-[1350px]:hidden` |
+     | **الخدمات** | أقل من 1200px | `max-[1200px]:hidden` |
+     | **معرض الأعمال** | أقل من 1050px | `max-[1050px]:hidden` |
+     | **مجات وهدايا** | أقل من 900px | `max-[900px]:hidden` |
+     | **كابات ومطرزات** | أقل من 750px | `max-[750px]:hidden` |
+     | **تيشرتات وهوديز** | أقل من 600px | `max-[600px]:hidden` |
+   - عند الشاشات الصغيرة جداً (`< 600px` شاشات الهواتف المحمولة)، تختفي كافة الأزرار النصية ويبقى في الكبسولة شعار الموقع، زر القائمة الجانبية (Hamburger)، وأيقونات الإجراءات السريعة.
+
+4. **تثبيت الوزن العريض للخطوط (Persistent Bold/Black Typography):**
+   - تم اعتماد الوزن الفائق `font-black` و `font-extrabold` مع مقاس `text-[13px] sm:text-sm` لكافة أزرار الكبسولة عبر جميع مقاسات الشاشات، مما يحافظ على وضوح النص وهيبته دون تخفيف سمك الخط عند تضييق النافذة.
+
+5. **زر التبديل بين الوضع الليلي والنهاري (Theme Switcher):**
+   - مثبت بجوار زر لوحة الإدارة (Admin Dashboard) داخل الكبسولة.
+   - يعرض أيقونة الشمس الذهبية (`SunIcon`) عند تفعيل الوضع الليلي للتحويل إلى النهاري، وأيقونة القمر الزيتي (`MoonIcon`) في الوضع النهاري للتحويل إلى الليلي.
+   - مدعوم بتأثير تفاعلي حركي (`active:scale-90 hover:scale-110 transition-transform`) وتلميح وظيفي عائم (Tooltip).
+   - متصل بسياق السمة العام `ThemeContext` مع مزامنة فورية في `localStorage`.
+
+6. **القائمة الجانبية المنبثقة من اليسار (Slide-over Offcanvas Drawer with Portal):**
+   - تم تحويل القائمة المنسدلة من dropdown بسيط إلى درج جانبي احترافي (Offcanvas Drawer) ينزلق أفقياً بسلاسة فائقة من أقصى اليسار (`fixed inset-y-0 left-0 w-80 max-w-[85vw] transform transition-transform`).
+   - تم تثبيت القائمة عبر تقنية **React `createPortal`** مباشرة إلى `document.body` لعزلها تماماً عن الـ `header` وتجنب أي مشاكل قص أو أبعاد ناتجة عن كلاسات `backdrop-blur`.
+   - تتضمن خلفية تعتيم ضبابية تفاعلية (`backdrop-blur-sm bg-black/60`) تؤدي للنقر عليها إلى إغلاق القائمة فوراً.
+   - قفل التمرير التلقائي لصفحة الويب (`document.body.style.overflow = 'hidden'`) طوال فترة فتح القائمة مع إمكانية إغلاقها بمفتاح `Escape`.
+   - زر القائمة (Hamburger Button) مكون من 3 خطوط متوازية تتحول بحركة دوران سلسة ومورفينج هندسي إلى علامة إغلاق `X` مع أنيميشن ضغط متجاوب (`active:scale-90`).
+
+7. **الشعار الرسمي للعلامة التجارية (`BrandLogo.tsx`):**
+   - تم توجيه الشعار رسمياً لاستدعاء الأيقونة المفرغة عالية الدقة `/logo/logo-green.png` لضمان حدة الشعار ونقاء ألوانه فوق الكبسولة البيضاء.
+
+---
 
 ### 4.1. خلفية الورق الطبيعي وشبكة النقاط (Paper Blueprint Grid)
 - **اللون الأساسي:** `#F6F1E7` (Warm Cream Paper) المعتمد كجزء من هوية يوزرسيف في `index.css`.
@@ -99,37 +169,57 @@ Home (src/pages/Home.tsx)
   - الثانية: منتصف الصفحة يميناً `top-[40%]` بلون `#E3A92F/10`.
   - الثالثة: أسفل الصفحة يساراً `top-[70%]` بلون `#0B5F55/5`.
 
+---
+
 ### 4.2. قسم الهيرو وتخصيص الاستوديو (`EmbroideryHero`)
-- **كبسولة البداية:** "أفكارك. مطبوعة في أسوان." بإطار ولون متجاوب (`text-[#0B5F55] dark:text-[#5EE7CF]`).
+- **كبسولة البداية:** "أفكارك. مطبوعة في أسوان." بإطار ولون متجاوب (`text-[#0B5F55] dark:text-[#6A994E]`).
 - **العنوان الرئيسي:**
   - نص العبارة: **"خليك مختلف، خليك يوزرسيف."**
   - منسق إجبارياً في **سطر واحد أفقي متصل** (`flex-nowrap whitespace-nowrap`) على حاوية متسعة `max-w-6xl` لمنع الانكسار إلى سطرين.
   - مدعوم بريشتي شعار يوزرسيف الخضراء الرسمية (`feather-logo-green.png` و `feather-logo-green2.png`).
-  - التكيّف مع الوضع الليلي: عبارة "خليك مختلف،" تتحول إلى العاجي الناصع `#F6F1E7`، وعبارة "خليك يوزرسيف." إلى النعناعي المضيء `#5EE7CF`، وشعار الريشة ينعكس إلى الأبيض المشع بهالة نعناعية.
+  - التكيّف مع الوضع الليلي: عبارة "خليك مختلف،" تتحول إلى العاجي الناصع `#F6F1E7`، وعبارة "خليك يوزرسيف." إلى الأخضر العشبي المتوهج `#6A994E`، وشعار الريشة ينعكس إلى الأبيض المشع بهالة ضوئية.
 - **استوديو المحاكاة والتخصيص:**
-  1. **المنتجات الثلاثة:**
-     - **تيشيرت عادي:** موك اب شفاف متجاوب الألوان (`tshirt-white-front-trans.png`, `tshirt-green-front.png`, `tshirt-black-front-trans.png`).
-     - **شنطة توت باج بسوستة:** صورة حقيقية مفرغة (`Tote_Bag_Mockup.png`) مرفوعة بمقدار `20px` للأعلى (`-translate-y-[20px]`) مع فلاتر ألوان واقعية تحافظ على مسام وثنيات القماش الطبيعي في الأسود والأخضر.
-     - **هودي ميلتون أوفر سايز:** موك اب شفاف ثلاثي الألوان.
+  1. **المنتجات الثلاثة وموك اب الصور عالية الدقة:**
+     - **تيشيرت عادي:** موك اب شفاف متجاوب يدعم 3 صور واقعية مخصصة ومفرغة لكل لون:
+       - الأبيض: `/products/tshirt-white-front-trans.png`
+       - الأخضر: `/products/tshirt-white-front-trans-green.png`
+       - الأسود: `/products/tshirt-white-front-trans-black.png`
+       - مساحة طباعة الصدر مضبوطة بمقياس `scale-[0.80]` لضمان أبعاد متناسبة ومريحة بصرياً.
+     - **شنطة توت باج بسوستة:**
+       - صورة مفرغة حقيقية (`Tote_Bag_Mockup.png`) بنسبة أبعاد مربعة 1:1.
+       - تم حل مشكلة التموضع السابقة عن طريق عزل منطقة أحزمة الحمل (التي تمثل أول 42% من الصورة) وتحديد منطقة الطباعة الحقيقية لنسيج الحقيبة (`top-[42%] left-[29%] w-[38.5%] h-[42%]`)، مما يضمن توسط الشعار في مركز النسيج بدقة بالغة دون الاقتراب من الدرزات العلوية أو الانزياح يميناً.
+       - دعم فلاتر ألوان واقعية تحافظ على مسام وثنيات القماش الطبيعي في اللونين الأسود والأخضر.
+     - **هودي ميلتون أوفر سايز:**
+       - موك اب شفاف واقعي عالي الدقة يدعم 3 صور مخصصة:
+         - الأبيض: `/products/hoodie-white-front-trans.png`
+         - الأخضر: `/products/hoodie-white-front-trans-green.png`
+         - الأسود: `/products/hoodie-white-front-trans-black.png`
+       - مساحة طباعة الصدر مفرغة ومضبوطة بمقياس `scale-90` لتلائم المساحة الواقعية بين أربطة الهودي والجيب الأمامي.
   2. **أنماط الرسم والتطريز:**
      - **الشعار:** يعرض لوجو يوزرسيف الخطي الرسمي من `public/logo/` (`logo-green.png` على الأبيض، و `logo-white.png` على الألوان الداكنة).
      - **أشكال:** تكوين هندسي تجريدي بألوان البراند (كحلي، ذهبي، وأخضر).
      - **وردة:** رسمة وردة فنية تراثية.
   3. **منتقي الألوان:** أبيض ناصع، أسود ملكي، وأخضر يوزرسيف الزمردي.
-- **زر الإجراء (CTA):** "خلّيه بتصميمك ->" زر بارز بلون الذهب `#E3A92F` مع إطار زيتي داكن وظل ثلاثي الأبعاد يوجه مباشرة إلى معالج الطلبات مع تمرير نوع المنتج المختار تلقائياً.
+- **زر الإجراء (CTA):** "خلّيه بتصميمك ->" زر بارز بلون الذهب `#E3A92F` مع إطار زيتي داكن وظل ثلاثي الأبعاد يتحول إلى `#6A994E` في الوضع الليلي، يوجه مباشرة إلى معالج الطلبات مع تمرير نوع المنتج المختار تلقائياً.
+
+---
 
 ### 4.3. قسم الاسكتش والمنتج النهائي (`BeforeAfterShowcase`)
 - شريط سحب ومقارنة تفاعلي يقارن بين الفكرة المرسومة باليد والمنتج بعد التطريز والطباعة الفاخرة.
 - تم تكييف نصوصه وأزراره بالكامل للوضع الليلي والنهاري لضمان قراءة مثالية.
 
-### 4.4. شبكة كتالوج الخدمات (Services Grid)
-تعرض 6 كروت مصممة بنمط الحواف ثلاثية الأبعاد:
-1. **تشرتات وهوديز مطبوعة:** طباعة DTF وتطريز كمبيوتري على خامات قطنية ميلتون. الزر يوجه إلى `/request?service=clothing-hoodies`.
-2. **كابات ومطرزات عصرية:** كابات بيسبول ودائرية بتطريز بارز (3D Puff). الزر يوجه إلى `/request?service=caps-embroidery`.
-3. **استيكرات استيكراتك:** لواصق فينيل Die-cut مقاومة للمياه والشمس مع شارة "تسليم سريع". الزر يوجه إلى `/request?service=stickers-labels`.
-4. **مجات وهدايا ترويجية:** مجات سيراميك حرارية وهدايا مؤتمرات. الزر يوجه إلى `/request?service=mugs-promotional-gifts`.
-5. **جرابات هواتف مخصصة:** كفرات حماية مدعمة بطباعة UV بارزة لا تبهت. الزر يوجه إلى `/request?service=phone-cases`.
-6. **خدمة المساعدة والتصميم الفني:** توجيه مباشر للتواصل مع فريق التصميم عبر صفحة `/contact`.
+---
+
+### 4.4. شبكة كتالوج الخدمات (Services Grid & Asset Mapping)
+تعرض 6 كروت مصممة بنمط الحواف ثلاثية الأبعاد ومدعومة بصور الأصول الرسمية المعتمدة في مجلد `public/services/`:
+1. **تشرتات وهوديز مطبوعة (`/services/service-hoodies.jpg`):** طباعة DTF وتطريز كمبيوتري على خامات قطنية ميلتون. الزر يوجه إلى `/request?service=clothing-hoodies`.
+2. **كابات ومطرزات عصرية (`/services/service-caps.jpg`):** كابات بيسبول ودائرية بتطريز بارز (3D Puff). الزر يوجه إلى `/request?service=caps-embroidery`.
+3. **استيكرات استيكراتك (`/services/service-stickers.jpg`):** لواصق فينيل Die-cut مقاومة للمياه والشمس مع شارة "تسليم سريع". الزر يوجه إلى `/request?service=stickers-labels`.
+4. **مجات وهدايا ترويجية (`/services/service-mugs.jpg`):** مجات سيراميك حرارية وهدايا مؤتمرات. الزر يوجه إلى `/request?service=mugs-promotional-gifts`.
+5. **جرابات هواتف مخصصة (`/services/service-cases.jpg`):** كفرات حماية مدعمة بطباعة UV بارزة لا تبهت. الزر يوجه إلى `/request?service=phone-cases`.
+6. **خدمة المساعدة والتصميم الفني (`/services/service-design.jpg`):** توجيه مباشر للتواصل مع فريق التصميم عبر صفحة `/contact`.
+
+---
 
 ### 4.5. معرض الأعمال المختارة (Portfolio Highlights)
 يعرض 3 أعمال بارزة موثقة مصورة بجودة عالية في معمل أسوان:
@@ -137,6 +227,8 @@ Home (src/pages/Home.tsx)
 - **براند أسوان كرافت:** 500 استيكر فينيل مقصوص ومقاوم للماء لحقائب المنتجات.
 - **متجر أصالة نوبية:** سلسلة جرابات هواتف بتصاميم وزخارف تراثية بتقنية UV.
 - **ميزة "استخدم هذا العمل كمرجع لطلبك":** تنقل العميل مباشرة لصفحة الطلب مع تمرير عنوان النموذج تلقائياً في خانة المرجع.
+
+---
 
 ### 4.6. سير العمل المعتمد (Customer Journey)
 - تم تحويل خلفية القسم إلى نمط متوافق وشفاف يتيح لشبكة الورق المنسابة من الخلف بالظهور.
@@ -146,8 +238,12 @@ Home (src/pages/Home.tsx)
   - `03`: إصدار كود المتابعة (YZ-xxxx).
   - `04`: اعتماد المعمل والتنفيذ.
 
+---
+
 ### 4.7. معرض الأنماط وتصوير الاستوديو (`SocialDesignsShowcase`)
 - يستعرض البوستات المعتمدة للمنصات الرقمية (نسبة 4:5 المخصصة لإنستجرام) ونماذج الاستوديو المقربة بدقة 4K.
+
+---
 
 ### 4.8. بانر الاتصال والإجراء الختامي (Contact CTA Banner)
 - كارت زمردي كبير بتدرج ملكي من `#073B35` إلى `#0B5F55`.
@@ -160,14 +256,29 @@ Home (src/pages/Home.tsx)
 ## 5. حالة الصفحة والخطافات البرمجية (Hooks & State Management)
 
 ```typescript
-// استخدام التنقل البرمجي عند التفاعل مع أزرار المراجع والخدمات
+// التنقل البرمجي عند التفاعل مع أزرار المراجع والخدمات
 const navigate = useNavigate();
 
-// مصفوفة الخدمات الستة المعتمدة
-const servicesList = [ ... ];
+// إدارة حالة الثيم العام (Light / Dark Mode) المخزن في localStorage
+const { theme, toggleTheme } = useTheme();
 
-// مصفوفة عناصر المعرض البارزة
-const portfolioItems = [ ... ];
+// حالة فتح وإغلاق القائمة الجانبية (Drawer State)
+const [isOpen, setIsOpen] = useState(false);
+
+// قفل تمرير الشاشة ومراقبة مفتاح الهروب Escape
+useEffect(() => {
+  if (isOpen) {
+    document.body.style.overflow = 'hidden';
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }
+}, [isOpen]);
 ```
 
 - **التنقل بالمعاملات (Query Parameters Navigation):**
@@ -182,30 +293,38 @@ const portfolioItems = [ ... ];
 
 - **الخلفية الموحدة للموقع:**
   - في الوضع النهاري: خلفية الورق الطبيعي الدافئ `#F6F1E7` مع شبكة نقاط هندسية بلون أخضر زمردي شفاف `rgba(11, 95, 85, 0.28)`.
-  - في الوضع الليلي: خلفية داكنة فاخرة `#071f1c` مع شبكة نقاط بنعناعي مضيء خافت `rgba(94, 231, 207, 0.12)`.
+  - في الوضع الليلي: خلفية داكنة فاخرة `#071f1c` مع شبكة نقاط بلون `#6A994E` شفاف خافت `rgba(106, 153, 78, 0.12)`.
 - **التكيّف مع الوضع الليلي (Dark Mode System):**
   - تم تعميم قواعد ذكية في `src/index.css`:
-    - جميع النصوص الداكنة (`#073B35` و `#012C2B`) تتحول تلقائياً إلى العاجي الناصع `#F6F1E7`، مع استثناء الأزرار الذهبية للحفاظ على التباين الفائق.
-    - نصوص التمييز (`#0B5F55`) تتحول إلى النعناعي المضيء `#5EE7CF`.
-    - النصوص الوصفية (`#4d6560` و `text-slate-600`) تتحول إلى الفضي النعناعي `#9CB5AF`.
-    - أيقونات الشعار (`feather-logo-green.png`) تنعكس إلى الأبيض المضيء عبر فلاتر CSS.
+    - جميع النصوص الداكنة (`#073B35` و `#012C2B`) تتحول تلقائياً إلى العاجي الناصع `#F6F1E7`، مع استثناء الأزرار الذهبية وكبسولة الـ Navbar.
+    - نصوص التمييز (`#0B5F55`) تتحول إلى الأخضر العشبي المتوهج `#6A994E`.
+    - استثناء كبسولة الـ Navbar برمجياً `[data-navbar-capsule]` لتحتفظ بالخلفية البيضاء النقية وتظل عائمة ومتباينة فوق المحتوى المظلم.
 - **الأزرار وتأثير الظل ثلاثي الأبعاد (Neobrutalism Shadows):**
   - **الوضع الفاتح (Light Mode):** ظلال هندسية بارزة بالزيتي الملكي `shadow-[3px_3px_0px_#073B35]` و `shadow-[5px_5px_0px_#073B35]`.
-  - **الوضع الليلي (Dark Mode):** تتحول ظلال الأزرار وبطاقات التحديد تلقائياً إلى اللون الأخضر المضيء لهوية يوزرسيف `#6A994E` (`box-shadow: ... #6A994E !important;`) لتوفير تباين بصري ناصع وواضح فوق الخلفية الداكنة.
-- **التجاوب (Responsiveness):**
-  - شاشات الموبايل (`< 640px`): عنوان الهيرو في سطر واحد متدرج المقاس (`text-2xl`)، أزرار كاملة العرض، وموك اب بحجم ملائم لتفادي التداخل.
-  - الأجهزة اللوحية (`sm` / `md`): شبكة ثنائية `sm:grid-cols-2`، مقاس خط العنوان `text-4xl md:text-5xl`.
-  - الشاشات الكبيرة (`lg` / `xl`): شبكة ثلاثية ورباعية `lg:grid-cols-3` و `lg:grid-cols-4`، عنوان الهيرو بمقاس ملكي `text-6xl xl:text-7xl` في سطر واحد متصل وممتد.
+  - **الوضع الليلي (Dark Mode):** تتحول ظلال الأزرار وبطاقات التحديد تلقائياً عبر `index.css` إلى اللون الأخضر العشبي لهوية يوزرسيف `#6A994E` (`box-shadow: ... #6A994E !important;`) لتوفر تبايناً هندسياً فائق الوضوح ثلاثي الأبعاد فوق الخلفية الداكنة `#071f1c`.
+- **التجاوب (Responsiveness & Gradual Pruning):**
+  - نظام الانهيار التدريجي للأزرار الستة (`1350px -> 1200px -> 1050px -> 900px -> 750px -> 600px`).
+  - خطوط عريضة ثابتة `font-black` / `font-extrabold` على جميع المقاسات.
+  - شاشات الموبايل (`< 600px`): كبسولة مضغوطة تحتوي على الشعار وأيقونات التفاعل وقائمة الـ Drawer المنسابة بملء الشاشة تقريباً.
 
 ---
 
 ## 7. حالات الحواف ومعالجة الأخطاء (Edge Cases & Fallbacks)
 
-1. **الصور الثقيلة وعرض الشبكة:** تم تزويد جميع عناصر الصور بخاصية التحميل الكسول `loading="lazy"` لتسريع التحميل الأولي للصفحة بنسبة تزيد عن 60%.
-2. **عناوين البورتفوليو الطويلة:** استخدام كلاس `line-clamp-2` لضمان عدم انكسار ارتفاع البطاقات عند وجود أوصاف نصية طويلة.
-3. **أجهزة اللمس في قسم المقارنة (Touch Events):** يدعم مكون `BeforeAfterShowcase` السحب بالأصابع على الشاشات اللمسية بالإضافة لحركة مؤشر الفأرة.
-4. **تشفير معلمات الروابط:** استخدام `encodeURIComponent(item.title)` عند الانتقال بالمرجع لمنع مشاكل الحروف العربية في الـ URL.
-5. **منع انكسار العنوان الرئيسي:** تطبيق `flex-nowrap whitespace-nowrap overflow-hidden` مع توسيع الحاوية إلى `max-w-6xl` لضمان بقاء العبارة مع الريشتين في سطر واحد مستقيم على مختلف الشاشات.
+1. **عزل حاوية الهيدر ومنع المستطيل اللاصق (Decoupled Sticky Header):**
+   - تم حل مشكلة ظهور شريط لوني صلب أو ضبابي يلتصق بأعلى الصفحة عند التمرير بجعل حاوية `<header>` شفافة بالكامل مع كلاس `pointer-events-none`، وجعل الكبسولة العائمة وحدها `pointer-events-auto`، مما يسمح للعميل بالنقر على الروابط دون حجب تفاعل العناصر خلف الهيدر.
+2. **عزل القائمة الجانبية من الـ Clipping والـ Containing Block:**
+   - تم استخدام `createPortal(drawerContent, document.body)` لنقل القائمة الجانبية وخلفيتها المعتمة مباشرة إلى جذر الـ DOM، لتفادي أي احتجاز للقائمة داخل صندوق الهيدر أو تشويهها بسبب خواص الـ `backdrop-filter` و الـ `transform`.
+3. **منع التمرير المزدوج عند فتح القائمة:**
+   - قفل خاصية تمرير الصفحة فور فتح القائمة عبر `overflow = 'hidden'` واستعادتها تلقائياً عند الإغلاق لتجنب تشوه الواجهة في شاشات اللمس.
+4. **دعم إمكانية الوصول والتفاعل بلوحة المفاتيح (Accessibility & Keybindings):**
+   - إمكانية إغلاق القائمة الجانبية بمجرد الضغط على زر `Escape`، مع وجود تلميحات نصية واضحة (`aria-label`) لأزرار الثيم والهامبرغر وتتبع الطلبات.
+5. **الصور الثقيلة وعرض الشبكة:**
+   - تم تزويد جميع عناصر الصور بخاصية التحميل الكسول `loading="lazy"` لتسريع التحميل الأولي للصفحة بنسبة تزيد عن 60%.
+6. **محاذاة الطباعة على شنطة التوت باج ومنع تأثير الـ Letterboxing:**
+   - استخدام حاوية بنسبة أبعاد مربعة `aspect-square h-full max-w-full` مع نسب مئوية محسوبة بكسلياً لجسم القماش الفعلي (`top-[42%] left-[29%] w-[38.5%] h-[42%]`) مما يضمن ثبات وتمركز الشعار بدقة فائقة عند أي مقاس شاشة.
+7. **تناسق مقياس الشعار على مختلف المنسوجات والملابس:**
+   - تخصيص `scale-[0.80]` للتيشيرت و `scale-90` للهودي لمراعاة اختلاف عرض منطقة الصدر الفعلي بين التيشيرت العادي والهودي الأوفر سايز.
 
 ---
 
@@ -213,12 +332,14 @@ const portfolioItems = [ ... ];
 
 | اسم الملف | المسار | دوره وارتباطه بالصفحة |
 | :--- | :--- | :--- |
+| `Navbar.tsx` | `src/components/Navbar.tsx` | شريط التنقل العلوي العائم بنظام الكبسولة البيضاء المستقلة، الانهيار التدريجي للأزرار، القائمة الجانبية المنبثقة من اليسار، ومفتاح تبديل الثيم |
+| `ThemeContext.tsx` | `src/context/ThemeContext.tsx` | سياق إدارة الوضع الليلي والنهاري ومزامنته محلياً |
+| `BrandLogo.tsx` | `src/components/BrandLogo.tsx` | عرض الشعار الرسمي بدقة عالية ومتغيرات لونية مستقاة من `/logo/logo-green.png` |
 | `EmbroideryHero.tsx` | `src/components/EmbroideryHero.tsx` | قسم الهيرو الرئيسي واستوديو التخصيص والمحاكاة |
 | `BeforeAfterShowcase.tsx` | `src/components/BeforeAfterShowcase.tsx` | محاكي المقارنة التفاعلي بين الفكرة والمنتج |
 | `SocialDesignsShowcase.tsx` | `src/components/SocialDesignsShowcase.tsx` | معرض استعراض المنتجات على طراز إنستجرام وفوتوغرافيا 4K |
-| `BrandLogo.tsx` | `src/components/BrandLogo.tsx` | عرض الشعار الرسمي بدقة عالية ومتغيرات لونية |
-| `Navbar.tsx` | `src/components/Navbar.tsx` | شريط التنقل العلوي العائم بخلفية ورقية متصلة |
 | `RequestWizard.tsx` | `src/pages/RequestWizard.tsx` | الصفحة الهدف لجميع أزرار بدء الطلب والمراجع |
 | `Services.tsx` | `src/pages/Services.tsx` | الكتالوج الكامل المرتبط بزر "عرض كل الخدمات" |
 | `Portfolio.tsx` | `src/pages/Portfolio.tsx` | المعرض الكامل المرتبط بزر "تصفح كل المعرض" |
-| `backup_homepage/` | `backup_homepage/` | مجلد النسخة الاحتياطية المتكامل لكود وصور الصفحة الرئيسية |
+| `backup_homepage/` | `backup_homepage/` | مجلد النسخة الاحتياطية المتكامل لكود وصور وموك اب الصفحة الرئيسية |
+| `public/services/` | `public/services/` | صور بطاقات الخدمات الست المعتمدة |

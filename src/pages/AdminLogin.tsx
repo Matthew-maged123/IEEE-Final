@@ -131,7 +131,13 @@ export const AdminLogin: React.FC = () => {
           </CardContent>
         </Card>
 
-        <div className="text-center">
+        <div className="text-center space-y-2">
+          <div>
+            <span className="text-xs text-slate-500">هل أنت عميل وترغب في متابعة طلباتك؟ </span>
+            <Link to="/auth" className="text-xs font-bold text-[#0B5F55] hover:underline">
+              تسجيل الدخول / إنشاء حساب عميل
+            </Link>
+          </div>
           <Link to="/" className="text-xs text-slate-600 hover:text-[#065E5A] transition-colors font-medium">
             العودة للصفحة الرئيسية للموقع
           </Link>

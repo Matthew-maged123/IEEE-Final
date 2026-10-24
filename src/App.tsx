@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
@@ -18,6 +18,7 @@ import { Policies } from './pages/Policies';
 import { AdminLogin } from './pages/AdminLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { ProductDetail } from './pages/ProductDetail';
+import { Auth } from './pages/Auth';
 
 export function App() {
   return (
@@ -39,6 +40,9 @@ export function App() {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/login" element={<Navigate to="/auth?mode=signin" replace />} />
+          <Route path="/signup" element={<Navigate to="/auth?mode=signup" replace />} />
         </Routes>
       </main>
 

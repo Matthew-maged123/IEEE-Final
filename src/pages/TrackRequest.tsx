@@ -22,7 +22,8 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Input } from '../components/ui/input';
-import { getRequestById } from '../lib/mock-api';
+import { getRequestById, getRequests } from '../lib/mock-api';
+import { useAuth } from '../context/AuthContext';
 import { ServiceRequest } from '../lib/types';
 import { formatDateAr, getStatusDetails, formatFileSize, generateWhatsAppLink, YUZERSEF_WHATSAPP } from '../lib/utils';
 
@@ -33,6 +34,21 @@ export const TrackRequest: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const { user } = useAuth();
+  const [userOrders, setUserOrders] = useState<ServiceRequest[]>([]);
+
+  useEffect(() => {
+    if (user) {
+      getRequests().then((all) => {
+        const matches = all.filter(
+          (r) =>
+            (user.phone && r.phone.replace(/\s+/g, '') === user.phone.replace(/\s+/g, '')) ||
+            (user.email && r.email.toLowerCase() === user.email.toLowerCase())
+        );
+        setUserOrders(matches);
+      });
+    }
+  }, [user]);
 
   const fetchRequest = async (idToSearch: string) => {
     if (!idToSearch.trim()) return;
@@ -111,6 +127,32 @@ export const TrackRequest: React.FC = () => {
             <span>بحث وتتبع</span>
           </Button>
         </form>
+
+        {/* User's Own Registered Orders */}
+        {userOrders.length > 0 && (
+          <div className="p-3.5 bg-white rounded-2xl border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35] space-y-2 mt-2 text-right">
+            <div className="flex items-center justify-between text-xs font-black text-[#073B35]">
+              <span>طلباتك السابقة المسجلة ({userOrders.length}):</span>
+              <span className="text-[11px] text-slate-500 font-normal">انقر على رقم الطلب لعرض حالته فوراً</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {userOrders.map((uo) => (
+                <button
+                  key={uo.id}
+                  type="button"
+                  onClick={() => {
+                    setQueryId(uo.id);
+                    setSearchParams({ id: uo.id });
+                    fetchRequest(uo.id);
+                  }}
+                  className="px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-[#E3A92F] text-[#073B35] text-xs font-mono font-bold transition-all border border-[#073B35] cursor-pointer"
+                >
+                  {uo.id} ({uo.serviceTitle})
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Quick Demo Chips */}
         <div className="flex flex-wrap items-center justify-center gap-2 pt-2 text-xs text-slate-600">

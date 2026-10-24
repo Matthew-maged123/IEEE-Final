@@ -28,6 +28,7 @@ import { Badge } from '../components/ui/badge';
 import { Input, Textarea, Label } from '../components/ui/input';
 import { FileUploadPreview } from '../components/ui/FileUploadPreview';
 import { BrandLogo } from '../components/BrandLogo';
+import { useAuth } from '../context/AuthContext';
 import { getServices, createServiceRequest } from '../lib/mock-api';
 import { Service, FileAttachment, ServiceRequest, SizeBreakdown, ServiceCategory } from '../lib/types';
 import { calculateTotalSizes, generateWhatsAppLink, YUZERSEF_WHATSAPP } from '../lib/utils';
@@ -87,6 +88,16 @@ export const RequestWizard: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedRequest, setSubmittedRequest] = useState<ServiceRequest | null>(null);
   const [copied, setCopied] = useState(false);
+  const { user } = useAuth();
+
+  // Prefill contact info if user is authenticated
+  useEffect(() => {
+    if (user) {
+      if (user.name && !customerName) setCustomerName(user.name);
+      if (user.phone && !phone) setPhone(user.phone);
+      if (user.email && !email) setEmail(user.email);
+    }
+  }, [user]);
 
   useEffect(() => {
     getServices().then((res) => {

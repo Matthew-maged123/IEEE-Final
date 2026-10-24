@@ -29,6 +29,25 @@ const serviceCreateSchema = z.object({
   basePrice: z.coerce.number().optional().default(0),
   images: z.array(z.string()).optional().default([]),
   options: z.record(z.any()).optional().default({}),
+  variants: z
+    .array(
+      z.object({
+        colorName: z.string().trim().min(1, 'اسم اللون مطلوب'),
+        colorHex: z.string().optional().default('#000000'),
+        images: z.array(z.string()).optional().default([]),
+        sizes: z
+          .array(
+            z.object({
+              size: z.string().trim().min(1),
+              inStock: z.boolean().optional().default(true),
+            })
+          )
+          .optional()
+          .default([]),
+      })
+    )
+    .optional()
+    .default([]),
   isActive: z.boolean().optional().default(true),
 });
 

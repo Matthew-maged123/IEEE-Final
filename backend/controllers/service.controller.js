@@ -112,7 +112,7 @@ exports.getServiceBySlug = asyncWrapper(async (req, res) => {
 });
 
 exports.createService = asyncWrapper(async (req, res) => {
-  const { title, category, description, basePrice, options, images, isActive } = req.body;
+  const { title, category, description, basePrice, options, images, variants, isActive } = req.body;
 
   let baseSlug = slugify(title, { lower: true, strict: false, trim: true }) || 'service';
   if (!baseSlug || baseSlug === 'service') {
@@ -133,6 +133,7 @@ exports.createService = asyncWrapper(async (req, res) => {
     basePrice: Number(basePrice) || 0,
     options: options || {},
     images: Array.isArray(images) ? images : [],
+    variants: Array.isArray(variants) ? variants : [],
     isActive: isActive !== undefined ? isActive : true,
   });
 

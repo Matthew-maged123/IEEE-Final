@@ -17,6 +17,7 @@ import { Contact } from './pages/Contact';
 import { Policies } from './pages/Policies';
 import { AdminLogin } from './pages/AdminLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { ProductDetail } from './pages/ProductDetail';
 
 export function App() {
   return (
@@ -37,6 +38,7 @@ export function App() {
           <Route path="/policies" element={<Policies />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
         </Routes>
       </main>
 

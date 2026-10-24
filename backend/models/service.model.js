@@ -1,5 +1,44 @@
 const mongoose = require('mongoose');
 
+const variantSizeSchema = new mongoose.Schema(
+  {
+    size: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    inStock: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  { _id: false }
+);
+
+const variantSchema = new mongoose.Schema(
+  {
+    colorName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    colorHex: {
+      type: String,
+      default: '#000000',
+      trim: true,
+    },
+    images: {
+      type: [String],
+      default: [],
+    },
+    sizes: {
+      type: [variantSizeSchema],
+      default: [],
+    },
+  },
+  { _id: false }
+);
+
 const serviceSchema = new mongoose.Schema(
   {
     title: {
@@ -47,6 +86,10 @@ const serviceSchema = new mongoose.Schema(
           options: [String],
         },
       ],
+    },
+    variants: {
+      type: [variantSchema],
+      default: [],
     },
     isActive: {
       type: Boolean,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Award, Sparkles, ArrowLeft, Tag, Calendar, CheckCircle2, BookmarkPlus } from 'lucide-react';
+import { Award, Sparkles, ArrowLeft, Tag, Calendar, CheckCircle2, BookmarkPlus } from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -35,7 +35,7 @@ export const Portfolio: React.FC = () => {
       : items.filter((item) => item.category === activeCategory);
 
   return (
-    <div className="py-10 sm:py-16 space-y-12 bg-[#EFEFEA] min-h-screen">
+    <div className="py-10 sm:py-16 space-y-12 bg-transparent min-h-screen">
       {/* Header */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl space-y-4">
         <Badge variant="demo" className="text-xs bg-[#065E5A]/10 text-[#065E5A] border-[#065E5A]/30">
@@ -56,10 +56,10 @@ export const Portfolio: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all shrink-0 cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-[#065E5A] text-white shadow-sm'
-                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
+                  ? 'bg-[#E3A92F] text-[#073B35] border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35]'
+                  : 'bg-white text-[#073B35] border-2 border-[#d9d2c3] hover:border-[#073B35]'
               }`}
             >
               {cat.label}
@@ -106,13 +106,13 @@ export const Portfolio: React.FC = () => {
                   </div>
 
                   <div className="relative z-10 max-w-[65%]">
-                    <span className="text-xs text-[#5ee7cf] font-semibold">{item.clientName}</span>
+                    <span className="text-xs text-[#6A994E] font-semibold">{item.clientName}</span>
                     <h3 className="text-base font-black leading-snug mt-1 group-hover:text-emerald-100 transition-colors">
                       {item.title}
                     </h3>
                   </div>
 
-                  <div className="absolute -bottom-8 -end-8 w-32 h-32 rounded-full bg-[#5ee7cf]/10 blur-xl pointer-events-none" />
+                  <div className="absolute -bottom-8 -end-8 w-32 h-32 rounded-full bg-[#6A994E]/10 blur-xl pointer-events-none" />
                 </div>
 
                 <CardContent className="p-6 space-y-4">
@@ -144,7 +144,7 @@ export const Portfolio: React.FC = () => {
                           `/request?service=${item.serviceId}&ref=${encodeURIComponent(item.title)}`
                         )
                       }
-                      className="w-full gap-2 text-xs bg-[#065E5A] hover:bg-[#012C2B] text-white shadow-xs"
+                      className="w-full gap-2 text-xs"
                     >
                       <BookmarkPlus className="w-4 h-4" />
                       <span>استخدم هذا العمل كمرجع لطلبك (Use as reference)</span>

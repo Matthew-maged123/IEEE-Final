@@ -17,7 +17,7 @@ import {
   Phone,
   Truck,
   Shirt
-} from 'lucide-react';
+} from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -76,7 +76,7 @@ export const TrackRequest: React.FC = () => {
   const statusInfo = request ? getStatusDetails(request.status) : null;
 
   return (
-    <div className="py-10 sm:py-16 space-y-12 bg-[#EFEFEA] min-h-screen">
+    <div className="py-10 sm:py-16 space-y-12 bg-transparent min-h-screen">
       {/* Header */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-2xl space-y-4">
         <Badge variant="demo" className="text-xs bg-[#065E5A]/10 text-[#065E5A] border-[#065E5A]/30">
@@ -105,7 +105,7 @@ export const TrackRequest: React.FC = () => {
             type="submit"
             size="lg"
             isLoading={loading}
-            className="gap-2 shrink-0 h-12 shadow-md bg-[#065E5A] hover:bg-[#012C2B] text-white"
+            className="gap-2 shrink-0 h-12"
           >
             <Search className="w-4 h-4 rtl:rotate-90" />
             <span>بحث وتتبع</span>
@@ -124,7 +124,7 @@ export const TrackRequest: React.FC = () => {
                 setSearchParams({ id: demoId });
                 fetchRequest(demoId);
               }}
-              className="px-2.5 py-1 rounded-md bg-white hover:bg-[#065E5A]/10 hover:text-[#065E5A] font-mono text-slate-700 transition-colors cursor-pointer border border-slate-300"
+              className="px-3 py-1 rounded-xl bg-white hover:bg-[#E3A92F] text-[#073B35] font-mono font-bold transition-all cursor-pointer border-2 border-[#073B35] shadow-[2px_2px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35]"
             >
               {demoId}
             </button>
@@ -156,7 +156,7 @@ export const TrackRequest: React.FC = () => {
             {/* Header info strip */}
             <div className="p-6 sm:p-8 bg-[#012C2B] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#065E5A]/40">
               <div className="space-y-1">
-                <span className="text-xs font-mono text-[#5ee7cf]">طلب رقم:</span>
+                <span className="text-xs font-mono text-[#6A994E]">طلب رقم:</span>
                 <h2 className="text-3xl font-black font-mono tracking-wider">{request.id}</h2>
                 <p className="text-xs text-emerald-100/70">{request.serviceTitle}</p>
               </div>
@@ -199,7 +199,7 @@ export const TrackRequest: React.FC = () => {
                   rel="noopener noreferrer"
                   className="shrink-0 w-full sm:w-auto"
                 >
-                  <Button size="sm" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white gap-1.5 text-xs">
+                  <Button size="sm" className="w-full gap-1.5 text-xs">
                     <MessageCircle className="w-3.5 h-3.5" />
                     <span>مراسلة واتساب</span>
                   </Button>
@@ -367,7 +367,7 @@ export const TrackRequest: React.FC = () => {
                   هل تريد تجربة تحديث حالة هذا الطلب من لوحة تحكم المسؤول؟
                 </span>
                 <Link to="/admin/login" className="shrink-0">
-                  <Button variant="outline" size="sm" className="text-xs border-slate-300">
+                  <Button variant="outline" size="sm" className="text-xs">
                     فتح لوحة المسؤول
                   </Button>
                 </Link>

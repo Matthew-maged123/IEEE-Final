@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
+  Copyright,
   MapPin,
   Phone,
   Mail,
   Clock,
   ArrowUpRight,
   ShieldAlert,
-} from 'lucide-react';
+} from './ui/icons';
 import { BrandLogo } from './BrandLogo';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#012C2B] text-emerald-100/90 pt-16 pb-12 border-t border-[#065E5A]/40">
+    <footer data-bg="dark-green" className="bg-[#012C2B] text-emerald-100/90 pt-16 pb-12 border-t border-[#065E5A]/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-[#065E5A]/40">
           {/* Col 1: Brand - Using white-on-deep on dark green background #012C2B, NO imitating text next to it */}
@@ -123,7 +124,7 @@ export const Footer: React.FC = () => {
             </div>
             <Link
               to="/admin/login"
-              className="inline-flex items-center gap-1.5 text-xs text-[#5ee7cf] hover:text-white font-medium"
+              className="inline-flex items-center gap-1.5 text-xs text-[#6A994E] hover:text-white font-medium"
             >
               الانتقال لبوابة المسؤول التجريبية
               <ArrowUpRight className="w-3.5 h-3.5 rtl:rotate-[-90deg]" />
@@ -133,7 +134,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-100/60">
-          <p>© {new Date().getFullYear()} وكالة يوزرسيف للحلول الإبداعية والطباعة. جميع الحقوق محفوظة (نسخة تجريبية Frontend).</p>
+          <p className="flex items-center gap-1.5"><Copyright className="w-3.5 h-3.5 text-emerald-100/60 inline shrink-0" /> {new Date().getFullYear()} وكالة يوزرسيف للحلول الإبداعية والطباعة. جميع الحقوق محفوظة (نسخة تجريبية Frontend).</p>
           <div className="flex items-center gap-4">
             <Link to="/policies" className="hover:text-white transition-colors">
               سياسة الخصوصية

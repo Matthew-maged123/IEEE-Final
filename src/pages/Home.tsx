@@ -5,8 +5,14 @@ import {
   Sparkles,
   ChevronLeft,
   Award,
-  MessageCircle,
-} from 'lucide-react';
+  ShoppingBag,
+  Zap,
+  Scissors,
+  Gift,
+  Smartphone,
+  Paintbrush,
+  Shirt,
+} from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -14,7 +20,6 @@ import { BrandLogo } from '../components/BrandLogo';
 import { EmbroideryHero } from '../components/EmbroideryHero';
 import { BeforeAfterShowcase } from '../components/BeforeAfterShowcase';
 import { SocialDesignsShowcase } from '../components/SocialDesignsShowcase';
-import { generateWhatsAppLink, YUZERSEF_WHATSAPP } from '../lib/utils';
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -25,43 +30,43 @@ export const Home: React.FC = () => {
       id: 'hoodies',
       title: 'تشرتات وهوديز مطبوعة',
       image: '/services/service-hoodies.jpg',
-      btnText: 'ابدأ تصميمك الآن 🛍️',
+      btnText: 'ابدأ تصميمك الآن', icon: ShoppingBag,
       link: '/request?service=clothing-hoodies',
     },
     {
       id: 'caps',
       title: 'كابات ومطرزات عصرية',
       image: '/services/service-caps.jpg',
-      btnText: 'طلب تطريز خاص 🧵',
+      btnText: 'طلب تطريز خاص', icon: Sparkles,
       link: '/request?service=caps-embroidery',
     },
     {
       id: 'stickers',
       title: 'استيكرات استيكراتك',
       image: '/services/service-stickers.jpg',
-      badge: 'تسليم سريع ⚡',
-      btnText: 'صمم استيكراتك ✂️',
+      badge: 'تسليم سريع',
+      btnText: 'صمم استيكراتك', icon: Scissors,
       link: '/request?service=stickers-labels',
     },
     {
       id: 'mugs',
       title: 'مجات وهدايا ترويجية',
       image: '/services/service-mugs.jpg',
-      btnText: 'طلب كميات وهدايا 🎁',
+      btnText: 'طلب كميات وهدايا', icon: Gift,
       link: '/request?service=mugs-promotional-gifts',
     },
     {
       id: 'cases',
       title: 'جرابات هواتف مخصصة',
       image: '/services/service-cases.jpg',
-      btnText: 'اختر موديل هاتفك 📱',
+      btnText: 'اختر موديل هاتفك', icon: Smartphone,
       link: '/request?service=phone-cases',
     },
     {
       id: 'design',
       title: 'خدمة المساعدة والتصميم الفني',
       image: '/services/service-design.jpg',
-      btnText: 'تواصل مع مصمم 🖌️',
+      btnText: 'تواصل مع مصمم', icon: Paintbrush,
       link: '/contact',
     },
   ];
@@ -98,17 +103,26 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20 overflow-x-hidden bg-[#F6F1E7]">
-      
-      {/* ─────────────────────────────────────────────────────────────
-          SECTION (a): Cinematic Hero with Embroidery Animation
-      ───────────────────────────────────────────────────────────── */}
-      <EmbroideryHero />
+    <div className="relative pb-20 overflow-x-hidden bg-transparent min-h-screen">
+      {/* Ambient Glow Orbs for visual depth throughout the scroll */}
+      <div className="absolute top-[15%] -start-24 w-96 h-96 bg-[#0B5F55]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-[40%] -end-24 w-96 h-96 bg-[#E3A92F]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-[70%] -start-24 w-96 h-96 bg-[#0B5F55]/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10">
+        {/* ─────────────────────────────────────────────────────────────
+            SECTION (a): Cinematic Full-Viewport Hero with Embroidery Animation
+        ───────────────────────────────────────────────────────────── */}
+        <EmbroideryHero />
 
       {/* ─────────────────────────────────────────────────────────────
-          SECTION (b): Real Sketch to Polished Product (Before & After)
+          Follow-up Content Sections (with smooth transition & spacing)
       ───────────────────────────────────────────────────────────── */}
-      <BeforeAfterShowcase />
+      <div className="space-y-16 sm:space-y-24 mt-0">
+        {/* ─────────────────────────────────────────────────────────────
+            SECTION (b): Real Sketch to Polished Product (Before & After)
+        ───────────────────────────────────────────────────────────── */}
+        <BeforeAfterShowcase />
 
       {/* ─────────────────────────────────────────────────────────────
           SECTION (c): Services / Products Catalogue (Refined Visual Cards)
@@ -116,20 +130,20 @@ export const Home: React.FC = () => {
       <section className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-[#0B5F55] font-bold text-xs mb-1">
+            <div className="inline-flex items-center gap-1.5 text-[#0B5F55] dark:text-[#6A994E] font-bold text-xs mb-1">
               <Sparkles className="w-3.5 h-3.5" />
               <span>كتالوج الخدمات والمنتجات المعتمدة</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] font-display">
+            <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] dark:text-[#F6F1E7] font-display">
               حلول متكاملة للطباعة والتطريز في مكان واحد
             </h2>
-            <p className="text-sm text-[#4d6560] mt-1">
+            <p className="text-sm text-[#4d6560] dark:text-[#9CB5AF] mt-1">
               نغطي كافة منتجات الملابس، الكابات، المجات، وجرابات الهواتف بجودة تشطيب استثنائية.
             </p>
           </div>
 
           <Link to="/services">
-            <Button variant="outline" className="gap-2 shrink-0 border-[#d9d2c3] hover:bg-white text-slate-800">
+            <Button variant="outline" className="gap-2 shrink-0">
               <span>عرض كل الخدمات</span>
               <ChevronLeft className="w-4 h-4 rtl:rotate-0" />
             </Button>
@@ -166,8 +180,9 @@ export const Home: React.FC = () => {
                 {/* Quick Delivery Badge if exists */}
                 {service.badge && (
                   <div className="absolute top-12 start-4 z-10">
-                    <Badge className="bg-[#E3A92F] text-[#073B35] font-black text-[10px] px-2 py-0.5 shadow-md border-none">
-                      {service.badge}
+                    <Badge className="bg-[#E3A92F] text-[#073B35] font-black text-[10px] px-2 py-0.5 shadow-md border-none flex items-center gap-1">
+                      <Zap className="w-2.5 h-2.5" />
+                      <span>{service.badge}</span>
                     </Badge>
                   </div>
                 )}
@@ -176,11 +191,15 @@ export const Home: React.FC = () => {
               {/* Action Button at bottom */}
               <div className="p-4 pt-1 bg-[#073B35] z-10">
                 <Link to={service.link} className="block w-full">
-                  <Button
-                    className="w-full bg-[#052925] hover:bg-[#0B5F55] text-white border border-emerald-500/40 hover:border-[#E3A92F] text-xs font-bold py-2.5 rounded-xl shadow-md transition-all cursor-pointer"
+                  <button
+                    className="w-full bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#052925] text-[#073B35] font-black text-xs sm:text-sm py-2.5 px-4 rounded-xl border-2 border-[#052925] shadow-[4px_4px_0px_#001716] transition-all cursor-pointer flex items-center justify-center gap-1.5"
                   >
-                    <span>[ {service.btnText} ]</span>
-                  </Button>
+                    {service.icon && <service.icon className="w-3.5 h-3.5 text-[#073B35] shrink-0" />}
+                    <span>{service.btnText}</span>
+                    <svg className="w-3.5 h-3.5 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                  </button>
                 </Link>
               </div>
             </Card>
@@ -194,20 +213,20 @@ export const Home: React.FC = () => {
       <section className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-[#0B5F55] font-bold text-xs mb-1">
+            <div className="inline-flex items-center gap-1.5 text-[#0B5F55] dark:text-[#6A994E] font-bold text-xs mb-1">
               <Award className="w-3.5 h-3.5" />
               <span>معرض الأعمال والنماذج السابقة</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] font-display">
+            <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] dark:text-[#F6F1E7] font-display">
               أعمال نفذناها بكل شغف ودقة
             </h2>
-            <p className="text-sm text-[#4d6560] mt-1">
+            <p className="text-sm text-[#4d6560] dark:text-[#9CB5AF] mt-1">
               نماذج واقعية مصورة بجودة عالية؛ يمكنك اختيار أي نموذج واستخدامه كمرجع مباشر لطلبك!
             </p>
           </div>
 
           <Link to="/portfolio">
-            <Button variant="outline" className="gap-2 shrink-0 border-[#d9d2c3] hover:bg-white text-slate-800">
+            <Button variant="outline" className="gap-2 shrink-0">
               <span>تصفح كل المعرض</span>
               <ChevronLeft className="w-4 h-4 rtl:rotate-0" />
             </Button>
@@ -252,16 +271,17 @@ export const Home: React.FC = () => {
                 </p>
 
                 <div className="pt-2 border-t border-slate-100">
-                  <Button
-                    size="sm"
+                  <button
                     onClick={() =>
                       navigate(`/request?service=${item.serviceId}&ref=${encodeURIComponent(item.title)}`)
                     }
-                    className="w-full text-xs gap-1.5 bg-[#0B5F55] hover:bg-[#073B35] text-white py-2 rounded-xl"
+                    className="w-full bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] text-[#073B35] font-black text-xs py-2.5 px-4 rounded-xl border-2 border-[#073B35] shadow-[3px_3px_0px_#073B35] transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
                     <span>استخدم هذا العمل كمرجع لطلبك</span>
-                    <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-0" />
-                  </Button>
+                    <svg className="w-3.5 h-3.5 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                  </button>
                 </div>
               </CardContent>
             </Card>
@@ -272,14 +292,14 @@ export const Home: React.FC = () => {
       {/* ─────────────────────────────────────────────────────────────
           SECTION (e): How Ordering Works
       ───────────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 sm:py-20 border-y border-[#d9d2c3]/80">
+      <section className="py-16 sm:py-20 border-y border-[#d9d2c3]/80 relative z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-xl mx-auto mb-14 space-y-2">
-            <span className="text-xs font-bold text-[#0B5F55] uppercase tracking-wider">سير العمل المعتمد (Customer Journey)</span>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#073B35] font-display">
+            <span className="text-xs font-bold text-[#0B5F55] dark:text-[#6A994E] uppercase tracking-wider">سير العمل المعتمد (Customer Journey)</span>
+            <h2 className="text-2xl sm:text-3xl font-black text-[#073B35] dark:text-[#F6F1E7] font-display">
               رحلة طلبك من الفكرة حتى الاستلام
             </h2>
-            <p className="text-sm text-[#4d6560]">
+            <p className="text-sm text-[#4d6560] dark:text-[#9CB5AF]">
               خطوات منظمة ومباشرة مدعومة بفحص الجاهزية الذكي لضمان استيفاء كافة المواصفات.
             </p>
           </div>
@@ -309,7 +329,7 @@ export const Home: React.FC = () => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-[#F6F1E7] rounded-2xl p-6 border border-[#d9d2c3] shadow-xs relative overflow-hidden"
+                className="bg-white/90 backdrop-blur-xs rounded-2xl p-6 border-2 border-[#d9d2c3] hover:border-[#0B5F55] transition-all shadow-md relative overflow-hidden"
               >
                 <span className="text-4xl font-black text-slate-300/40 absolute top-3 end-3 select-none pointer-events-none font-mono">
                   {item.step}
@@ -325,9 +345,12 @@ export const Home: React.FC = () => {
 
           <div className="mt-10 text-center">
             <Link to="/request">
-              <Button size="lg" className="bg-[#E3A92F] hover:bg-[#d49b24] text-[#073B35] font-black px-8">
-                ابدأ رحلة طلبك الآن
-              </Button>
+              <button className="bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] text-[#073B35] font-black text-base py-3.5 px-8 rounded-xl border-2 border-[#073B35] shadow-[4px_4px_0px_#073B35] transition-all cursor-pointer inline-flex items-center justify-center gap-2">
+                <span>ابدأ رحلة طلبك الآن</span>
+                <svg className="w-4 h-4 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 17L17 7M7 7h10v10" />
+                </svg>
+              </button>
             </Link>
           </div>
         </div>
@@ -338,55 +361,8 @@ export const Home: React.FC = () => {
       ───────────────────────────────────────────────────────────── */}
       <SocialDesignsShowcase />
 
-      {/* ─────────────────────────────────────────────────────────────
-          SECTION (f): Contact CTA
-      ───────────────────────────────────────────────────────────── */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-gradient-to-r from-[#073B35] via-[#0B5F55] to-[#073B35] text-white p-8 sm:p-14 overflow-hidden shadow-2xl border-2 border-[#0B5F55]">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            <div className="lg:col-span-8 space-y-5 text-center sm:text-start">
-              <Badge className="bg-[#E3A92F]/20 text-[#E3A92F] border-[#E3A92F]/40 text-xs">
-                جاهزون لبدء مشروعك
-              </Badge>
-              <h2 className="text-2xl sm:text-4xl font-black leading-tight text-white font-display">
-                هل لديك فكرة أو تصميم وتبحث عن لمسة تليق بعلامتك؟
-              </h2>
-              <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed">
-                استخدم معالج الطلب الذكي الآن وسيقوم المساعد بفحص تفاصيل طلبك وتمريره للمشرف للمراجعة.
-              </p>
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4">
-                <Link to="/request" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto bg-[#E3A92F] text-[#073B35] hover:bg-[#d49b24] font-black shadow-md border-none">
-                    ابدأ معالج الطلب
-                  </Button>
-                </Link>
-                
-                <a
-                  href={generateWhatsAppLink(undefined, 'مرحباً، أود الاستفسار عن خدمات يوزرسيف المتاحة.')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto"
-                >
-                  <Button variant="ghost" size="lg" className="w-full sm:w-auto text-white hover:bg-white/10 border border-white/30 gap-2">
-                    <MessageCircle className="w-4 h-4 text-emerald-300" />
-                    <span>تواصل واتساب ({YUZERSEF_WHATSAPP})</span>
-                  </Button>
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-4 flex justify-center lg:justify-end">
-              <div className="p-6 rounded-2xl bg-[#0B5F55]/40 border border-white/10 backdrop-blur-xs shadow-inner flex items-center justify-center">
-                <BrandLogo
-                  variant="white-on-green"
-                  className="h-28 sm:h-36 w-auto drop-shadow-md"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      </div>
     </div>
+  </div>
   );
 };

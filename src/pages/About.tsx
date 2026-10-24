@@ -11,7 +11,7 @@ import {
   Printer,
   ShieldAlert,
   ArrowLeft
-} from 'lucide-react';
+} from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -19,7 +19,7 @@ import { BrandLogo } from '../components/BrandLogo';
 
 export const About: React.FC = () => {
   return (
-    <div className="py-10 sm:py-16 space-y-16 bg-[#EFEFEA]">
+    <div className="py-10 sm:py-16 space-y-16 bg-transparent">
       {/* Header Banner */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl space-y-5">
         <div className="flex justify-center mb-2">
@@ -120,7 +120,7 @@ export const About: React.FC = () => {
             </div>
           </div>
           <Link to="/request" className="shrink-0 w-full sm:w-auto">
-            <Button size="sm" className="w-full bg-[#065E5A] hover:bg-[#012C2B] text-white gap-1.5">
+            <Button size="sm" className="w-full gap-1.5">
               <span>طلب خدمة الآن</span>
               <ArrowLeft className="w-4 h-4 rtl:rotate-0" />
             </Button>

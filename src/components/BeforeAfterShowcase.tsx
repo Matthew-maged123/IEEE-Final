@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { ArrowLeftRight } from 'lucide-react';
+import { ArrowLeftRight } from './ui/icons';
 import { Badge } from './ui/badge';
 
 export const BeforeAfterShowcase: React.FC = () => {
@@ -37,27 +37,24 @@ export const BeforeAfterShowcase: React.FC = () => {
   };
 
   return (
-    <section className="py-14 sm:py-20 bg-[#F6F1E7] border-y border-[#d9d2c3]/60 relative overflow-hidden">
+    <section className="pt-16 pb-14 sm:pt-24 sm:pb-20 bg-transparent border-b border-[#d9d2c3]/60 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
-          <Badge className="bg-[#0B5F55]/15 text-[#0B5F55] border-[#0B5F55]/30 text-xs px-3 py-1 font-semibold">
-            رحلة التحول الإبداعي (Before & After)
-          </Badge>
-          <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] tracking-tight font-display">
+          <h2 className="text-2xl sm:text-4xl font-black text-[#073B35] dark:text-[#F6F1E7] tracking-tight font-display">
             من فكرة أولية بسيطة إلى منتج مطبوع ومطرّز
           </h2>
-          <p className="text-sm sm:text-base text-[#4d6560] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#4d6560] dark:text-[#9CB5AF] leading-relaxed">
             لا تشغل بالك بجودة الرسمة المبدئية؛ نحن في «يوزرسيف» نستلم فكرتك ولو كانت خطوطاً مرسومة بالقلم الرصاص، ونحولها إلى فيكتور متقن وتطريز أو طباعة احترافية عالية الدقة.
           </p>
 
           <div className="pt-2 flex justify-center">
             <button
               onClick={() => setIsSideBySide(!isSideBySide)}
-              className="inline-flex items-center gap-1.5 text-xs text-[#0B5F55] hover:text-[#073B35] font-semibold bg-white border border-[#d9d2c3] rounded-full px-3.5 py-1.5 shadow-xs transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 text-xs text-[#073B35] dark:text-[#F6F1E7] hover:bg-[#F6F1E7] dark:hover:bg-[#113831] font-bold bg-white dark:bg-[#0c2b26] border-2 border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#073B35] rounded-xl px-4 py-2 transition-all cursor-pointer"
             >
-              <ArrowLeftRight className="w-3.5 h-3.5" />
+              <ArrowLeftRight className="w-3.5 h-3.5 text-[#073B35]" />
               <span>{isSideBySide ? 'التبديل إلى شريط السحب التفاعلي' : 'عرض جنباً إلى جنب (مقارنة ثابتة)'}</span>
             </button>
           </div>
@@ -172,8 +169,9 @@ export const BeforeAfterShowcase: React.FC = () => {
 
           {/* User helper tip */}
           <div className="mt-4 text-center">
-            <span className="text-xs text-slate-500 font-medium">
-              ↔ اسحب المقبض في المنتصف يميناً ويساراً لمشاهدة التحول الكامل من السكتش إلى المنتج الواقعي
+            <span className="text-xs text-slate-500 font-medium inline-flex items-center gap-1.5 justify-center">
+              <ArrowLeftRight className="w-3.5 h-3.5 text-slate-400" />
+              <span>اسحب المقبض في المنتصف يميناً ويساراً لمشاهدة التحول الكامل من السكتش إلى المنتج الواقعي</span>
             </span>
           </div>
         </div>

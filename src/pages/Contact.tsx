@@ -9,7 +9,7 @@ import {
   AlertCircle,
   MessageSquare,
   ShieldAlert
-} from 'lucide-react';
+} from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input, Textarea, Label } from '../components/ui/input';
@@ -238,7 +238,7 @@ export const Contact: React.FC = () => {
                     type="submit"
                     size="lg"
                     isLoading={loading}
-                    className="w-full gap-2 shadow-md bg-[#065E5A] hover:bg-[#012C2B] text-white"
+                    className="w-full gap-2"
                   >
                     <Send className="w-4 h-4 rtl:rotate-180" />
                     <span>إرسال الرسالة الآن</span>

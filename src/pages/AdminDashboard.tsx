@@ -21,12 +21,7 @@ import {
   Shirt,
   Smartphone,
   Tag,
-  Truck,
-  Package,
-  Plus,
-  UploadCloud,
-  X,
-  Trash2,
+  Truck
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
@@ -297,7 +292,7 @@ export const AdminDashboard: React.FC = () => {
   if (!admin) return null;
 
   return (
-    <div className="py-8 sm:py-12 space-y-8 bg-[#EFEFEA] min-h-screen">
+    <div className="py-8 sm:py-12 space-y-8 bg-transparent min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Tab Navigation */}
         <div className="flex items-center gap-2 bg-white rounded-2xl border border-slate-200 p-1.5 shadow-xs w-fit">

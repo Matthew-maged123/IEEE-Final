@@ -21,7 +21,7 @@ import {
   MessageCircle,
   HelpCircle,
   ShieldAlert
-} from 'lucide-react';
+} from '../components/ui/icons';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -305,7 +305,7 @@ export const RequestWizard: React.FC = () => {
     );
 
     return (
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 max-w-2xl bg-[#EFEFEA]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 max-w-2xl bg-transparent">
         <Card className="border-[#065E5A]/40 bg-white shadow-2xl overflow-hidden animate-slide-up">
           <div className="bg-[#012C2B] text-white p-6 sm:p-8 text-center space-y-3">
             <div className="flex justify-center mb-1">
@@ -365,7 +365,7 @@ export const RequestWizard: React.FC = () => {
                 </p>
               </div>
               <a href={waLink} target="_blank" rel="noopener noreferrer" className="shrink-0 w-full sm:w-auto">
-                <Button size="sm" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white gap-1.5 shadow-xs">
+                <Button size="sm" className="w-full gap-1.5">
                   <MessageCircle className="w-3.5 h-3.5" />
                   <span>فتح محادثة واتساب</span>
                 </Button>
@@ -412,7 +412,7 @@ export const RequestWizard: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <Button
                 size="lg"
-                className="w-full gap-2 bg-[#065E5A] hover:bg-[#012C2B] text-white shadow-md"
+                className="w-full gap-2"
                 onClick={() => navigate(`/track?id=${submittedRequest.id}`)}
               >
                 <span>انتقل لصفحة التتبع الآن</span>
@@ -420,7 +420,7 @@ export const RequestWizard: React.FC = () => {
               </Button>
 
               <Link to="/admin/login" className="w-full">
-                <Button variant="outline" size="lg" className="w-full text-xs border-slate-300">
+                <Button variant="outline" size="lg" className="w-full text-xs">
                   دخول لوحة المسؤول لاعتماد الطلب
                 </Button>
               </Link>
@@ -440,7 +440,7 @@ export const RequestWizard: React.FC = () => {
   ];
 
   return (
-    <div className="py-8 sm:py-16 bg-[#EFEFEA] min-h-screen">
+    <div className="py-8 sm:py-16 bg-transparent min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl space-y-8">
         {/* Wizard Header */}
         <div className="text-center space-y-2">
@@ -1015,7 +1015,7 @@ export const RequestWizard: React.FC = () => {
                       <div>
                         <span className="text-slate-500 block mb-1">التصميم والمرفقات:</span>
                         <p className="font-medium text-slate-800">
-                          {needsDesignHelp ? '✓ طلب مساعدة في التصميم' : `✓ ${attachments.length} ملفات مرفقة`}
+                          <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /><span>{needsDesignHelp ? 'طلب مساعدة في التصميم' : `${attachments.length} ملفات مرفقة`}</span></span>
                         </p>
                       </div>
                     </div>
@@ -1051,7 +1051,7 @@ export const RequestWizard: React.FC = () => {
                     <Button
                       type="button"
                       onClick={handleNext}
-                      className="gap-1.5 bg-[#065E5A] hover:bg-[#012C2B] text-white"
+                      className="gap-1.5"
                     >
                       <span>التالي</span>
                       <ChevronLeft className="w-4 h-4 rtl:rotate-0" />
@@ -1062,7 +1062,7 @@ export const RequestWizard: React.FC = () => {
                       onClick={handleSubmit}
                       disabled={!allReadinessPassed || isSubmitting}
                       isLoading={isSubmitting}
-                      className="bg-[#065E5A] hover:bg-[#012C2B] text-white gap-2 px-6 shadow-md"
+                      className="gap-2 px-6"
                     >
                       <Check className="w-4 h-4" />
                       <span>تأكيد وإصدار رقم الطلب</span>
@@ -1078,7 +1078,7 @@ export const RequestWizard: React.FC = () => {
             <Card className="border-[#065E5A]/30 bg-white shadow-lg overflow-hidden">
               <div className="bg-[#065E5A] text-white p-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#5ee7cf] animate-pulse" />
+                  <Sparkles className="w-4 h-4 text-[#6A994E] animate-pulse" />
                   <h3 className="font-bold text-xs sm:text-sm">مساعد الجاهزية الذكي (Feature)</h3>
                 </div>
                 <Badge className="bg-white/20 text-white border-none text-[10px]">
@@ -1116,14 +1116,14 @@ export const RequestWizard: React.FC = () => {
 
                 {/* Mandatory Rubric Note from Page 11 */}
                 <div className="pt-2 border-t border-slate-100 text-[10px] text-slate-500 leading-tight">
-                  ℹ️ تنبيه: فحص الجاهزية الذكي لا يضمن مطابقة الألوان النهائية بنسبة 100% في خطوط الإنتاج.
+                  <div className="flex items-start gap-1.5"><AlertCircle className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" /><span>تنبيه: فحص الجاهزية الذكي لا يضمن مطابقة الألوان النهائية بنسبة 100% في خطوط الإنتاج.</span></div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Quick WhatsApp Help */}
             <div className="p-3.5 rounded-xl bg-[#012C2B] text-white text-xs space-y-2 shadow-xs">
-              <span className="font-bold text-[#5ee7cf] block">تحتاج استشارة سريعة قبل الطلب؟</span>
+              <span className="font-bold text-[#6A994E] block">تحتاج استشارة سريعة قبل الطلب؟</span>
               <p className="text-[11px] text-emerald-100/70">
                 تواصل مع فريق يوزرسيف مباشرة عبر واتساب للمساعدة في تفاصيل طلبك.
               </p>
@@ -1131,7 +1131,7 @@ export const RequestWizard: React.FC = () => {
                 href={generateWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-[#5ee7cf] hover:text-white font-medium"
+                className="inline-flex items-center gap-1.5 text-xs text-[#6A994E] hover:text-white font-medium"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
                 <span>واتساب: {YUZERSEF_WHATSAPP}</span>

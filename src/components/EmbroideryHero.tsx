@@ -1,380 +1,434 @@
-import React, { useState, useEffect } from 'react';
-import { Sparkles, CheckCircle2, Cpu, Activity } from 'lucide-react';
-import { Badge } from './ui/badge';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Star, Flower } from './ui/icons';
 
-type EmbroideryPhase = 0 | 1 | 2 | 3;
-
-interface NeedlePoint {
-  x: number;
-  y: number;
-}
+type ProductOption = 'tshirt' | 'totebag' | 'hoodie';
+type ShapeOption = 'words' | 'shapes' | 'flower';
+type ColorOption = 'white' | 'black' | 'green';
 
 export const EmbroideryHero: React.FC = () => {
-  const [phase, setPhase] = useState<EmbroideryPhase>(1);
-  const [stitchCount, setStitchCount] = useState<number>(1280);
-  const [needleIndex, setNeedleIndex] = useState<number>(0);
+  const [selectedProduct, setSelectedProduct] = useState<ProductOption>('tshirt');
+  const [selectedShape, setSelectedShape] = useState<ShapeOption>('words');
+  const [selectedColor, setSelectedColor] = useState<ColorOption>('white');
 
-  // Key coordinate waypoints tracing the calligraphy and crest of UserSafe (in percent)
-  const waypoints: NeedlePoint[] = [
-    { x: 38, y: 46 },
-    { x: 44, y: 38 },
-    { x: 52, y: 36 },
-    { x: 62, y: 42 },
-    { x: 58, y: 54 },
-    { x: 48, y: 58 },
-    { x: 40, y: 62 },
-    { x: 34, y: 52 },
-    { x: 50, y: 48 },
+  const productsList = [
+    {
+      id: 'tshirt' as ProductOption,
+      num: '01',
+      title: 'تيشيرت عادي',
+      serviceQuery: 'clothing-hoodies',
+    },
+    {
+      id: 'totebag' as ProductOption,
+      num: '02',
+      title: 'شنطة توت باج بسوستة',
+      serviceQuery: 'stickers-labels',
+    },
+    {
+      id: 'hoodie' as ProductOption,
+      num: '03',
+      title: 'هودي ميلتون أوفر سايز',
+      serviceQuery: 'clothing-hoodies',
+    },
   ];
 
-  // 1. Continuous Loop Cycle (Total 18s: Phase 0 -> 1 -> 2 -> 3 -> repeat)
-  useEffect(() => {
-    let currentSeconds = 0;
-    const interval = setInterval(() => {
-      currentSeconds = (currentSeconds + 0.5) % 18;
-
-      if (currentSeconds < 3.5) {
-        setPhase(0); // Vector Blueprint
-      } else if (currentSeconds < 10) {
-        setPhase(1); // Active Mechanical Stitching & Piercing
-      } else if (currentSeconds < 14) {
-        setPhase(2); // 3D Metallic Satin Fill
-      } else {
-        setPhase(3); // Finished Luxury Emblem
-      }
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // 2. Needle Movement & Stitch Counter Tick (Active during Phase 1 & 2)
-  useEffect(() => {
-    if (phase === 0) {
-      setStitchCount(0);
-      return;
-    }
-
-    if (phase === 3) {
-      setStitchCount(4280);
-      return;
-    }
-
-    // Dynamic stitch counting & needle repositioning
-    const needleTimer = setInterval(() => {
-      setNeedleIndex((prev) => (prev + 1) % waypoints.length);
-      setStitchCount((prev) => Math.min(4280, prev + Math.floor(Math.random() * 45 + 30)));
-    }, 450);
-
-    return () => clearInterval(needleTimer);
-  }, [phase, waypoints.length]);
-
-  const currentNeedle = waypoints[needleIndex];
-
   return (
-    <section className="relative overflow-hidden pt-8 pb-14 sm:pt-12 sm:pb-20 bg-gradient-to-b from-[#073B35] via-[#0B5F55] to-[#073B35] text-white">
-      {/* Background Texture & Ambient Glow */}
-      <div 
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #E3A92F 1px, transparent 0)`,
-          backgroundSize: '24px 24px',
-        }}
-      />
-      <div className="absolute top-1/4 -start-20 w-96 h-96 bg-[#E3A92F]/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 -end-20 w-96 h-96 bg-[#001716]/60 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-center pt-2 pb-3 sm:pt-4 sm:pb-4 lg:pt-5 lg:pb-5 bg-transparent text-[#073B35] select-none border-b border-[#d9d2c3]/70">
+      <div className="absolute top-1/4 -start-24 w-96 h-96 bg-[#0B5F55]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 -end-24 w-96 h-96 bg-[#E3A92F]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="w-full max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-10 flex flex-col justify-between my-auto">
+        
+        {/* ─────────────────────────────────────────────────────────────
+            1. Top Header Area (Grand Headline & Egyptian Brand Kicker)
+        ───────────────────────────────────────────────────────────── */}
+        <div className="text-center max-w-5xl xl:max-w-6xl mx-auto space-y-2 mb-3 sm:mb-5 lg:mb-6">
+          {/* Eyebrow Kicker Pill */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B5F55]/10 dark:bg-[#6A994E]/10 border border-[#0B5F55]/20 dark:border-[#6A994E]/30 text-[#0B5F55] dark:text-[#6A994E] text-xs sm:text-sm font-black tracking-wide shadow-2xs">
+            <span>أفكارك. مطبوعة في أسوان.</span>
+          </div>
+
+          {/* Main Headline (Strictly One Line) */}
+          <div className="flex items-center justify-center pt-1 w-full overflow-hidden">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight text-[#073B35] dark:text-[#F6F1E7] font-display flex flex-nowrap whitespace-nowrap items-center justify-center gap-2 sm:gap-3 leading-tight text-center">
+              {/* Official Youzersef Feather Logo (Right) */}
+              <img
+                src="/feather-logo-green.png"
+                alt="شعار يوزرسيف"
+                className="h-[28px] sm:h-[44px] md:h-[54px] lg:h-[64px] xl:h-[74px] w-auto object-contain inline-block shrink-0 drop-shadow-xs -me-1 sm:-me-2"
+              />
+              <span className="text-[#073B35] dark:text-[#F6F1E7]">خليك مختلف،</span>
+              <span className="text-[#0B5F55] dark:text-[#6A994E]">خليك يوزرسيف.</span>
+              {/* Official Youzersef Feather Logo (Left) */}
+              <img
+                src="/feather-logo-green2.png"
+                alt="شعار يوزرسيف"
+                className="h-[28px] sm:h-[44px] md:h-[54px] lg:h-[64px] xl:h-[74px] w-auto object-contain inline-block shrink-0 drop-shadow-xs -ms-1 sm:-ms-2"
+              />
+            </h1>
+          </div>
+
+          {/* Subtitle */}
+          <p className="text-sm sm:text-base lg:text-lg text-[#4d6560] dark:text-[#9CB5AF] font-bold max-w-2xl mx-auto leading-relaxed">
+            رسمة بتحبها، كلمة بتعبّر عنك. حوّل فكرتك لحاجة تستخدمها كل يوم.
+          </p>
+        </div>
+
+        {/* ─────────────────────────────────────────────────────────────
+            2. Interactive Studio Stage (Expanded Scale to Fill the View)
+        ───────────────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center w-full">
           
-          {/* Right Column: Hero Content & Value Proposition */}
-          <div className="lg:col-span-6 space-y-6 text-center lg:text-start">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E3A92F]/20 border border-[#E3A92F]/40 text-[#E3A92F] text-xs font-semibold backdrop-blur-sm">
-              <Sparkles className="w-4 h-4 animate-pulse" />
-              <span>UserSafe • يوزرسيف للطباعة والتطريز في أسوان</span>
+          {/* ═══════════════════════════════════════════════════════════
+              LEFT COLUMN: Design Controls (جرّب شكل يعجبك)
+          ═══════════════════════════════════════════════════════════ */}
+          <div className="lg:col-span-3 xl:col-span-3 flex flex-col items-center lg:items-start order-2 lg:order-1 space-y-6">
+            {/* Tool Category Label & 3 Option Buttons */}
+            <div className="w-full max-w-sm xl:max-w-md">
+              <span className="block text-sm sm:text-base font-black text-[#073B35] dark:text-[#F6F1E7] mb-3 text-center lg:text-start">
+                جرّب شكل يعجبك
+              </span>
+              
+              <div className="grid grid-cols-3 gap-3 w-full">
+                {/* 1. Words / Logo Button */}
+                <button
+                  onClick={() => setSelectedShape('words')}
+                  className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
+                    selectedShape === 'words' ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] -translate-y-0.5'
+                      : 'bg-white dark:bg-[#0c2b26] text-[#073B35] dark:text-[#F6F1E7] border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] hover:bg-[#F6F1E7] dark:hover:bg-[#113831]'
+                  }`}
+                  title="طباعة شعار يوزرسيف الرسمي"
+                >
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 7V4h16v3M9 20h6M12 4v16" />
+                  </svg>
+                  <span className="text-xs sm:text-sm font-black">الشعار</span>
+                </button>
+
+                {/* 2. Shapes Button */}
+                <button
+                  onClick={() => setSelectedShape('shapes')}
+                  className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
+                    selectedShape === 'shapes' ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] -translate-y-0.5'
+                      : 'bg-white dark:bg-[#0c2b26] text-[#073B35] dark:text-[#F6F1E7] border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] hover:bg-[#F6F1E7] dark:hover:bg-[#113831]'
+                  }`}
+                  title="تصميم أشكال هندسية"
+                >
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 3l6 10H6z" />
+                    <rect x="3" y="15" width="6" height="6" rx="1" />
+                    <circle cx="18" cy="18" r="3" />
+                  </svg>
+                  <span className="text-xs sm:text-sm font-black">أشكال</span>
+                </button>
+
+                {/* 3. Flower / Pattern Button */}
+                <button
+                  onClick={() => setSelectedShape('flower')}
+                  className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
+                    selectedShape === 'flower' ? 'bg-[#0B5F55] text-white shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] -translate-y-0.5'
+                      : 'bg-white dark:bg-[#0c2b26] text-[#073B35] dark:text-[#F6F1E7] border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] hover:bg-[#F6F1E7] dark:hover:bg-[#113831]'
+                  }`}
+                  title="تصميم رسمة ووردة"
+                >
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7 mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
+                    <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
+                    <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
+                    <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
+                  </svg>
+                  <span className="text-xs sm:text-sm font-black">وردة</span>
+                </button>
+              </div>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-5xl font-black leading-[1.25] tracking-tight text-white font-display">
-              نحوّل الفكرة إلى واقع{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-l from-[#E3A92F] via-[#F6F1E7] to-[#E3A92F]">
-                مطرز ومطبوع بعناية
+            {/* Color Swatch Picker */}
+            <div className="w-full max-w-sm xl:max-w-md">
+              <span className="block text-sm sm:text-base font-black text-[#073B35] dark:text-[#F6F1E7] mb-2.5 text-center lg:text-start">
+                اختار لونك
               </span>
-            </h1>
+              <div className="flex items-center gap-3.5 justify-center lg:justify-start">
+                {/* White Swatch (Most Right in RTL) */}
+                <button
+                  onClick={() => setSelectedColor('white')}
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
+                    selectedColor === 'white'
+                      ? 'ring-3 ring-offset-2 ring-offset-[#F6F1E7] ring-[#0B5F55] scale-110 shadow-md'
+                      : 'hover:scale-105 shadow-xs'
+                  }`}
+                  style={{ backgroundColor: '#ffffff' }}
+                  aria-label="اللون الأبيض"
+                />
+                
+                {/* Black Swatch (Middle in RTL) */}
+                <button
+                  onClick={() => setSelectedColor('black')}
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
+                    selectedColor === 'black'
+                      ? 'ring-3 ring-offset-2 ring-offset-[#F6F1E7] ring-[#0B5F55] scale-110 shadow-md'
+                      : 'hover:scale-105 shadow-xs'
+                  }`}
+                  style={{ backgroundColor: '#000000' }}
+                  aria-label="اللون الأسود"
+                />
 
-            <p className="text-base sm:text-lg text-emerald-100/85 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              منصة متخصصة تجمع بين دقة التطريز الميكانيكي وأحدث تقنيات الطباعة في أسوان. ننفذ تصاميمك المخصصة على الملابس، الكابات، والمجات بأرفع مقاييس الجودة والتشطيب.
-            </p>
+                {/* Brand Green Swatch (Left in RTL) */}
+                <button
+                  onClick={() => setSelectedColor('green')}
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0B5F55] border-[2.5px] border-[#073B35] transition-all cursor-pointer ${
+                    selectedColor === 'green'
+                      ? 'ring-3 ring-offset-2 ring-offset-[#F6F1E7] ring-[#E3A92F] scale-110 shadow-md'
+                      : 'hover:scale-105 shadow-xs'
+                  }`}
+                  style={{ backgroundColor: '#0B5F55' }}
+                  aria-label="أخضر يوزرسيف"
+                />
+              </div>
+            </div>
 
-            {/* Value Highlights */}
-            <div className="pt-4 grid grid-cols-3 gap-3 border-t border-emerald-600/40 text-emerald-100/90 max-w-md mx-auto lg:mx-0">
-              <div className="text-center lg:text-start">
-                <p className="text-xs font-bold text-[#E3A92F]">تطريز ميتاليك 3D</p>
-                <p className="text-[11px] text-emerald-200/70 mt-0.5">غرز بارزة متراصة تدوم</p>
-              </div>
-              <div className="text-center lg:text-start border-s border-emerald-600/40 ps-3">
-                <p className="text-xs font-bold text-[#E3A92F]">دقة ميكانيكية</p>
-                <p className="text-[11px] text-emerald-200/70 mt-0.5">محاكاة مسار الغرز رقمياً</p>
-              </div>
-              <div className="text-center lg:text-start border-s border-emerald-600/40 ps-3">
-                <p className="text-xs font-bold text-[#E3A92F]">تشطيب استثنائي</p>
-                <p className="text-[11px] text-emerald-200/70 mt-0.5">حرفية متقنة تليق بك</p>
-              </div>
+            {/* Big Action Button (خلّيه بتصميمك) in Grand Scale */}
+            <div className="w-full max-w-sm xl:max-w-md pt-2">
+              <Link to={`/request?service=${selectedProduct === 'totebag' ? 'stickers-labels' : 'clothing-hoodies'}`} className="block w-full">
+                <button className="w-full bg-[#E3A92F] hover:bg-[#d89c25] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#073B35] dark:active:shadow-[2px_2px_0px_#6A994E] text-[#073B35] font-black text-base sm:text-lg lg:text-xl py-4 sm:py-4.5 px-8 rounded-2xl border-[2.5px] border-[#073B35] shadow-[5px_5px_0px_#073B35] dark:shadow-[5px_5px_0px_#6A994E] transition-all cursor-pointer flex items-center justify-center gap-3">
+                  <span>خلّيه بتصميمك</span>
+                  <svg className="w-5 h-5 rtl:rotate-90 text-[#073B35]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 17L17 7M7 7h10v10" />
+                  </svg>
+                </button>
+              </Link>
             </div>
           </div>
 
-          {/* Left Column: Continuous Live Mechanical Embroidery Canvas */}
-          <div className="lg:col-span-6 flex flex-col items-center">
-            <div className="relative w-full max-w-[480px] rounded-3xl bg-[#073B35]/95 border-2 border-[#0B5F55] shadow-2xl p-6 sm:p-7 flex flex-col items-center justify-between overflow-hidden backdrop-blur-md">
+          {/* ═══════════════════════════════════════════════════════════
+              CENTER STAGE: Expanded Product Canvas & Huge Orbit Ring
+          ═══════════════════════════════════════════════════════════ */}
+          <div className="lg:col-span-6 xl:col-span-6 flex items-center justify-center relative order-1 lg:order-2 min-h-[320px] sm:min-h-[400px] lg:min-h-[440px] xl:min-h-[470px] -translate-y-4 sm:-translate-y-6 lg:-translate-y-8">
+            {/* Grand Orbit Ring filling the central area */}
+            <div className="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[480px] lg:h-[480px] xl:w-[530px] xl:h-[530px] rounded-full border-2 border-[#0B5F55]/15 dark:border-[#6A994E]/20 pointer-events-none" />
+
+            {/* Product Mockup Container (Greatly Scaled Up) */}
+            <div className="relative w-72 sm:w-[380px] lg:w-[430px] xl:w-[480px] h-[320px] sm:h-[390px] lg:h-[430px] xl:h-[460px] flex items-center justify-center transition-all duration-300">
               
-              {/* Header inside canvas: Live Telemetry */}
-              <div className="w-full flex items-center justify-between text-xs text-emerald-200/90 mb-3 z-30">
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E3A92F] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#E3A92F]"></span>
-                  </span>
-                  <span className="font-mono text-[11px] font-bold text-[#E3A92F] tracking-wide">
-                    {phase === 0 && 'تجهيز مسار المخطط'}
-                    {phase === 1 && 'ماكينة التطريز: غرز الخيوط الذهبية'}
-                    {phase === 2 && 'حشو التطريز الميتاليكي'}
-                    {phase === 3 && 'البادج المطرّز الملكي المكتمل'}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-1.5 font-mono text-[10px] bg-[#052925] px-2.5 py-1 rounded-full border border-emerald-700/50 text-emerald-300">
-                  <Activity className="w-3 h-3 text-[#E3A92F] animate-pulse" />
-                  <span>{stitchCount.toLocaleString('en-US')} غرزة</span>
-                </div>
-              </div>
-
-              {/* Live Stage Progress Indicator (Automated / Running Continuously) */}
-              <div className="w-full grid grid-cols-4 gap-1.5 p-1 rounded-xl bg-[#052925] border border-emerald-800/60 mb-3 text-[10px] z-30 text-center font-bold">
-                <div className={`py-1 rounded-lg transition-all ${phase === 0 ? 'bg-white text-slate-900 shadow-sm' : 'text-emerald-400/60'}`}>
-                  1. المخطط
-                </div>
-                <div className={`py-1 rounded-lg transition-all ${phase === 1 ? 'bg-[#E3A92F] text-[#073B35] shadow-sm' : 'text-emerald-400/60'}`}>
-                  2. ثقب وغرز
-                </div>
-                <div className={`py-1 rounded-lg transition-all ${phase === 2 ? 'bg-[#0B5F55] text-white shadow-sm' : 'text-emerald-400/60'}`}>
-                  3. حشو بارز
-                </div>
-                <div className={`py-1 rounded-lg transition-all ${phase === 3 ? 'bg-gradient-to-r from-[#E3A92F] to-[#f4c663] text-[#073B35] shadow-sm' : 'text-emerald-400/60'}`}>
-                  4. اكتمل
-                </div>
-              </div>
-
-              {/* Center Presentation: Continuous Embroidery Canvas */}
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 my-1 flex items-center justify-center select-none">
-                
-                {/* 1. Base Blueprint Sketch (Phase 0) */}
-                <div
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${
-                    phase === 0 ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-95 pointer-events-none'
-                  }`}
-                >
+              {/* Product 1: T-Shirt (Large Display) */}
+              {selectedProduct === 'tshirt' && (
+                <div className="relative w-full h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-300">
                   <img
-                    src="/brand/badge-sketch.png"
-                    alt="بادج المخطط الأولي"
-                    className="w-full h-full object-contain drop-shadow-xl"
+                    src={
+                      selectedColor === 'white'
+                        ? '/products/tshirt-white-front-trans.png'
+                        : selectedColor === 'green'
+                        ? '/products/tshirt-green-front.png'
+                        : '/products/tshirt-black-front-trans.png'
+                    }
+                    alt="تيشيرت مخصص"
+                    className="w-full h-full object-contain filter drop-shadow-[0_16px_32px_rgba(7,59,53,0.15)]"
                   />
-                  <div className="absolute inset-0 bg-[#073B35]/20 rounded-full pointer-events-none" />
-                </div>
 
-                {/* 2 & 3. Active Embroidery Phase: Fabric + Dynamic Piercing Needle + Thread Trail */}
-                {(phase === 1 || phase === 2) && (
-                  <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-                    {/* Underlying fabric badge with increasing opacity of embroidered relief */}
-                    <div className="relative w-full h-full">
-                      <img
-                        src="/brand/badge-sketch.png"
-                        alt="بدء عملية التطريز"
-                        className="w-full h-full object-contain filter contrast-105 drop-shadow-xl opacity-60"
-                      />
-                      
-                      {/* Semi-filled embroidered preview blending in */}
-                      <img
-                        src="/brand/badge-embroidered.png"
-                        alt="تدرج التطريز"
-                        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ${
-                          phase === 2 ? 'opacity-85' : 'opacity-35'
-                        }`}
-                      />
-                    </div>
+                  {/* Dynamic Chest Print Area */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-8 sm:pb-12">
+                    {/* Official Brand Logo from /public/logo */}
+                    {selectedShape === 'words' && (
+                      <div className="flex items-center justify-center select-none w-36 sm:w-44 lg:w-48">
+                        <img
+                          src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
+                          alt="لوجو يوزرسيف الرسمي"
+                          className="w-full h-auto object-contain filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)]"
+                        />
+                      </div>
+                    )}
 
-                    {/* SVG Canvas for Trailing Threads, Stitch Paths, and Piercing Impact Rings */}
-                    <svg className="absolute inset-0 w-full h-full z-20" viewBox="0 0 100 100" fill="none">
-                      {/* Trail of Golden Thread from top feed to needle */}
-                      <path
-                        d={`M 50 2 Q ${currentNeedle.x} ${currentNeedle.y - 12} ${currentNeedle.x} ${currentNeedle.y}`}
-                        stroke="#E3A92F"
-                        strokeWidth="1.2"
-                        strokeLinecap="round"
-                        strokeDasharray="2 0.5"
-                        className="filter drop-shadow-[0_0_2px_#E3A92F]"
-                      />
+                    {/* Shapes Graphic (Geometric Bauhaus Composition) */}
+                    {selectedShape === 'shapes' && (
+                      <div className="flex flex-col items-center justify-center gap-2 p-3 select-none">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-full bg-[#E3A92F]" />
+                          <div className="w-8 h-8 bg-[#0B5F55] rotate-45" />
+                        </div>
+                        <div className="w-20 h-5 bg-[#073B35] rounded-xs mt-1" />
+                        <span className="text-xs sm:text-sm font-black text-[#073B35] font-mono tracking-widest mt-1">
+                          YUZERSEF
+                        </span>
+                      </div>
+                    )}
 
-                      {/* Previous Stitches Trail */}
-                      <path
-                        d="M 38 46 L 44 38 L 52 36 L 62 42 L 58 54 L 48 58"
-                        stroke="#F6D58E"
-                        strokeWidth="1.6"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeDasharray="1.5 0.8"
-                        className="opacity-90 filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]"
-                      />
-
-                      {/* Fabric Puncture Point (Dark Hole Dent) where needle pierces */}
-                      <ellipse
-                        cx={currentNeedle.x}
-                        cy={currentNeedle.y}
-                        rx="1.2"
-                        ry="0.8"
-                        fill="#011817"
-                        stroke="#E3A92F"
-                        strokeWidth="0.4"
-                      />
-
-                      {/* Fabric Puncture Ripple Wave expanding on needle strike */}
-                      <circle
-                        key={`ripple-${needleIndex}`}
-                        cx={currentNeedle.x}
-                        cy={currentNeedle.y}
-                        r="3.5"
-                        stroke="#E3A92F"
-                        strokeWidth="0.8"
-                        fill="none"
-                        style={{
-                          animation: 'fabric-ripple 0.5s ease-out forwards',
-                          transformOrigin: `${currentNeedle.x}% ${currentNeedle.y}%`,
-                        }}
-                      />
-                    </svg>
-
-                    {/* The Mechanical Piercing Needle (Rapid in-and-out puncture motion) */}
-                    <div
-                      className="absolute z-30 transition-all duration-300 ease-out"
-                      style={{
-                        left: `${currentNeedle.x}%`,
-                        top: `${currentNeedle.y}%`,
-                        transform: 'translate(-10%, -90%)',
-                      }}
-                    >
-                      {/* Inner needle vibrating up and down into the fabric */}
-                      <div style={{ animation: 'needle-pierce 0.22s ease-in-out infinite' }}>
-                        <svg
-                          width="36"
-                          height="72"
-                          viewBox="0 0 24 50"
-                          fill="none"
-                          className="drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)]"
-                        >
-                          <defs>
-                            <linearGradient id="needleShine" x1="0%" y1="0%" x2="100%" y2="0%">
-                              <stop offset="0%" stopColor="#94a3b8" />
-                              <stop offset="40%" stopColor="#f8fafc" />
-                              <stop offset="70%" stopColor="#cbd5e1" />
-                              <stop offset="100%" stopColor="#64748b" />
-                            </linearGradient>
-                            <linearGradient id="needleTip" x1="0%" y1="0%" x2="0%" y2="100%">
-                              <stop offset="0%" stopColor="#cbd5e1" />
-                              <stop offset="100%" stopColor="#ffffff" />
-                            </linearGradient>
-                          </defs>
-
-                          {/* Machine Needle Bar / Clamp */}
-                          <rect x="8" y="0" width="8" height="12" rx="1.5" fill="#334155" stroke="#475569" strokeWidth="0.5" />
-                          <circle cx="12" cy="6" r="1.5" fill="#E3A92F" />
-
-                          {/* Steel Needle Shank */}
-                          <rect x="10" y="12" width="4" height="22" fill="url(#needleShine)" />
-
-                          {/* Tapered Piercing Needle Tip */}
-                          <polygon points="10,34 14,34 12,48" fill="url(#needleTip)" />
-
-                          {/* Needle Eyelet (with golden thread threading through it) */}
-                          <ellipse cx="12" cy="40" rx="1" ry="2.2" fill="#073B35" stroke="#475569" strokeWidth="0.4" />
-                          
-                          {/* Golden Thread through the eyelet */}
-                          <line x1="8" y1="36" x2="16" y2="44" stroke="#E3A92F" strokeWidth="1.5" strokeLinecap="round" />
-                          <circle cx="12" cy="40" r="1.2" fill="#E3A92F" className="animate-ping" />
+                    {/* Flower Graphic */}
+                    {selectedShape === 'flower' && (
+                      <div className="flex flex-col items-center justify-center select-none">
+                        <svg className={`w-16 h-16 sm:w-20 sm:h-20 ${selectedColor === 'white' ? 'text-[#0B5F55]' : 'text-[#E3A92F]'} animate-pulse`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <circle cx="12" cy="12" r="3" />
+                          <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
+                          <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
+                          <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
+                          <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
                         </svg>
+                        <span className="text-xs sm:text-sm font-black text-[#E3A92F] mt-2 tracking-widest">
+                          FLOWER ART
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Product 2: Tote Bag (Large Display) */}
+              {selectedProduct === 'totebag' && (
+                <div className="relative w-full h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-300">
+                  <div className="relative w-full h-full flex items-center justify-center scale-110 sm:scale-125">
+                    <img
+                      src="/products/Tote_Bag_Mockup.png"
+                      alt="شنطة توت باج مخصصة"
+                      className={`w-full h-full object-contain filter drop-shadow-[0_16px_32px_rgba(7,59,53,0.15)] transition-all duration-300 ${
+                        selectedColor === 'black'
+                          ? 'brightness-[0.25] contrast-[1.15]'
+                          : selectedColor === 'green'
+                          ? 'brightness-[0.55] sepia-[0.8] hue-rotate-[105deg] saturate-[2.8] contrast-[1.1]'
+                          : ''
+                      }`}
+                    />
+
+                    {/* Dynamic Tote Bag Print Area (Precisely aligned to bag canvas body) */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="translate-y-[17%] sm:translate-y-[18%] flex items-center justify-center">
+                        {selectedShape === 'words' && (
+                          <div className="flex items-center justify-center select-none w-24 sm:w-28 lg:w-32">
+                            <img
+                              src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
+                              alt="لوجو يوزرسيف"
+                              className="w-full h-auto object-contain filter drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
+                            />
+                          </div>
+                        )}
+                        {selectedShape === 'shapes' && (
+                          <div className="flex flex-col items-center justify-center gap-1.5 p-2 select-none scale-90 sm:scale-100">
+                            <div className="flex items-center gap-2">
+                              <div className="w-5 h-5 rounded-full bg-[#E3A92F]" />
+                              <div className="w-5 h-5 bg-[#0B5F55] rotate-45" />
+                            </div>
+                            <div className="w-14 h-3.5 bg-[#073B35] rounded-xs mt-0.5" />
+                            <span className={`text-[10px] sm:text-xs font-black font-mono tracking-widest mt-0.5 ${
+                              selectedColor === 'white' ? 'text-[#073B35]' : 'text-white'
+                            }`}>
+                              YUZERSEF
+                            </span>
+                          </div>
+                        )}
+                        {selectedShape === 'flower' && (
+                          <div className="flex flex-col items-center justify-center select-none scale-90 sm:scale-100">
+                            <svg className={`w-12 h-12 sm:w-14 sm:h-14 ${selectedColor === 'white' ? 'text-[#0B5F55]' : 'text-[#E3A92F]'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <circle cx="12" cy="12" r="3" />
+                              <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
+                              <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
+                              <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
+                              <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
+                            </svg>
+                          </div>
+                        )}
                       </div>
                     </div>
-
-                    {/* Dynamic thread fibers & golden sparks */}
-                    <div
-                      className="absolute z-25 pointer-events-none"
-                      style={{
-                        left: `${currentNeedle.x}%`,
-                        top: `${currentNeedle.y}%`,
-                        transform: 'translate(-50%, -50%)',
-                      }}
-                    >
-                      <Sparkles className="w-5 h-5 text-[#E3A92F] animate-spin opacity-80" />
-                    </div>
-                  </div>
-                )}
-
-                {/* 4. Phase 3: The Finished Luxury Embroidered Badge (Pristine Metallic Gleam) */}
-                <div
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${
-                    phase === 3 ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-95 pointer-events-none'
-                  }`}
-                >
-                  <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-full">
-                    <img
-                      src="/brand/badge-embroidered.png"
-                      alt="بادج يوزرسيف مطرز فاخر أسود في دهبي"
-                      className="w-full h-full object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)] filter brightness-105"
-                    />
-
-                    {/* Diagonal Light-Sweep Shimmer Reflection across the finished metallic threads */}
-                    <div
-                      className="absolute inset-0 pointer-events-none w-1/3 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                      style={{
-                        animation: 'light-sweep 2.4s ease-in-out infinite',
-                      }}
-                    />
-
-                    {/* Ambient Gold Aura */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-[#E3A92F]/20 to-transparent mix-blend-overlay pointer-events-none" />
                   </div>
                 </div>
+              )}
 
-              </div>
+              {/* Product 3: Hoodie (Large Display) */}
+              {selectedProduct === 'hoodie' && (
+                <div className="relative w-full h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-300">
+                  <img
+                    src={
+                      selectedColor === 'white'
+                        ? '/products/hoodie-white-front-trans.png'
+                        : selectedColor === 'green'
+                        ? '/products/hoodie-green-front.png'
+                        : '/products/hoodie-black-front-trans.png'
+                    }
+                    alt="هودي مخصص"
+                    className="w-full h-full object-contain filter drop-shadow-[0_16px_32px_rgba(7,59,53,0.15)]"
+                  />
 
-              {/* Status Bar inside Canvas */}
-              <div className="w-full bg-[#052925]/90 rounded-xl p-2.5 text-center text-xs border border-emerald-500/20 mt-3 z-30">
-                {phase === 0 && (
-                  <span className="text-emerald-100 flex items-center justify-center gap-1.5">
-                    <Cpu className="w-3.5 h-3.5 text-[#E3A92F]" />
-                    تجهيز المخطط الهندسي ومعايرة إحداثيات ماكينة التطريز...
-                  </span>
-                )}
-                {phase === 1 && (
-                  <span className="text-[#E3A92F] font-semibold flex items-center justify-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#E3A92F] animate-ping" />
-                    حركة الإبرة الميكانيكية: ثقب القماش وغرز خيوط الحرير الذهبية بدقة...
-                  </span>
-                )}
-                {phase === 2 && (
-                  <span className="text-emerald-200 font-semibold flex items-center justify-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-[#E3A92F] animate-spin" />
-                    تكثيف الحشو الميتاليكي وإبراز التموجات ثلاثية الأبعاد (3D)...
-                  </span>
-                )}
-                {phase === 3 && (
-                  <span className="text-[#E3A92F] font-bold flex items-center justify-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#E3A92F]" />
-                    بادج يوزرسيف الملكي المكتمل بخيوط ميتاليك بارزة وقماش تويل فاخر
-                  </span>
-                )}
+                  {/* Hoodie Chest Print */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-6 sm:pb-8">
+                    {selectedShape === 'words' && (
+                      <div className="flex items-center justify-center select-none w-32 sm:w-40 lg:w-44">
+                        <img
+                          src={selectedColor === 'white' ? '/logo/logo-green.png' : '/logo/logo-white.png'}
+                          alt="لوجو يوزرسيف"
+                          className="w-full h-auto object-contain filter drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
+                        />
+                      </div>
+                    )}
+                    {selectedShape === 'shapes' && (
+                      <div className="w-12 h-12 rounded-full bg-[#E3A92F] flex items-center justify-center text-[#073B35] font-black text-xl shadow-xs">
+                        <svg className="w-6 h-6 fill-current text-[#073B35]" viewBox="0 0 24 24">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                      </div>
+                    )}
+                    {selectedShape === 'flower' && (
+                      <svg className="w-12 h-12 text-[#E3A92F] drop-shadow-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
+                        <path d="M12 22a4 4 0 0 0 4-4v-1a4 4 0 0 0-8 0v1a4 4 0 0 0 4 4z" />
+                        <path d="M2 12a4 4 0 0 0 4 4h1a4 4 0 0 0 0-8H6a4 4 0 0 0-4 4z" />
+                        <path d="M22 12a4 4 0 0 0-4-4h-1a4 4 0 0 0 0 8h1a4 4 0 0 0 4-4z" />
+                      </svg>
+                    )}
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </div>
+
+          {/* ═══════════════════════════════════════════════════════════
+              RIGHT COLUMN: Product Selector Cards (اختار منتجك)
+          ═══════════════════════════════════════════════════════════ */}
+          <div className="lg:col-span-3 xl:col-span-3 flex flex-col items-center lg:items-end order-3 space-y-4">
+            <div className="w-full max-w-sm xl:max-w-md">
+              <span className="block text-sm sm:text-base font-black text-[#073B35] dark:text-[#F6F1E7] mb-3 text-center lg:text-end">
+                اختار منتجك
+              </span>
+
+              {/* 3 Stacked Cards (Expanded & Bold) */}
+              <div className="flex flex-col space-y-3.5">
+                {productsList.map((prod) => {
+                  const isSelected = selectedProduct === prod.id;
+                  return (
+                    <button
+                      key={prod.id}
+                      onClick={() => setSelectedProduct(prod.id)}
+                      className={`w-full p-4 sm:p-5 rounded-2xl border-[2.5px] border-[#073B35] flex items-center justify-between text-start transition-all cursor-pointer ${
+                        isSelected ? 'bg-[#E3A92F] text-[#073B35] shadow-[5px_5px_0px_#073B35] dark:shadow-[5px_5px_0px_#6A994E] -translate-x-1.5 -translate-y-1'
+                          : 'bg-white dark:bg-[#0c2b26] text-[#073B35] dark:text-[#F6F1E7] border-[#073B35] dark:border-[#6A994E]/40 shadow-[3px_3px_0px_#073B35] dark:shadow-[3px_3px_0px_#6A994E] hover:shadow-[5px_5px_0px_#073B35] dark:hover:shadow-[5px_5px_0px_#6A994E] hover:bg-[#faf7f0] dark:hover:bg-[#113831] hover:-translate-y-0.5'
+                      }`}
+                    >
+                      {/* Arrow Icon in deep green */}
+                      <svg className="w-5 h-5 text-[#073B35] shrink-0 rtl:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                      </svg>
+
+                      {/* Number & Name in Bold Scale */}
+                      <div className="flex items-center gap-2.5 font-black text-sm sm:text-base lg:text-lg">
+                        <span>{prod.title}</span>
+                        <span className="text-xs sm:text-sm font-mono opacity-70">{prod.num}</span>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
-
           </div>
 
         </div>
+
+        {/* ─────────────────────────────────────────────────────────────
+            3. Bottom Centered Caption
+        ───────────────────────────────────────────────────────────── */}
+        <div className="text-center pt-2 sm:pt-3 lg:pt-4">
+          <p className="text-xs sm:text-sm text-[#4d6560] font-black tracking-wide">
+            مثال توضيحي - ابدأ تصميمك من الصفر في الاستوديو
+          </p>
+        </div>
+
       </div>
     </section>
   );

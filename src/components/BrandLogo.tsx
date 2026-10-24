@@ -11,23 +11,27 @@ interface BrandLogoProps {
 export const BrandLogo: React.FC<BrandLogoProps> = ({
   variant = 'green-on-paper',
   className = '',
-  height = 42,
+  height,
 }) => {
-  let src = '/brand/youzersef-logo-green-on-paper.png';
+  let src = '/logo/logo-green.png';
 
   if (variant === 'white-on-green') {
     src = '/brand/youzersef-logo-white-on-green.png';
   } else if (variant === 'white-on-deep') {
-    src = '/brand/youzersef-logo-white-on-deep.png';
+    src = '/logo/logo-white.png';
   } else if (variant === 'square-icon') {
     src = '/brand/youzersef-icon-square.png';
   }
+
+  const style = height !== undefined
+    ? { height: typeof height === 'number' ? `${height}px` : height }
+    : undefined;
 
   return (
     <img
       src={src}
       alt="يوزرسيف"
-      style={{ height: typeof height === 'number' ? `${height}px` : height }}
+      style={style}
       className={`w-auto object-contain select-none transition-transform duration-200 ${className}`}
       loading="eager"
       decoding="async"
